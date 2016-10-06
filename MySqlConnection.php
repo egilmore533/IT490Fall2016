@@ -39,15 +39,20 @@ $s = "SELECT * FROM userlogin";
 	if($username == $usernameDB && $password == $passwordDB)
 {
 		echo "Access Granted";
+		return array("success" => true, 'message'=>"Server received request and processed");
+    //return false if not valid
 		break;
 }
 else 
 {
 echo "Access Denied";
+return array("success" => false, 'message'=>"Server received request and processed");
+    //return false if not valid
+
 break;
 }
 }
-    return true;
+    return array("success" => true, 'message'=>"Server received request and processed");
     //return false if not valid
 }
 
