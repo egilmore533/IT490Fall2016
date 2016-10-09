@@ -23,11 +23,11 @@ switch($request["request"])
 	$response = $login->send_request($requestArr);
 	if ($response["success"]==true)
 	{
-		$response["message"] = "Login Successful:".$response["message"];
+		$response["message"] = "Login Successful: ".$response["message"];
 	}
 	else
 	{
-		$response["message"] = "Login Failed:".$response["message"];
+		$response["message"] = "Login Failed: ".$response["message"];
 	}
 	echo "client received message: " .PHP_EOL;
 	
