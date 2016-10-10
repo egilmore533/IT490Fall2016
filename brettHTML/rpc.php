@@ -7,7 +7,6 @@ require_once('rabbitMQLib.inc');
 $request = array();
 $request["request"] = "login";
 $request = json_decode(file_get_contents("php://input"),true);
-$response = "error unrecognized request";
 switch($request["request"])
 {
     case "login":
@@ -29,11 +28,11 @@ switch($request["request"])
 	{
 		$response["message"] = "Login Failed: ".$response["message"];
 	}
-	echo "client received message: " .PHP_EOL;
-	
+	echo json_encode("Hi");
 	break;
 	
 	
 }
-echo json_encode($response['message']);
+
+    echo json_encode($response['message']);
 ?>
