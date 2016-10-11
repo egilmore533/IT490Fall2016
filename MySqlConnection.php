@@ -41,6 +41,8 @@ while($r=mysqli_fetch_array($result))
 
 	if($username == $usernameDB && sha1($password) == $passwordDB)
 	{
+		$sd = sha1(strval(date(DATE_ATOM)));
+		echo "\n\n" . $sd . "\n\n";
 		echo "Access Granted";
 		$checkDB = 1;
 		return array("success" => true, 'message'=>"Server received request and processed");
