@@ -28,10 +28,27 @@ switch($request["request"])
 	{
 		$response["message"] = "Login Failed: ".$response["message"];
 	}
-	echo json_encode("Hi");
 	break;
+    case "register":
+        $username = $request['username'];
+	$password = $request['password'];
+	$login = new rabbitMQClient("testRabbitMQ.ini","testServer");
 	
+	$requestArr = array();
+	$requestArr["type"] = "register";
+	$requestArr["username"] = $username;
+	$requestArr['password'] = $password;
 	
+	$response = $login->send_request($requestArr);
+        if ($response["success"]==true)
+	{
+		$response["message"] = "Register Successful: ".$response["message"];
+	}
+	else
+	{
+		$response["message"] = "Register Failed: ".$response["message"];
+	}
+	break;
 }
 
     echo json_encode($response['message']);
