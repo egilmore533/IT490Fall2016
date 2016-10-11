@@ -196,13 +196,14 @@
     <form name="login">
         Username<input type="text" id="username" name="username"/>
         Password<input type="password" id="password" name="password"/>        
-        <input type="button" onclick="sendRequest()" value="Login"/>
-        <input type="button" onclick="" value="Register"/>
+        <input type="button" onclick="sendRequest('login')" value="login"/>
+        <input type="button" onclick="sendRequest('register')" value="register"/>
 
     </form>
     <script language="javascript">
         var request;
-        function sendRequest()
+        var reqType;
+        function sendRequest(reqType)
         {
             var name = document.getElementById("username").value;
             var pw = document.getElementById("password").value;
@@ -210,7 +211,7 @@
             request.onreadystatechange = handleResponse;
             request.open("POST","rpc.php",true);
             request.setRequestHeader("Content-type","application/json");
-            var data = JSON.stringify({request:"login",username:name,password:pw});
+            var data = JSON.stringify({request:reqType,username:name,password:pw});
             request.send(data);
         }
         function handleResponse()
