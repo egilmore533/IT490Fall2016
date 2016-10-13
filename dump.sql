@@ -16,6 +16,148 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `Accounts`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Accounts` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `Accounts`;
+
+--
+-- Table structure for table `info`
+--
+
+DROP TABLE IF EXISTS `info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `info` (
+  `username` varchar(40) DEFAULT NULL,
+  `funds` float DEFAULT NULL,
+  `wincount` int(11) DEFAULT NULL,
+  `avg_odds` float DEFAULT NULL,
+  `flagged` int(1) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `info`
+--
+
+LOCK TABLES `info` WRITE;
+/*!40000 ALTER TABLE `info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Current Database: `Trainer`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Trainer` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `Trainer`;
+
+--
+-- Table structure for table `info`
+--
+
+DROP TABLE IF EXISTS `info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `info` (
+  `trainerid` int(11) DEFAULT NULL,
+  `pokemon1` varchar(20) DEFAULT NULL,
+  `pokemon2` varchar(20) DEFAULT NULL,
+  `pokemon3` varchar(20) DEFAULT NULL,
+  `skillrating` int(11) DEFAULT NULL,
+  `winrate` float DEFAULT NULL,
+  `totalfights` int(11) DEFAULT NULL,
+  UNIQUE KEY `trainerid` (`trainerid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `info`
+--
+
+LOCK TABLES `info` WRITE;
+/*!40000 ALTER TABLE `info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Current Database: `betHistory`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `betHistory` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `betHistory`;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `history` (
+  `fightid` varchar(60) DEFAULT NULL,
+  `username` varchar(40) DEFAULT NULL,
+  `trainer1_bet` float DEFAULT NULL,
+  `trainer2_bet` float DEFAULT NULL,
+  `winnings` float DEFAULT NULL,
+  UNIQUE KEY `fightid` (`fightid`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `history`
+--
+
+LOCK TABLES `history` WRITE;
+/*!40000 ALTER TABLE `history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Current Database: `fightHistory`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `fightHistory` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `fightHistory`;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `history` (
+  `fightid` varchar(60) DEFAULT NULL,
+  `trainer1id` int(20) DEFAULT NULL,
+  `trainer2id` int(20) DEFAULT NULL,
+  `payout` float DEFAULT NULL,
+  `winner` varchar(40) DEFAULT NULL,
+  `odds` float DEFAULT NULL,
+  UNIQUE KEY `fightid` (`fightid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `history`
+--
+
+LOCK TABLES `history` WRITE;
+/*!40000 ALTER TABLE `history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Current Database: `mysql`
 --
 
@@ -347,7 +489,7 @@ CREATE TABLE `innodb_index_stats` (
 
 LOCK TABLES `innodb_index_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT INTO `innodb_index_stats` VALUES ('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','size',1,NULL,'Number of pages in the index'),('userlogin','betBackup','GEN_CLUST_INDEX','2016-10-11 19:35:54','n_diff_pfx01',0,1,'DB_ROW_ID'),('userlogin','betBackup','GEN_CLUST_INDEX','2016-10-11 19:35:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','betBackup','GEN_CLUST_INDEX','2016-10-11 19:35:54','size',1,NULL,'Number of pages in the index'),('userlogin','betHistory','GEN_CLUST_INDEX','2016-10-11 19:38:06','n_diff_pfx01',0,1,'DB_ROW_ID'),('userlogin','betHistory','GEN_CLUST_INDEX','2016-10-11 19:38:06','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','betHistory','GEN_CLUST_INDEX','2016-10-11 19:38:06','size',1,NULL,'Number of pages in the index'),('userlogin','fighthistory','GEN_CLUST_INDEX','2016-10-11 19:21:20','n_diff_pfx01',0,1,'DB_ROW_ID'),('userlogin','fighthistory','GEN_CLUST_INDEX','2016-10-11 19:21:20','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','fighthistory','GEN_CLUST_INDEX','2016-10-11 19:21:20','size',1,NULL,'Number of pages in the index'),('userlogin','fighthistory','fightid','2016-10-11 19:24:02','n_diff_pfx01',0,1,'fightid'),('userlogin','fighthistory','fightid','2016-10-11 19:24:02','n_diff_pfx02',0,1,'fightid,trainer1id'),('userlogin','fighthistory','fightid','2016-10-11 19:24:02','n_diff_pfx03',0,1,'fightid,trainer1id,trainer2id'),('userlogin','fighthistory','fightid','2016-10-11 19:24:02','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','fighthistory','fightid','2016-10-11 19:24:02','size',1,NULL,'Number of pages in the index'),('userlogin','fighthistory','fightid_2','2016-10-11 19:24:18','n_diff_pfx01',0,1,'fightid'),('userlogin','fighthistory','fightid_2','2016-10-11 19:24:18','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','fighthistory','fightid_2','2016-10-11 19:24:18','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-10-11 19:01:01','n_diff_pfx01',10,1,'DB_ROW_ID'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-10-11 19:01:01','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-10-11 19:01:01','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','username','2016-10-11 19:01:01','n_diff_pfx01',10,1,'username'),('userlogin','userlogin','username','2016-10-11 19:01:01','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','username','2016-10-11 19:01:01','size',1,NULL,'Number of pages in the index');
+INSERT INTO `innodb_index_stats` VALUES ('Accounts','info','GEN_CLUST_INDEX','2016-10-11 21:09:22','n_diff_pfx01',0,1,'DB_ROW_ID'),('Accounts','info','GEN_CLUST_INDEX','2016-10-11 21:09:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','GEN_CLUST_INDEX','2016-10-11 21:09:22','size',1,NULL,'Number of pages in the index'),('Accounts','info','email','2016-10-11 21:11:51','n_diff_pfx01',0,1,'email'),('Accounts','info','email','2016-10-11 21:11:51','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','email','2016-10-11 21:11:51','size',1,NULL,'Number of pages in the index'),('Accounts','info','username','2016-10-11 21:11:30','n_diff_pfx01',0,1,'username'),('Accounts','info','username','2016-10-11 21:11:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','username','2016-10-11 21:11:30','size',1,NULL,'Number of pages in the index'),('Trainer','info','GEN_CLUST_INDEX','2016-10-11 21:53:43','n_diff_pfx01',0,1,'DB_ROW_ID'),('Trainer','info','GEN_CLUST_INDEX','2016-10-11 21:53:43','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Trainer','info','GEN_CLUST_INDEX','2016-10-11 21:53:43','size',1,NULL,'Number of pages in the index'),('Trainer','info','trainerid','2016-10-11 21:54:14','n_diff_pfx01',0,1,'trainerid'),('Trainer','info','trainerid','2016-10-11 21:54:14','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Trainer','info','trainerid','2016-10-11 21:54:14','size',1,NULL,'Number of pages in the index'),('betHistory','history','GEN_CLUST_INDEX','2016-10-11 22:01:21','n_diff_pfx01',0,1,'DB_ROW_ID'),('betHistory','history','GEN_CLUST_INDEX','2016-10-11 22:01:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('betHistory','history','GEN_CLUST_INDEX','2016-10-11 22:01:21','size',1,NULL,'Number of pages in the index'),('betHistory','history','fightid','2016-10-11 22:01:21','n_diff_pfx01',0,1,'fightid'),('betHistory','history','fightid','2016-10-11 22:01:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('betHistory','history','fightid','2016-10-11 22:01:21','size',1,NULL,'Number of pages in the index'),('betHistory','history','username','2016-10-11 22:01:21','n_diff_pfx01',0,1,'username'),('betHistory','history','username','2016-10-11 22:01:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('betHistory','history','username','2016-10-11 22:01:21','size',1,NULL,'Number of pages in the index'),('fightHistory','history','GEN_CLUST_INDEX','2016-10-11 20:59:06','n_diff_pfx01',0,1,'DB_ROW_ID'),('fightHistory','history','GEN_CLUST_INDEX','2016-10-11 20:59:06','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fightHistory','history','GEN_CLUST_INDEX','2016-10-11 20:59:06','size',1,NULL,'Number of pages in the index'),('fightHistory','history','fightid','2016-10-11 20:59:06','n_diff_pfx01',0,1,'fightid'),('fightHistory','history','fightid','2016-10-11 20:59:06','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fightHistory','history','fightid','2016-10-11 20:59:06','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-10-11 19:01:01','n_diff_pfx01',10,1,'DB_ROW_ID'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-10-11 19:01:01','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-10-11 19:01:01','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','username','2016-10-11 19:01:01','n_diff_pfx01',10,1,'username'),('userlogin','userlogin','username','2016-10-11 19:01:01','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','username','2016-10-11 19:01:01','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -375,7 +517,7 @@ CREATE TABLE `innodb_table_stats` (
 
 LOCK TABLES `innodb_table_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT INTO `innodb_table_stats` VALUES ('mysql','gtid_executed','2016-09-26 20:15:07',0,1,0),('sys','sys_config','2016-09-26 20:15:08',2,1,0),('userlogin','betBackup','2016-10-11 19:35:54',0,1,0),('userlogin','betHistory','2016-10-11 19:38:06',0,1,0),('userlogin','fighthistory','2016-10-11 19:24:32',0,1,0),('userlogin','userlogin','2016-10-11 19:01:01',10,1,1);
+INSERT INTO `innodb_table_stats` VALUES ('Accounts','info','2016-10-11 21:11:51',0,1,0),('Trainer','info','2016-10-11 21:54:14',0,1,0),('betHistory','history','2016-10-11 22:01:21',0,1,2),('fightHistory','history','2016-10-11 20:59:06',0,1,1),('mysql','gtid_executed','2016-09-26 20:15:07',0,1,0),('sys','sys_config','2016-09-26 20:15:08',2,1,0),('userlogin','userlogin','2016-10-11 19:01:01',10,1,1);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -967,84 +1109,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `userlogin` /*!40100 DEFAULT CHARACTER 
 USE `userlogin`;
 
 --
--- Table structure for table `betBackup`
---
-
-DROP TABLE IF EXISTS `betBackup`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `betBackup` (
-  `fightid` varchar(60) DEFAULT NULL,
-  `username` varchar(40) DEFAULT NULL,
-  `trainer1_bet` float DEFAULT NULL,
-  `trainer2id` float DEFAULT NULL,
-  `doubledown` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `betBackup`
---
-
-LOCK TABLES `betBackup` WRITE;
-/*!40000 ALTER TABLE `betBackup` DISABLE KEYS */;
-/*!40000 ALTER TABLE `betBackup` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `betHistory`
---
-
-DROP TABLE IF EXISTS `betHistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `betHistory` (
-  `fightid` varchar(60) DEFAULT NULL,
-  `username` varchar(40) DEFAULT NULL,
-  `trainer1_bet` float DEFAULT NULL,
-  `trainer2id` float DEFAULT NULL,
-  `winnings` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `betHistory`
---
-
-LOCK TABLES `betHistory` WRITE;
-/*!40000 ALTER TABLE `betHistory` DISABLE KEYS */;
-/*!40000 ALTER TABLE `betHistory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `fighthistory`
---
-
-DROP TABLE IF EXISTS `fighthistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fighthistory` (
-  `fightid` varchar(60) DEFAULT NULL,
-  `trainer1id` varchar(60) DEFAULT NULL,
-  `trainer2id` varchar(60) DEFAULT NULL,
-  `payout` float DEFAULT NULL,
-  `winner` varchar(40) DEFAULT NULL,
-  `odds` float DEFAULT NULL,
-  UNIQUE KEY `fightid` (`fightid`,`trainer1id`,`trainer2id`),
-  UNIQUE KEY `fightid_2` (`fightid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fighthistory`
---
-
-LOCK TABLES `fighthistory` WRITE;
-/*!40000 ALTER TABLE `fighthistory` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fighthistory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `userlogin`
 --
 
@@ -1078,4 +1142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-11 16:38:02
+-- Dump completed on 2016-10-13 12:05:17
