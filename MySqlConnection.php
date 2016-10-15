@@ -20,6 +20,7 @@ $conn = new mysqli($servername, $DBuser, $DBpass, $database);
 if($conn->connect_error){
         die("Connection failed: " . $conn->connect_error);
 }
+
 else
 {
 $s = "SELECT * FROM userlogin";
@@ -35,7 +36,6 @@ while($r=mysqli_fetch_array($result))
 {
 	$usernameDB = $r["username"];
 	$passwordDB = $r["password"];
-
 	var_dump($username);
 	var_dump($password);
 
@@ -63,7 +63,6 @@ $conn->close();
 if($checkDB == 0)
         return array("success" => '0', 'message'=>"Server received request and processed");
                 //return false if not valid
-
 }
 
 function register($username, $password)
@@ -102,7 +101,6 @@ while($r=mysqli_fetch_array($result))
 }
 	else
 		$checkDB = 1;
-
 }
 
 if($checkDB == 1)
@@ -113,7 +111,6 @@ if($checkDB == 1)
 	
 	//Non-Sha password insert
 	//$reg = "INSERT INTO userlogin (username, password) VALUES('$username', '$password')";
-
 	if($conn->query($reg) === TRUE)
 	{
 	
@@ -127,11 +124,9 @@ if($checkDB == 1)
 	var_dump($username);
 	var_dump($password);
 	}
-
 }
 else
 	echo "Username Taken.";
-
 
 $conn->close();
 
@@ -139,8 +134,8 @@ if($checkDB == 1)
 	return array("success" => true, 'message'=>"Server received request and processed");
 else
 	return array("success" => '0', 'message'=>"Server received request and processed");
-
 }
+
 function requestProcessor($request)
 {
   echo "received request".PHP_EOL;
@@ -165,4 +160,3 @@ $server = new rabbitMQServer("testRabbitMQ.ini","testServer");
 $server->process_requests('requestProcessor');
 exit();
 ?>
-
