@@ -1,11 +1,25 @@
 #!/usr/bin/php
 <?php
 
+$start_url = 'Walkthrough';
+$url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
+
+$url_data = file_get_contents($url_base . $start_url);
+
+$url_locations_regex = '/<div style="-moz-col(.+)<div style="/sU';
+$url_table_regex = '/href="\/wiki\/Pok%C3%A9mon_FireRed_and_LeafGreen\/(.+)" title/U';
+preg_match($url_locations_regex,$url_data,$url_data);
+preg_match_all($url_table_regex,$url_data[1],$url_array);
+
+
+foreach($url_array[1] as $url_tag)
+{
+
 $final_array = array();
 
-$url = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/Route_3';
+echo "\n\n" . $url_tag. "\n\n";
 
-$data = file_get_contents($url);
+$data = file_get_contents($url_base . $url_tag);
 
 $trainer_table_regex = '/>Money(.+)<\/table>/sU';
 
@@ -32,14 +46,19 @@ foreach($trainers[0] as $trainer)
 	$i++;
 }
 
-
-$trainer_name_regex = '/\/><\/a>(\s*[A-Z][a-z]+[.]?\s*[&amp;]?\s*[A-Z]?[a-z]*)<\/td>/s';
+$html_pattern = '/<br \/>\n/';
+$html_replace = '';
+$amp_pattern = '/&amp;/';
+$amp_replace = '&';
+$trainer_name_regex = '/\/><\/a>(?=[<br \/>]?)(\s*(.+))<\/td>/sU';
 $trainer_names = array();
 $i = 0;
 
 foreach($trainers[0] as $trainer)
 {
 	preg_match($trainer_name_regex,$trainer,$trainer_names[$i]);
+	$trainer_names[$i][1] = preg_replace($amp_pattern, $amp_replace, $trainer_names[$i][1]);
+	$trainer_names[$i][1] = preg_replace($html_pattern, $html_replace, $trainer_names[$i][1]);
 	$final_array[$i+$position][1] = trim($trainer_names[$i][1]);
 	$i++;
 }
@@ -67,6 +86,9 @@ $j++;
 }//end of loop for seperate trainer tables
 
 var_dump($final_array);
+
+}//end of url loop
+
 
 ?>
 
