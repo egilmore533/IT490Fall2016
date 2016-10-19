@@ -21,7 +21,7 @@ echo "\n\n" . $url_tag. "\n\n";
 
 $data = file_get_contents($url_base . $url_tag);
 
-$trainer_table_regex = '/>Money(.+)<\/table>/sU';
+$trainer_table_regex = '/>1st<\/th>(.+)<\/table>/sU';
 
 preg_match_all($trainer_table_regex,$data,$trainer_tables);
 
@@ -35,7 +35,7 @@ $trainer_regex = '/<td(.+)<\/tr>/sU';
 
 preg_match_all($trainer_regex,$trainer_table,$trainers);
 
-$trainer_type_regex = '/Pokemon_FRLG_(.+).png/U';
+$trainer_type_regex = '/<img alt="Pok.+mon.FRLG.(.+)\.png"/U';
 $trainer_types = array();
 $i = 0;
 
