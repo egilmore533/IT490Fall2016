@@ -15,6 +15,11 @@ preg_match_all($url_table_regex,$url_data[1],$url_array);
 foreach($url_array[1] as $url_tag)
 {
 
+if($url_tag == 'Route_22' || $url_tag == 'Pok%C3%A9mon_League_Rematch')
+{
+	continue;
+}
+
 $final_array = array();
 
 echo "\n\n" . $url_tag. "\n\n";
@@ -76,6 +81,10 @@ foreach($trainers[0] as $trainer)
 		$final_array[$i+$position][$pokemon_num + 2] = trim($pokemon);
 		$pokemon_num++;
 	}
+	for($pokemon_num; $pokemon_num + 2 < 8; $pokemon_num++)
+	{
+		$final_array[$i+$position][$pokemon_num + 2] = "";
+	}
 	$pokemon_num = 0;
 	$i++;
 }
@@ -86,6 +95,12 @@ $j++;
 }//end of loop for seperate trainer tables
 
 var_dump($final_array);
+
+foreach($final_array as $trainer)
+{
+	$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES (CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+	var_dump($sql);
+}
 
 }//end of url loop
 
