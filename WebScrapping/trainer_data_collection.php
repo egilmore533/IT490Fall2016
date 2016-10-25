@@ -2,6 +2,8 @@
 <?php
 include 'type_change.php';
 
+$unique_pokemon_name = array();
+$unique_pos = 0;
 
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
@@ -91,6 +93,22 @@ foreach($trainers[0] as $trainer)
 		//some pokemon have leading/trailing whitespace so we just need to trim that here
 		$final_array[$i+$position][$pokemon_num + 2] = trim($pokemon);
 		$pokemon_num++;
+		$flag = 1;
+		foreach($unique_pokemon_name as $unique_pokemon)
+		{
+			
+			if($unique_pokemon == trim($pokemon))
+			{
+				$flag = 0;
+				break;
+			}
+		}
+		
+		if($flag == 1)
+		{
+			$unique_pokemon_name[$unique_pos] = trim($pokemon);
+			$unique_pos++;
+		}
 	}
 	//here we need to fill the rest of the trainer's pokemon slots with empty strings that way we can insert the trainers properly into the database
 	for($pokemon_num; $pokemon_num + 2 < 8; $pokemon_num++)
@@ -108,7 +126,7 @@ $j++;
 }//end of loop for seperate trainer tables
 
 //this to check or output is good
-var_dump($final_array);
+//var_dump($final_array);
 
 //make insert statements for each trainer
 foreach($final_array as $trainer)
@@ -116,17 +134,18 @@ foreach($final_array as $trainer)
 	if($trainer[0] == "")
 	{
 		$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainer[1]', '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
-		var_dump($sql);
+		//var_dump($sql);
 	}
 	else
 	{
 		$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES (CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
-		var_dump($sql);
+		//var_dump($sql);
 	}
 }
 
 }//end of url loop
 
+var_dump($unique_pokemon_name);
 
 ?>
 
