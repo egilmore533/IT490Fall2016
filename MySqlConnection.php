@@ -12,9 +12,11 @@ function doLogin($username,$password)
 	$DBuser = "it490";
 	$DBpass = "whoGivesaFuck!490";
 	$database = "userlogin";
+	$database2 = "Accounts";
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	$conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
 	
 	//Check Connection
 	if($conn->connect_error){
@@ -24,6 +26,15 @@ function doLogin($username,$password)
 	{
 		$s = "SELECT * FROM userlogin";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
+		echo "Connected Successfully";
+	}
+	if($conn2->connect_error){
+		die("Connection failed: " . $conn2->connect_error);
+	}
+	else
+	{
+		$s = "SELECT * FROM info";
+		($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
 		echo "Connected Successfully";
 	}
 	//MySQL Connection
@@ -45,7 +56,16 @@ function doLogin($username,$password)
 			echo "\n\n" . $sd . "\n\n";
 			echo "Access Granted";
 			$checkDB = 1;
-			return array("success" => true, 'message'=>"Server received request and processed");
+			while($a=mysqli_fetch_array($result2))
+			{
+				if($username == $a["username"])
+				{
+					$balance = $a["funds"];
+					$wins = $a["wincount"];
+				}
+			
+			}
+			return array("success" => true, 'message'=>"Server received request and processed", 'balance'=>$balance, 'wins'=>$wins);
 			//return false if not valid
 					break;
 		}
@@ -166,6 +186,51 @@ function register($username, $password)
 		return array("success" => '0', 'message'=>"Server received request and processed");
 	
 }
+
+function addfunds($username, $add)
+{
+	//MySQL Connection
+	$servername = "localhost";
+	$DBuser = "it490";
+	$DBpass = "whoGivesaFuck!490";
+	$database2 = "Accounts";
+	
+	//Create Connection
+	$conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
+	
+	//Check Connection
+	if($conn2->connect_error){
+		die("Connection failed: " . $conn2->connect_error);
+	}
+	else
+	{
+		$s = "SELECT * FROM info";
+		($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
+		echo "Connected Successfully";
+	}
+	//MySQL Connection
+
+	var_dump($username);
+
+	while($a=mysqli_fetch_array($result2))
+	{
+		if($username == $a["username"])
+		{
+			$a['funds'] = $a['funds']+$add;
+			echo "Funds Added!" . "<br>";
+			$conn2->close();
+			return array("success" => true, 'message'=>$a['funds']);
+
+		}
+		else{
+			echo "error no username";
+			$conn2->close();
+			return array("success" => '0', 'message'=>"Error with adding funds");
+		}
+			
+	}
+
+}
 function requestProcessor($request)
 {
 	echo "received request".PHP_EOL;
@@ -180,6 +245,8 @@ function requestProcessor($request)
 		      return doLogin($request['username'],$request['password']);
 		case "register":
 		      return register($request['username'],$request['password']);
+		case "addfunds":
+			  return addfunds($request['username'], $request['funds']);
 		case "validate_session":
 		      return doValidate($request['sessionId']);
 	}
