@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?php
+include 'type_change.php';
+
 
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
@@ -47,6 +49,7 @@ $i = 0;
 foreach($trainers[0] as $trainer)
 {
 	preg_match($trainer_type_regex,$trainer,$trainer_types[$i]);
+	$trainer_types[$i][1] = type_switch($trainer_types[$i][1]);
 	$final_array[$i+$position][0] = trim($trainer_types[$i][1]);
 	$i++;
 }
