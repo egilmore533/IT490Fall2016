@@ -62,9 +62,15 @@ function doLogin($username,$password)
 				{
 					$balance = $a["funds"];
 					$wins = $a["wincount"];
+					echo "\nbalance and wins stored";
+				}
+				else
+				{
+					echo "\nusername not found!?";
 				}
 			
 			}
+			echo "\nbalance and wins sent\n";
 			return array("success" => true, 'message'=>"Server received request and processed", 'balance'=>$balance, 'wins'=>$wins);
 			//return false if not valid
 					break;
@@ -211,15 +217,27 @@ function addfunds($username, $add)
 	//MySQL Connection
 
 	var_dump($username);
-
+	$f = 0;
 	while($a=mysqli_fetch_array($result2))
 	{
 		if($username == $a["username"])
 		{
-			$a['funds'] = $a['funds']+$add;
+			$f = $a['funds']; 
+			$f = $f+$add;
+			$reg = "UPDATE info SET funds='$f' WHERE username='$username'";
+		
+		
+		if($conn2->query($reg) === TRUE)
+		{
+			echo "\nFunds added to database\n";
+		}
+		else {
+			
+			echo "Error: " . $reg . "<br>" . $conn2->error;
+		}
 			echo "Funds Added!" . "<br>";
 			$conn2->close();
-			return array("success" => true, 'message'=>$a['funds']);
+			return array("success" => true, 'message'=>$f);
 
 		}
 		else{
