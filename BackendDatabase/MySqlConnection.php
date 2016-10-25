@@ -249,6 +249,48 @@ function addfunds($username, $add)
 	}
 
 }
+
+function fightHistory()
+{
+	$servername = "localhost";
+	$username = "it490";
+	$password = "whoGivesaFuck!490";
+	$dbname = "fightHistory";
+
+	//Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	//Check connection
+	if($conn->connect_error){
+		die("Connection failed: " . $conn->connect_error);
+	}
+
+	$sql = "SELECT * FROM history";
+	$result = $conn->query($sql);
+	$tablestring = "";
+
+	if($result->num_rows > 0)
+	{	
+		//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
+		$tablestring .= "<table><tr><th>ID<th>Trainer 1<th>Trainer 2<th>Payout<th>Winner<th>Odds";
+			//output data of each row
+		while($row = $result->fetch_assoc())
+		{
+			echo "tablestring created\n";
+			$tablestring .= "<tr><td>".$row["fightid"]."<td>".$row["trainer1id"]."<td>".$row["trainer2id"]."<td>".$row["payout"]."<td>".$row["winner"]."<td>".$row["odds"]."";
+		}
+			echo "tablestring sent\n";
+			return array("success" => true, 'message'=>$tablestring);	
+	}
+	else 
+	{
+		$tablestring = "0 results";
+		echo "no data to create table\n";
+		return array("success" => '0', 'message'=>$tablestring);
+	}
+
+	$conn -> close();
+}
+
 function requestProcessor($request)
 {
 	echo "received request".PHP_EOL;
@@ -267,6 +309,8 @@ function requestProcessor($request)
 			  return addfunds($request['username'], $request['funds']);
 		case "validate_session":
 		      return doValidate($request['sessionId']);
+		case "fh":
+		      return fightHistory();
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
