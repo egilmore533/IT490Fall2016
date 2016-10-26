@@ -75,7 +75,7 @@ $replacements = array(
   "Youngster",
   "Super Nerd",
   "Hiker",
-  "Team Rocket Grunt",
+  "Team Rocket",
   "",
   "Swimmer",
   "Picnicker",
@@ -89,7 +89,7 @@ $replacements = array(
   "Pokemaniac",
   "Twins",
   "Biker",
-  "Team Rocket Grunt",
+  "Team Rocket",
   "Beauty",
   "Cooltrainer",
   "",
@@ -127,18 +127,50 @@ $replacements = array(
   "Pokémon Breeder",
 );
 
-$return_string = $type_name;
-$pos = 0;
-$array_length = count($replacements);
-while($pos < $array_length)
+return preg_array_replace($type_name, $patterns, $replacements);
+
+}
+
+function preg_array_replace($string, $patt, $repl)
 {
-	$return_string = preg_replace($patterns[$pos],$replacements[$pos],$return_string);
-	$pos++;
+	$return_string = $string;
+	$pos = 0;
+	$array_length = count($repl);
+	while($pos < $array_length)
+	{
+		$return_string = preg_replace($patt[$pos],$repl[$pos],$return_string);
+		$pos++;
+	}
+
+	return $return_string;
 }
 
-return $return_string;
 
+
+function name_change($name)
+{
+	$patterns= array(
+		"/Nidoran♀/",
+		"/Nidoran♂/",
+		"/Nidorino/",
+		"/Nidorina/",
+		"/Nidoqueen/",
+		"/Nidoking/",
+		
+	);
+
+	$replacements = array(
+		"Nidoran-F (F)",
+		"Nidoran-M (M)",
+		"Nidorino (M)",
+		"Nidorina (F)",
+		"Nidoqueen (F)",	
+		"Nidoking (M)"
+	);
+
+	return preg_array_replace($name, $patterns, $replacements);		
 }
+
 
 ?>
 
