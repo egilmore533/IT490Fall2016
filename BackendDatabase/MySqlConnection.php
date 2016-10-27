@@ -291,6 +291,64 @@ function fightHistory()
 	$conn -> close();
 }
 
+function betHistory($username)
+{
+
+	//MySQL Connection
+	$servername = "localhost";
+	$DBuser = "it490";
+	$DBpass = "whoGivesaFuck!490";
+	$database = "betHistory";
+	
+	//Create Connection
+	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	
+	//Check Connection
+	if($conn->connect_error){
+		die("Connection failed: " . $conn->connect_error);
+	}
+	else
+	{
+		$s = "SELECT * FROM history";
+		($result = mysqli_query($conn, $s)) or die (mysqli_error());
+		echo "Connected Successfully";
+	}
+	//MySQL Connection
+
+	$tablestring = "";
+	//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
+	$tablestring .= "<table><tr><th>FightID<th>Trainer 1 Bet<th>Trainer 2 Bet<th>Winnings";
+	//output data of each row
+
+	while($row=mysqli_fetch_array($result))
+	{
+		if($username == $row["username"])
+		{
+			echo "\nbet history found\n";
+			$tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
+		
+			echo "bet history gathered and sent" . "\n";
+			$conn->close();
+			return array("success" => true, 'message'=>$tablestring);
+
+		}
+		else{
+			echo "error no username";
+			$conn->close();
+			return array("success" => '0', 'message'=>"Error with getting bet history");
+		}
+			
+	}
+
+}
+
+function schedule()
+{
+
+
+
+}
+
 function requestProcessor($request)
 {
 	echo "received request".PHP_EOL;
@@ -311,11 +369,15 @@ function requestProcessor($request)
 		      return doValidate($request['sessionId']);
 		case "fh":
 		      return fightHistory();
+		case "bh":
+		      return betHistory($request['user']);
+		case "sched":
+		      return schedule();
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server = new rabbitMQServer("testRabbitMQ.ini","testServer");
+$server = new rabbitMQServer("testRabbitMQ.ini","pokeServer");
 $server->process_requests('requestProcessor');
 exit();
 ?>
