@@ -80,7 +80,7 @@ foreach($trainers[0] as $trainer)
 	$i++;
 }
 
-//this will grab each pokemon from each individual trainer, these are all normal so we don't need to do any messing with them
+//this will grab each pokemon from each individual trainer, Nidoran family tree is a bit weird so we have to swap out their info using type_change.php again
 $trainer_pokemon_regex = '/"bulbapedia:(.+) \(/U';
 $trainer_pokemons = array();
 $i = 0;
@@ -90,25 +90,11 @@ foreach($trainers[0] as $trainer)
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
-		//some pokemon have leading/trailing whitespace so we just need to trim that here
-		$final_array[$i+$position][$pokemon_num + 2] = trim($pokemon);
+		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
+		$pokemon = name_change(trim($pokemon));
+		$final_array[$i+$position][$pokemon_num + 2] = ($pokemon);
 		$pokemon_num++;
-		$flag = 1;
-		foreach($unique_pokemon_name as $unique_pokemon)
-		{
-			
-			if($unique_pokemon == trim($pokemon))
-			{
-				$flag = 0;
-				break;
-			}
-		}
 		
-		if($flag == 1)
-		{
-			$unique_pokemon_name[$unique_pos] = trim($pokemon);
-			$unique_pos++;
-		}
 	}
 	//here we need to fill the rest of the trainer's pokemon slots with empty strings that way we can insert the trainers properly into the database
 	for($pokemon_num; $pokemon_num + 2 < 8; $pokemon_num++)
@@ -126,7 +112,7 @@ $j++;
 }//end of loop for seperate trainer tables
 
 //this to check or output is good
-//var_dump($final_array);
+var_dump($final_array);
 
 //make insert statements for each trainer
 foreach($final_array as $trainer)
