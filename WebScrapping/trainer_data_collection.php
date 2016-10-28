@@ -1,6 +1,7 @@
 #!/usr/bin/php
 <?php
 include 'type_change.php';
+include 'move_data_collection.php';
 
 $unique_pokemon_name = array();
 $unique_pos = 0;
@@ -90,6 +91,8 @@ foreach($trainers[0] as $trainer)
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
+		$move_array = array();
+		$move_array = get_pokemon_moves(trim($pokemon));
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
 		$pokemon = name_change(trim($pokemon));
 		$final_array[$i+$position][$pokemon_num + 2] = ($pokemon);
