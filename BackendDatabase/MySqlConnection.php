@@ -371,8 +371,8 @@ function schedule()
         }
         else
         {
-                $s = "SELECT * FROM info"; 
-                ($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
+                $i = "SELECT * FROM info"; 
+                ($result2 = mysqli_query($conn2, $i)) or die (mysqli_error());
                 echo "Connected Successfully";
         }
 
@@ -408,7 +408,7 @@ function schedule()
 
 		$pokestring1 = "";
                 $pokestring2 = "";
-                $result2 = $conn2->query($sql2);
+                $result2 = $conn2->query($i);
 	}
         	echo "tablestring sent\n";
 		return array("success" => true, 'message' =>$tablestring); 
