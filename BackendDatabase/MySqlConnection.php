@@ -344,8 +344,63 @@ function betHistory($username)
 
 function schedule()
 {
+	//MySQL Connection
+        $servername = "localhost";
+        $DBuser = "it490";
+        $DBpass = "whoGivesaFuck!490";
+        $database = "Schedule";
+	$database2 = "Trainer";
 
+        //Create Connection
+        $conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	$conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
 
+        //Check Connection
+        if($conn->connect_error){
+                die("Connection failed: " . $conn->connect_error);
+        }
+        else
+        {
+                $s = "SELECT * FROM schedule";
+                ($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+	//Check Connection
+        if($conn2->connect_error){
+                die("Connection failed: " . $conn2->connect_error);
+        }
+        else
+        {
+                $s = "SELECT * FROM info"; 
+                ($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+
+        //MySQL Connection
+	
+	$tablestring = "";
+
+	if($result->num_rows > 0)
+	{
+	//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
+        $tablestring .= "<table><tr><th>ID<th>Trainer 1<th>Trainer 2<th>Odds<th>Date";
+       
+	 //output data of each row
+        while($row = $result->fetch_assoc())
+	{
+		echo "tablestring created\n";
+        	$tablestring .= "<tr><td>".$row["fightid"]."<td>".$row["trainer1"]."<td>".$row["trainer2"]."<td>".$row["odds"]."<td>".$row["time"]."";
+	}
+        	echo "tablestring sent\n";
+		return array("success" => true, 'message' =>$tablestring); 
+	}else {
+		$tablestring = "0 results";
+        	echo "0 results\n";
+		return array("success" => '0', 'message'=>$tablestring);
+	}
+
+	$conn -> close();
+	
 
 }
 
