@@ -379,6 +379,8 @@ function schedule()
         //MySQL Connection
 	
 	$tablestring = "";
+	$pokestring1 = "";
+	$pokestring2 = "";
 
 	if($result->num_rows > 0)
 	{
@@ -388,8 +390,25 @@ function schedule()
 	 //output data of each row
         while($row = $result->fetch_assoc())
 	{
+		while($row2 = $result2->fetch_assoc())
+                {
+                        if($row["trainer1id"] == $row2["trainerid"])
+                        {
+                                $pokestring1 = $row2["pokemon1"] . $row2["pokemon2"] . $row2["pokemon3"] . $row2["pokemon4"] . $row2["pokemon5"] . $row2["pokemon6"];           
+                        }
+                        if($row["trainer2id"] == $row2["trainerid"])
+                        {
+                                $pokestring2 = $row2["pokemon1"] . $row2["pokemon2"] . $row2["pokemon3"] . $row2["pokemon4"] . $row2["pokemon5"] . $row2["pokemon6"];
+                        }
+                }
+		
+
 		echo "tablestring created\n";
-        	$tablestring .= "<tr><td>".$row["fightid"]."<td>".$row["trainer1"]."<td>".$row["trainer2"]."<td>".$row["odds"]."<td>".$row["time"]."";
+        	$tablestring .= "<tr><td>".$row["fightid"]."<td><bb title=$pokestring1><font color='blue'>".$row["trainer1"]."<td><cc title=$pokestring2><font color='blue'>".$row["trainer2"]."<td>".$row["odds"]."<td>".$row["time"]."";
+
+		$pokestring1 = "";
+                $pokestring2 = "";
+                $result2 = $conn2->query($sql2);
 	}
         	echo "tablestring sent\n";
 		return array("success" => true, 'message' =>$tablestring); 
