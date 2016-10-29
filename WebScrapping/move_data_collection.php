@@ -2,7 +2,7 @@
 <?php
 
 
-function get_pokemon_moves($pokemon_name)
+function get_pokemon_moves($pokemon_name, $level)
 {
 
 $all_moves = array();
@@ -35,7 +35,13 @@ foreach($moves_temp[1] as $move)
 $final_moves = array();
 foreach($all_moves as $move)
 {
-	
+	if((int)$move[0] <= (int)$level)
+	{
+		$final_moves[3] = $final_moves[2];
+		$final_moves[2] = $final_moves[1];
+		$final_moves[1] = $final_moves[0];
+		$final_moves[0] = $move[1];	
+	}
 }
 
 return $final_moves;
@@ -43,7 +49,7 @@ return $final_moves;
 
 }
 
-get_pokemon_moves('Geodude');
+var_dump(get_pokemon_moves('Kakuna','49'));
 
 ?>
 
