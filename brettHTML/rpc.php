@@ -14,7 +14,7 @@ switch($request["request"])
     case "login":
 	$username = $request['username'];
 	$password = sha1($request['password']);
-	$login = new rabbitMQClient("testRabbitMQ.ini","testServer");
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
 	$requestArr = array();
 	$requestArr["type"] = "login";
@@ -29,11 +29,8 @@ switch($request["request"])
             $_SESSION['balance'] = $response["balance"];
             $_SESSION['wins'] = $response['wins'];
             
-            header("Location: myaccount.php"); 
             $response["message"] = "Login Successful! ".$response["message"];
-            
-            
-            
+   
 	}
 	else
 	{
@@ -43,7 +40,7 @@ switch($request["request"])
     case "register":
         $username = $request['username'];
 	$password = sha1($request['password']);
-	$login = new rabbitMQClient("testRabbitMQ.ini","testServer");
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
 	$requestArr = array();
 	$requestArr["type"] = "register";
@@ -61,7 +58,7 @@ switch($request["request"])
 	}
 	break;
     case "addFunds":
-	$login = new rabbitMQClient("testRabbitMQ.ini","testServer");
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
 	SessionManager::sessionStart('PokemonBets');
 	$requestArr = array();
@@ -81,9 +78,8 @@ switch($request["request"])
 	}
 	break;
     case "fh":
-	$login = new rabbitMQClient("testRabbitMQ.ini","testServer");
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
-	SessionManager::sessionStart('PokemonBets');
 	$requestArr = array();
 	$requestArr["type"] = "fh";
 	
@@ -96,6 +92,56 @@ switch($request["request"])
             $response["message"] = "Failed.";
 	}
 	break;
+    case "sched":
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
+	
+	$requestArr = array();
+	$requestArr["type"] = "sched";
+	
+	$response = $login->send_request($requestArr);
+        if ($response["success"]==true)
+	{
+	}
+	else
+	{
+            $response["message"] = "Failed.";
+	}
+	break;
+    case "bh":
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
+	
+	SessionManager::sessionStart('PokemonBets');
+	$requestArr = array();
+	$requestArr["type"] = "bh";
+	$requestArr["user"] = $_SESSION['user'];
+	
+	$response = $login->send_request($requestArr);
+        if ($response["success"]==true)
+	{
+	}
+	else
+	{
+            $response["message"] = "Failed.";
+	}
+	break;
+    case "tdb":
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
+	
+	SessionManager::sessionStart('PokemonBets');
+	$requestArr = array();
+	$requestArr["type"] = "tdb";
+	$requestArr["trainerid"] = $request['trainerid'];
+	
+	$response = $login->send_request($requestArr);
+        if ($response["success"]==true)
+	{
+	}
+	else
+	{
+            $response["message"] = "Failed.";
+	}
+	break;
+    
 }
     echo json_encode($response['message']);
 ?>

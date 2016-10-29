@@ -1,0 +1,187 @@
+body {
+    background-color: #D8DBE2;
+    font-family: Verdana, sans-serif;
+    background:url('pokeball4.jpg');
+    width:100%;
+    padding: 100px 0px 0px 0px;
+
+}
+
+table,th,td{
+    border:1px solid black;
+    float: center;
+}
+
+#maincontainer {
+    background-color: #D8DBE2;
+    font-family: Verdana, sans-serif;
+    position: relative;
+    display: table;
+
+    width: 480px;
+
+    margin-bottom: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 0px 0px 0px;
+
+    border-width: 2px;
+    border-color: #212738;
+    border-style: solid;
+
+    text-align: center;
+}
+#container {
+    padding: 3px 3px 3px 3px;
+    background-color: white;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#header {
+    background-color: #b50000;
+    color: white;
+    padding: 10px;
+}
+
+h1, h2, h3{
+    margin: 0;
+
+}
+
+#contents {
+    padding: 10px;
+
+}
+#accountbar {
+    height: 30px; /* 100% Full-height */
+    width: 100%; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    /*padding-top: 60px; /* Place content 60px from the top */
+    text-align: right;
+}
+#accountbar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #e2d0d0;
+    /*display: block;*/
+}
+#accountbar a.logout {
+    padding: 0px;
+}
+
+#accountbar div {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #818181;
+    /*display: block;*/
+}
+#sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+#sidenav a, #opennav a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+#sidenav a:hover, .offcanvas a:focus, #opennav a:hover{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+#sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#opennav {
+    height: 100%; /* 100% Full-height */
+    width: 10;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px; /* Place content 60px from the top */
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    #sidenav, #opennav {padding-top: 15px;}
+    #sidenav a, #opennav a {font-size: 18px;}
+}
+#search {
+    width: 240px;
+    float: left;
+}
+#searchbar {
+    width: 140px;
+    float: left;
+}
+
+#table {
+    margin-left: 15%;
+    border: 1px solid black;
+}
+#bal {
+    font-size: 24px;
+}
+#addfunds {
+
+}
+#wins {
+    font-size: 35px;
+    padding-left: 55%;
+}
+#main {
+    width: 600px;
+    float: right;
+}
+#footer {
+    clear: both;
+    padding: 10px;
+    background-color: #999999;
+    color: #efefef;
+    text-align: right;
+}
+#footer a {
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+}
+  #banner {
+    background:url('cockfight.jpg');
+    width:100%;
+    min-height:342px;
+  }
