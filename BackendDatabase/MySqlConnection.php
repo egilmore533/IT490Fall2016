@@ -394,11 +394,11 @@ function schedule()
                 {
                         if($row["trainer1id"] == $row2["trainerid"])
                         {
-                                $pokestring1 = $row2["pokemon1"] . $row2["pokemon2"] . $row2["pokemon3"] . $row2["pokemon4"] . $row2["pokemon5"] . $row2["pokemon6"];           
+                                $pokestring1 = $row2["pokemon1"] ." ". $row2["pokemon2"] ." ". $row2["pokemon3"] ." ". $row2["pokemon4"] ." ". $row2["pokemon5"] ." ". $row2["pokemon6"];           
                         }
                         if($row["trainer2id"] == $row2["trainerid"])
                         {
-                                $pokestring2 = $row2["pokemon1"] . $row2["pokemon2"] . $row2["pokemon3"] . $row2["pokemon4"] . $row2["pokemon5"] . $row2["pokemon6"];
+                                $pokestring2 = $row2["pokemon1"] ." ". $row2["pokemon2"] ." ". $row2["pokemon3"] ." ". $row2["pokemon4"] ." ". $row2["pokemon5"] ." ". $row2["pokemon6"];
                         }
                 }
 		
@@ -420,6 +420,65 @@ function schedule()
 
 	$conn -> close();
 	
+
+}
+
+function trainers($trainerid)
+{
+	$servername = "localhost";
+        $username = "it490";
+        $password = "whoGivesaFuck!490";
+        $dbname = "Trainer";
+
+        //Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        //Check connection
+        if($conn->connect_error){
+                die("Connection failed: " . $conn->connect_error);
+        }
+	else
+	{
+	
+		if($trainerid==0)
+		{
+			$s = "SELECT * FROM info";
+                        ($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                        echo "Connected Successfully";
+		}
+		else
+		{
+		       	$s = "SELECT * FROM info where trainerid=$trainerid";
+                	($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                	echo "Connected Successfully";
+
+		}
+	}
+	
+	$tablestring = "";
+        $pokestring = "";
+
+        if($result->num_rows > 0)
+        {
+        	$tablestring .= "<table><tr><th>ID<th>Trainer 1<th>Pokemon 1<th>Pokemon 2<th>Pokemon 3<th>Pokemon 4<th>Pokemon 5<th>Pokemon 6";
+		while($row = $result->fetch_assoc())
+		{
+			$pokestring = $row["pokemon1"] ." ". $row["pokemon2"] ." ". $row["pokemon3"] ." ". $row["pokemon4"] ." ". $row["pokemon5"] ." ". $row["pokemon6"];
+		
+		echo "tablestring created\n";
+		$tablestring.="<tr><td>".$row["trainerid"]."<td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$row["pokemon1"]."<td>".$row["pokemon2"]."<td>".$row["pokemon3"]."<td>".$row["pokemon4"]."<td>".$row["pokemon5"]."<td>".$row["pokemon6"]."";
+		
+		}
+		echo "tablestring sent\n";
+		return array("success"=>true, 'message'=>$tablestring);
+	}
+	else
+	{
+		$tablestring ="0 results";
+		echo "0 results\n";
+		return array("success"=>'0', 'message'=>$tablestring);
+	}
+
+	$conn->close();
 
 }
 
@@ -447,6 +506,8 @@ function requestProcessor($request)
 		      return betHistory($request['user']);
 		case "sched":
 		      return schedule();
+		case "tdb":
+		      return trainers($request['trainerid']);
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
