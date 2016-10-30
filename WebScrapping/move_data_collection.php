@@ -35,6 +35,19 @@ foreach($moves_temp[1] as $move)
 $final_moves = array();
 foreach($all_moves as $move)
 {
+	$flag = 1;
+	foreach($final_moves as $final_move)
+	{
+		if($move[1] == $final_move)
+		{
+			$flag = 0;
+			break;
+		}
+	}
+	if($flag == 0)
+	{
+		break;
+	}
 	if((int)$move[0] <= (int)$level)
 	{
 		$final_moves[3] = $final_moves[2];
@@ -48,8 +61,6 @@ return $final_moves;
 
 
 }
-
-var_dump(get_pokemon_moves('Kakuna','49'));
 
 ?>
 

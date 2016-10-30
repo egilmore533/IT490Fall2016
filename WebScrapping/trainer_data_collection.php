@@ -3,9 +3,6 @@
 include 'type_change.php';
 include 'move_data_collection.php';
 
-$unique_pokemon_name = array();
-$unique_pos = 0;
-
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
 
@@ -83,19 +80,24 @@ foreach($trainers[0] as $trainer)
 
 //this will grab each pokemon from each individual trainer, Nidoran family tree is a bit weird so we have to swap out their info using type_change.php again
 $trainer_pokemon_regex = '/"bulbapedia:(.+) \(/U';
+$trainer_pokemon_level_regex ='/<\/a> (.+)<\/td>/';
 $trainer_pokemons = array();
+$trainer_levels = array();
 $i = 0;
 $pokemon_num = 0;
 foreach($trainers[0] as $trainer)
 {
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
+	preg_match_all($trainer_pokemon_level_regex,$trainer,$trainer_levels[$i]);
+	//var_dump($trainer_levels);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
 		$move_array = array();
-		$move_array = get_pokemon_moves(trim($pokemon));
+		$move_array = get_pokemon_moves(trim($pokemon),$trainer_levels[$i][1][$pokemon_num]);
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
 		$pokemon = name_change(trim($pokemon));
-		$final_array[$i+$position][$pokemon_num + 2] = ($pokemon);
+		$final_array[$i+$position][$pokemon_num + 2][0] = ($pokemon);
+		$final_array[$i+$position][$pokemon_num + 2][1] = $move_array;
 		$pokemon_num++;
 		
 	}
@@ -134,7 +136,6 @@ foreach($final_array as $trainer)
 
 }//end of url loop
 
-var_dump($unique_pokemon_name);
 
 ?>
 
