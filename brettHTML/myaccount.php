@@ -50,9 +50,10 @@
     ?> 
     <h2 id="header">PokéBetter <?php echo $_SESSION['user']; ?></h2>
     <p><div id="bal">Balance: $<?php echo $_SESSION['balance']; ?> </div>
-    <input id="addfunds" type="button" onclick="sendRequestTwo('show')" value="Add Funds"/>
+    <input id="addfunds" type="button" onclick="sendBalRequest('show')" value="Add Funds"/>
+    <input id="withdrawfunds" type="button" onclick="sendBalRequest('show2')" value="Withdraw"/>
     <input type="number" id="howmuch" style="display: none;"/>
-    <input type="button" id="confirmbutton" onclick="sendRequestTwo('addFunds')" value= "Confirm" style ="display: none;"/>
+    <input type="button" id="confirmbutton" onclick="sendBalRequest('addFunds')" value= "Confirm" style ="display: none;"/>
     <div id="wins">Wins: <?php echo $_SESSION['wins']; ?>
     Losses: <?php echo "1";?></div>
     <p id="bh"></p>
@@ -68,12 +69,19 @@
     function closeNav() {
         document.getElementById("sidenav").style.width = "0";
     }
-    function sendRequestTwo(reqType)
+    function sendBalRequest(reqType)
     {
         if(reqType == 'show')
         {
             document.getElementById("howmuch").style.display = "block";
             document.getElementById("confirmbutton").style.display = "block";
+            document.getElementById("confirmbutton").onclick = function(){sendBalRequest('addFunds');};
+        }
+        else if(reqType == 'show2')
+        {
+            document.getElementById("howmuch").style.display = "block";
+            document.getElementById("confirmbutton").style.display = "block";
+            document.getElementById("confirmbutton").onclick = function(){sendBalRequest('wdFunds');};
         }
         else
         {
@@ -105,6 +113,15 @@
     function handleBHResponse()
     { 
         document.getElementById("bh").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
+    }
+    function sendBetRequest(fid,tid)
+    {
+        request = new XMLHttpRequest();
+        request.onreadystatechange = handleResponse;
+        request.open("POST","rpc.php",true);
+        request.setRequestHeader("Content-type","application/json");
+        var data = JSON.stringify({request:"placebet",fid:fid,tid:tid,funds:funds});
+        request.send(data);
     }
   </script>
 <div id="footer">

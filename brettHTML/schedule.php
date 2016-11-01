@@ -47,6 +47,10 @@
             <input id="searchbar" type="text" id="search" name="search"/>
         </div>
     <div id="table">
+        <div id="bet">
+        <input type="number" id="howmuch" style="display: none;"/>
+        <input type="button" id="confirmbutton" onclick="" value= "Confirm" style ="display: none;"/>
+        </div>
         <p id="sched"></p>
     </div>
     </div>
@@ -72,6 +76,31 @@
     function handleFHResponse()
     { 
         document.getElementById("sched").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
+    }
+    function sendBetRequest(reqType,fid,tid)
+    {
+        if(reqType == 'show')
+        {
+            document.getElementById("howmuch").style.display = "block";
+            document.getElementById("confirmbutton").style.display = "block";
+            document.getElementById("confirmbutton").onclick = function(){sendBetRequest("placebet",fid,tid);};
+        }
+        else{
+            var funds = document.getElementById("howmuch").value;
+            
+            request = new XMLHttpRequest();
+            request.onreadystatechange = handleBetResponse;
+            request.open("POST","rpc.php",true);
+            request.setRequestHeader("Content-type","application/json");
+            var data = JSON.stringify({request:"placebet",fid:fid,tid:tid,funds:funds});
+            request.send(data);
+        }
+    }
+    function handleBetResponse()
+    {
+        document.getElementById("bet").innerHTML = "New Balance: $" + request.responseText;
+        document.getElementById("howmuch").style.display = "none";
+        document.getElementById("confirmbutton").style.display = "none";
     }
 </script>
 <div id="footer">
