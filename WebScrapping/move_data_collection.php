@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-include 'type_change.php';
+include 'replace_tools.php';
 
 function get_pokemon_moves($pokemon_name, $level)
 {

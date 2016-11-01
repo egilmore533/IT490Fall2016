@@ -61,18 +61,14 @@ foreach($trainers[0] as $trainer)
 
 //some trainers have their info stored slightly differently and we don't 
 //like that so we grab it then replace it, here we grab the names
-$html_pattern = '/<br \/>\n/';
-$html_replace = '';
-$amp_pattern = '/&amp;/';
-$amp_replace = '&';
 $trainer_name_regex = '/\/><\/a>(?=[<br \/>]?)(\s*(.+))<\/td>/sU';
 $trainer_names = array();
 $i = 0;
 foreach($trainers[0] as $trainer)
 {
 	preg_match($trainer_name_regex,$trainer,$trainer_names[$i]);
-	$trainer_names[$i][1] = preg_replace($amp_pattern, $amp_replace, $trainer_names[$i][1]);
-	$trainer_names[$i][1] = preg_replace($html_pattern, $html_replace, $trainer_names[$i][1]);
+	$trainer_names[$i][1] = amp_replace($trainer_names[$i][1]);
+	$trainer_names[$i][1] = html_jank_replace($trainer_names[$i][1]);
 	$final_array[$i+$position][1] = trim($trainer_names[$i][1]);
 	$i++;
 }

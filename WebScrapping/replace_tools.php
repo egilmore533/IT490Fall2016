@@ -200,5 +200,15 @@ function pokemon_name_change_back($pokemon_name)
 	return preg_array_replace($pokemon_name,$patterns,$replacements);	
 }
 
+function amp_replace($string)
+{
+	return preg_replace('/&amp;/','&',$string);
+}
+
+function html_jank_replace($string)
+{
+	return preg_replace('/<br \/>\n/','',$string);
+}
+
 ?>
 
