@@ -7,11 +7,13 @@
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Schedule";
 	$database2 = "Trainer";
+	$database3 = "fightHistory";	
 
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
 	$conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
-	
+	$conn3 = new mysqli($servername, $DBuser, $DBpass, $database3);	
+
 	//Check Connection
 	if($conn->connect_error){
 		die("Connection failed: " . $conn->connect_error);
@@ -32,6 +34,17 @@
 		($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
 		echo "Connected Successfully";
 	}
+
+	if($conn3->connect_error){
+                die("Connection failed: " . $conn3->connect_error);
+        }
+        else
+        {
+                $h = "SELECT * FROM history";
+                ($result3 = mysqli_query($conn3, $h)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+
 	//MySQL Connection
 
     $date = "0";
@@ -41,20 +54,35 @@
     $name1 = "";
     $name2 = "";
     $fightid = 0;
+		
+        $hours = 9;
+        $minutes = 00;
+        $timestamp = $hours . ":" . $minutes . $minutes;
+		
+	$sqlHistory = "INSERT INTO fightHistory.history (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time) SELECT fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time FROM Schedule.schedule;";
+		if($conn3->query($sqlHistory) ===TRUE)
+        	{
+                	echo "New History Match Stored!\n";
+        	}
+        	else
+        	      	echo "Error: " . $sqlHistory . "\n";
 
 	while($row=mysqli_fetch_array($result))
 	{
 		$fightid = $row['fightid'];
+		$date = $row['time'];
 	}
 
-	$sqldel = "DELETE FROM schedule";
-	if($conn->query($sqldel) === TRUE)
+	if($date != date("mdy"))
 	{
-		echo "\nCleared the Schedule Database\n";
+		$sqldel = "DELETE FROM schedule";
+		if($conn->query($sqldel) === TRUE)
+		{
+			echo "\nCleared the Schedule Database\n";
+		}
+		else
+			echo "Error: " . $sqldel . "\n";
 	}
-	else
-		echo "Error: " . $sqldel . "\n";
-
     while($date != date("mdy"))
     {
         while($fightnum != 40)
@@ -63,7 +91,7 @@
 
             $trainer1id = rand(1, 414);
             $trainer2id = rand(1, 414);
-
+            
             if($trainer1id == $trainer2id)
             {
                 $trainer2id -= 1;
@@ -100,8 +128,22 @@
 	    echo $trainer2id . " " . $name2 . "\n";
             $fightnum += 1;
 
-	$sqlSchedule = "INSERT INTO schedule (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time) VALUES ('$fightid', '$name1', '$trainer1id', '$name2', '$trainer2id', '0.0', '$date')";
-
+	$sqlSchedule = "INSERT INTO schedule (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time, timestamp) VALUES ('$fightid', '$name1', '$trainer1id', '$name2', '$trainer2id', '1.0', '$date', '$timestamp')";
+	
+	            
+	if($minutes == 60)
+	{
+            $hours += 1;
+            $minutes = 00;
+            $timestamp = $hours . ":" . $minutes . $minutes;
+	}
+	else
+	{
+            $timestamp = $hours . ":" . $minutes;
+        }
+        
+        $minutes+=15;
+	
 	if($conn->query($sqlSchedule) ===TRUE)
 	{
 		echo "New Match Scheduled!\n";
