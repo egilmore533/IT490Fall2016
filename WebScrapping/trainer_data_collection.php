@@ -5,9 +5,6 @@ include 'move_data_collection.php';
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
 
-$pokCount = 0;
-$pokemon_array = array();
-
 $url_data = file_get_contents($url_base . $start_url);
 
 //this will gain the web addresses for the entire walktrough
@@ -82,7 +79,6 @@ foreach($trainers[0] as $trainer)
 
 //this will grab each pokemon from each individual trainer, Nidoran family tree is a bit weird so we have to swap out their info using type_change.php again
 $trainer_pokemon_regex = '/"bulbapedia:(.+) \(/U';
-$trainer_pokemon_level_regex ='/<\/a> (.+)<\/td>/';
 $trainer_pokemons = array();
 $trainer_levels = array();
 $i = 0;
@@ -90,32 +86,11 @@ $pokemon_num = 0;
 foreach($trainers[0] as $trainer)
 {
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
-	preg_match_all($trainer_pokemon_level_regex,$trainer,$trainer_levels[$i]);
-	//var_dump($trainer_levels);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
-//		$move_array = array();
-//		$move_array = get_pokemon_moves(trim($pokemon),$trainer_levels[$i][1][$pokemon_num]);
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
 		$pokemon = name_change(trim($pokemon));
-		
-		$flag = 1;
-		foreach($pokemon_array as $mon)
-		{
-			if($mon == $pokemon)
-			{
-				$flag = 0;
-				break;
-			}
-		}
-		if($flag == 1)
-		{
-			$pokemon_array[$pokCount] = $pokemon;
-			$pokCount++;
-		}
-
-		$final_array[$i+$position][$pokemon_num + 2][0] = ($pokemon);
-		$final_array[$i+$position][$pokemon_num + 2][1] = $trainer_levels[$i][1][$pokemon_num];
+		$final_array[$i+$position][$pokemon_num + 2] = ($pokemon);
 		$pokemon_num++;
 		
 	}
@@ -143,12 +118,10 @@ foreach($final_array as $trainer)
 	if($trainer[0] == "")
 	{
 		$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainer[1]', '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
-		//var_dump($sql);
 	}
 	else
 	{
 		$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES (CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
-		//var_dump($sql);
 	}
 }
 
