@@ -293,7 +293,6 @@ function withdraw($username, $wd)
 				return array ("success" => '0', 'message' => "Can't withdraw over your balance.");
 
 			$reg = "UPDATE info SET funds='$f' WHERE username='$username'";
-
 			
                 if($conn2->query($reg) === TRUE)
                 {
@@ -400,8 +399,6 @@ function betHistory($username)
 			$tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
 		
 			echo "bet history gathered and sent" . "\n";
-			$conn->close();
-			return array("success" => true, 'message'=>$tablestring);
 
 		}
 		else{
@@ -411,6 +408,9 @@ function betHistory($username)
 		}
 			
 	}
+	
+        $conn->close();
+                return array("success" => true, 'message'=>$tablestring);
 
 }
 
