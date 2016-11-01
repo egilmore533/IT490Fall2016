@@ -5,6 +5,9 @@ include 'move_data_collection.php';
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
 
+$pokCount = 0;
+$pokemon_array = array();
+
 $url_data = file_get_contents($url_base . $start_url);
 
 //this will gain the web addresses for the entire walktrough
@@ -91,12 +94,28 @@ foreach($trainers[0] as $trainer)
 	//var_dump($trainer_levels);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
-		$move_array = array();
-		$move_array = get_pokemon_moves(trim($pokemon),$trainer_levels[$i][1][$pokemon_num]);
+//		$move_array = array();
+//		$move_array = get_pokemon_moves(trim($pokemon),$trainer_levels[$i][1][$pokemon_num]);
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
 		$pokemon = name_change(trim($pokemon));
+		
+		$flag = 1;
+		foreach($pokemon_array as $mon)
+		{
+			if($mon == $pokemon)
+			{
+				$flag = 0;
+				break;
+			}
+		}
+		if($flag == 1)
+		{
+			$pokemon_array[$pokCount] = $pokemon;
+			$pokCount++;
+		}
+
 		$final_array[$i+$position][$pokemon_num + 2][0] = ($pokemon);
-		$final_array[$i+$position][$pokemon_num + 2][1] = $move_array;
+		$final_array[$i+$position][$pokemon_num + 2][1] = $trainer_levels[$i][1][$pokemon_num];
 		$pokemon_num++;
 		
 	}

@@ -114,8 +114,8 @@ $replacements = array(
   "Aroma Lady",
   "Tuber",
   "Crush Girl",
-  "Pokémon Ranger",
-  "Pokémon Ranger",
+  "Pokemon Ranger",
+  "Pokemon Ranger",
   "Cooltrainer",
   "Cool Couple",
   "",
@@ -124,7 +124,7 @@ $replacements = array(
   "",
   "Ruin Maniac",
   "Psychic",
-  "Pokémon Breeder",
+  "Pokemon Breeder",
 );
 
 return preg_array_replace($type_name, $patterns, $replacements);
@@ -156,6 +156,7 @@ function name_change($name)
 		"/Nidorina/",
 		"/Nidoqueen/",
 		"/Nidoking/",
+		"/Exxegcute/"
 		
 	);
 
@@ -165,7 +166,8 @@ function name_change($name)
 		"Nidorino (M)",
 		"Nidorina (F)",
 		"Nidoqueen (F)",	
-		"Nidoking (M)"
+		"Nidoking (M)",
+		"Exeggcute"
 	);
 
 	return preg_array_replace($name, $patterns, $replacements);		

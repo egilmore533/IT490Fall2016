@@ -81,7 +81,8 @@ return $final_moves;
 
 }
 
-var_dump(get_pokemon_moves("Farfetch'd",'20'));
+
+
 
 ?>
 

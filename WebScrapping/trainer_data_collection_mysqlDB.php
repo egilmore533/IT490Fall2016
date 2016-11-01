@@ -103,16 +103,19 @@ foreach($trainers[0] as $trainer)
 
 //this will grab each pokemon from each individual trainer, these are all normal so we don't need to do any messing with them
 $trainer_pokemon_regex = '/"bulbapedia:(.+) \(/U';
+$trainer_pokemon_level_regex ='/<\/a> (.+)<\/td>/';
 $trainer_pokemons = array();
 $i = 0;
 $pokemon_num = 0;
 foreach($trainers[0] as $trainer)
 {
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
+	preg_match_all($trainer_pokemon_level_regex,$trainer,$trainer_levels[$i]);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
 		//some pokemon have leading/trailing whitespace so we just need to trim that here
-		$final_array[$i+$position][$pokemon_num + 2] = trim($pokemon);
+		$final_array[$i+$position][$pokemon_num + 2][0] = trim($pokemon);
+		$final_array[$i+$position][$pokemon_num + 2][1] = $trainer_levels[$i][1];
 		$pokemon_num++;
 	}
 	//here we need to fill the rest of the trainer's pokemon slots with empty strings that way we can insert the trainers properly into the database
