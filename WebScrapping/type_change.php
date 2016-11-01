@@ -1,5 +1,5 @@
-!usrbinphp
- <?php
+#!/usr/bin/php
+<?php
 
 function type_switch($type_name)
 {
@@ -173,7 +173,29 @@ function name_change($name)
 
 function pokemon_name_change_back($pokemon_name)
 {
-	
+	$patterns = array(
+		'/Mr. Mime/',
+		'/Nidoran-F \(F\)/',
+		'/Nidoran-M \(M\)/',
+		'/Nidorino \(M\)/',
+		'/Nidorina \(F\)/',
+		'/Nidoqueen \(F\)/',
+		'/Nidoking \(M\)/',
+		"/Farfetch'd/"
+	);
+
+	$replacements = array(
+		"Mr._Mime",
+		"Nidoran♀",
+		"Nidoran♂",
+		"Nidorino",
+		"Nidorina",
+		"Nidoqueen",
+		"Nidoking",
+		"Farfetch%27d"		
+		
+	);
+	return preg_array_replace($pokemon_name,$patterns,$replacements);	
 }
 
 ?>

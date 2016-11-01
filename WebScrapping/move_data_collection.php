@@ -15,13 +15,22 @@ $data = file_get_contents($start_url);
 
 $move_table_regex = '/Generation II learnset"><span style="color:#000;">II<\/span><\/a>&#160;-&#160;<a href="\/wiki\/'.$pokemon_name.'_\(Pok%C3%A9mon\)\/Generation_IV_learnset(.+)<\/td><\/tr><\/table>/sU';
 
-preg_match($move_table_regex,$data,$data);
+preg_match($move_table_regex,$data,$data2);
+
+if(empty($data2))
+{
+	$move_table_regex = '/Generation II learnset"><span style="color:#000;">II<\/span><\/a>&#160;-&#160;<a href="\/wiki\/Nidoran%E2%99%82_\(Pok%C3%A9mon\)\/Generation_IV_learnset(.+)<\/td><\/tr><\/table>/sU';
+	preg_match($move_table_regex,$data,$data2);
+	if(empty($data2))
+	{
+		$move_table_regex = '/Generation II learnset"><span style="color:#000;">II<\/span><\/a>&#160;-&#160;<a href="\/wiki\/Nidoran%E2%99%80_\(Pok%C3%A9mon\)\/Generation_IV_learnset(.+)<\/td><\/tr><\/table>/sU';
+        	preg_match($move_table_regex,$data,$data2);
+	}
+}
 
 
 $move_regex = '/display:none">[0-9][0-9]<\/span>(.+)<\/span><\/a>/sU';
-preg_match_all($move_regex,$data[1],$moves_temp);
-
-//var_dump($moves_temp[1]);
+preg_match_all($move_regex,$data2[1],$moves_temp);
 
 $level_regex = '/([0-9]+)/';
 $name_regex = '/title="(.+) \(move\)/';
@@ -32,16 +41,13 @@ foreach($moves_temp[1] as $move)
 	$temp = trim($temp[1]);
 	$all_moves[$pos][0] = $temp;
 	preg_match($name_regex,$move,$temp);
-	var_dump($temp);
 	$all_moves[$pos][1] = $temp[1];
 	$pos++;
 }
 
-$count = 0;
 $final_moves = array();
 foreach($all_moves as $move)
 {
-	var_dump($count++);
 	$flag = 1;
 	foreach($final_moves as $final_move)
 	{
@@ -64,10 +70,18 @@ foreach($all_moves as $move)
 	}
 }
 
+if(empty($final_moves))
+{
+	var_dump($level);
+	var_dump($pokemon_name);
+}
+
 return $final_moves;
 
 
 }
+
+var_dump(get_pokemon_moves("Farfetch'd",'20'));
 
 ?>
 
