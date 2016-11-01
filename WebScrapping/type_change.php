@@ -171,6 +171,10 @@ function name_change($name)
 	return preg_array_replace($name, $patterns, $replacements);		
 }
 
+function pokemon_name_change_back($pokemon_name)
+{
+	
+}
 
 ?>
 

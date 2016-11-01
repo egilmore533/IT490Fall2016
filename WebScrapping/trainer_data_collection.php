@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-include 'type_change.php';
 include 'move_data_collection.php';
 
 $start_url = 'Walkthrough';

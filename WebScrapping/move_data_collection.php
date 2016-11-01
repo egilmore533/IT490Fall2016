@@ -1,9 +1,11 @@
 #!/usr/bin/php
 <?php
-
+include 'type_change.php';
 
 function get_pokemon_moves($pokemon_name, $level)
 {
+
+$pokemon_name = pokemon_name_change_back($pokemon_name);
 
 $all_moves = array();
 
@@ -19,7 +21,9 @@ preg_match($move_table_regex,$data,$data);
 $move_regex = '/display:none">[0-9][0-9]<\/span>(.+)<\/span><\/a>/sU';
 preg_match_all($move_regex,$data[1],$moves_temp);
 
-$level_regex = '/(.+)<\/td>/sU';
+//var_dump($moves_temp[1]);
+
+$level_regex = '/([0-9]+)/';
 $name_regex = '/title="(.+) \(move\)/';
 $pos = 0;
 foreach($moves_temp[1] as $move)
@@ -28,13 +32,16 @@ foreach($moves_temp[1] as $move)
 	$temp = trim($temp[1]);
 	$all_moves[$pos][0] = $temp;
 	preg_match($name_regex,$move,$temp);
+	var_dump($temp);
 	$all_moves[$pos][1] = $temp[1];
 	$pos++;
 }
 
+$count = 0;
 $final_moves = array();
 foreach($all_moves as $move)
 {
+	var_dump($count++);
 	$flag = 1;
 	foreach($final_moves as $final_move)
 	{
@@ -46,7 +53,7 @@ foreach($all_moves as $move)
 	}
 	if($flag == 0)
 	{
-		break;
+		continue;
 	}
 	if((int)$move[0] <= (int)$level)
 	{
