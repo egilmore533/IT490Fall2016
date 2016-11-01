@@ -218,6 +218,8 @@ function addfunds($username, $add)
 
 	var_dump($username);
 	$f = 0;
+	if($add >= 0)
+	{
 	while($a=mysqli_fetch_array($result2))
 	{
 		if($username == $a["username"])
@@ -247,8 +249,77 @@ function addfunds($username, $add)
 		}
 			
 	}
+	}
+	else
+		return array("success" => '0', 'message' => "Can't add negative or zero funds");
 
 }
+
+function withdraw($username, $wd)
+{
+        //MySQL Connection
+        $servername = "localhost";
+        $DBuser = "it490";
+        $DBpass = "whoGivesaFuck!490";
+        $database2 = "Accounts";
+
+        //Create Connection
+        $conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
+
+        //Check Connection
+        if($conn2->connect_error){
+                die("Connection failed: " . $conn2->connect_error);
+        }
+        else
+        {
+                $s = "SELECT * FROM info";
+                ($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+        //MySQL Connection
+
+        var_dump($username);
+        $f = 0;
+        if($wd >= 0)
+        {
+        while($a=mysqli_fetch_array($result2))
+        {
+                if($username == $a["username"])
+                {
+                        $f = $a['funds'];
+                        $f = $f-$wd;
+                        
+			if($f < 0)
+				return array ("success" => '0', 'message' => "Can't withdraw over your balance.");
+
+			$reg = "UPDATE info SET funds='$f' WHERE username='$username'";
+			
+                if($conn2->query($reg) === TRUE)
+                {
+                        echo "\nFunds subtracted from database\n";
+                }
+                else {
+
+                        echo "Error: " . $reg . "<br>" . $conn2->error;
+                }
+                        echo "Funds Withdrawn!" . "<br>";
+                        $conn2->close();
+                        return array("success" => true, 'message'=>$f);
+
+                }
+                else{
+                        echo "error no username";
+                        $conn2->close();
+                        return array("success" => '0', 'message'=>"Error with adding funds");
+                }
+
+        }
+        }
+        else
+                return array("success" => '0', 'message' => "Can't withdraw negative or zero funds");
+
+}
+
 
 function fightHistory()
 {
@@ -276,7 +347,7 @@ function fightHistory()
 		while($row = $result->fetch_assoc())
 		{
 			echo "tablestring created\n";
-			$tablestring .= "<tr><td>".$row["fightid"]."<td>".$row["trainer1id"]."<td>".$row["trainer2id"]."<td>".$row["payout"]."<td>".$row["winner"]."<td>".$row["odds"]."";
+			$tablestring .= "<tr><td>".$row["fightid"]."<td>".$row["trainer1"]."<td>".$row["trainer2"]."<td>".$row["payout"]."<td>".$row["winner"]."<td>".$row["odds"]."";
 		}
 			echo "tablestring sent\n";
 			return array("success" => true, 'message'=>$tablestring);	
@@ -328,8 +399,6 @@ function betHistory($username)
 			$tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
 		
 			echo "bet history gathered and sent" . "\n";
-			$conn->close();
-			return array("success" => true, 'message'=>$tablestring);
 
 		}
 		else{
@@ -339,6 +408,9 @@ function betHistory($username)
 		}
 			
 	}
+	
+        $conn->close();
+                return array("success" => true, 'message'=>$tablestring);
 
 }
 
@@ -381,6 +453,7 @@ function schedule()
 	$tablestring = "";
 	$pokestring1 = "";
 	$pokestring2 = "";
+	$space = " ";
 
 	if($result->num_rows > 0)
 	{
@@ -394,17 +467,19 @@ function schedule()
                 {
                         if($row["trainer1id"] == $row2["trainerid"])
                         {
-                                $pokestring1 = $row2["pokemon1"] ." ". $row2["pokemon2"] ." ". $row2["pokemon3"] ." ". $row2["pokemon4"] ." ". $row2["pokemon5"] ." ". $row2["pokemon6"];           
+                                $pokestring1 = $row2["pokemon1"] . $space . $row2["pokemon2"] . $space . $row2["pokemon3"] . $space . $row2["pokemon4"] . $space . $row2["pokemon5"] . $space . $row2["pokemon6"];           
                         }
                         if($row["trainer2id"] == $row2["trainerid"])
                         {
                                 $pokestring2 = $row2["pokemon1"] ." ". $row2["pokemon2"] ." ". $row2["pokemon3"] ." ". $row2["pokemon4"] ." ". $row2["pokemon5"] ." ". $row2["pokemon6"];
                         }
                 }
+		$betbutton = "<input id='placebet' type='button' value ='Place Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
+		$betbutton2 = "<input id='placebet' type='button' value ='Place Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer2id']."'".")".">";
 		
 
 		echo "tablestring created\n";
-        	$tablestring .= "<tr><td>".$row["fightid"]."<td><bb title=$pokestring1><font color='blue'>".$row["trainer1"]."<td><cc title=$pokestring2><font color='blue'>".$row["trainer2"]."<td>".$row["odds"]."<td>".$row["time"]."";
+        	$tablestring .= "<tr><td>".$row["fightid"]."<td><bb title=$pokestring1><font color='blue'>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2><font color='blue'>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["time"]."";
 
 		$pokestring1 = "";
                 $pokestring2 = "";
@@ -482,6 +557,91 @@ function trainers($trainerid)
 
 }
 
+function placebet($username, $fightid, $trainerid, $funds)
+{
+    //MySQL Connection
+        $servername = "localhost";
+        $DBuser = "it490";
+        $DBpass = "whoGivesaFuck!490";
+        $database = "Schedule";
+	$database2 = "betHistory";
+        $database3 = "Accounts";
+        
+        //Create Connection
+        $conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	$conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
+	$conn3 = new mysqli($servername, $DBuser, $DBpass, $database3);
+
+        //Check Connection
+        if($conn->connect_error){
+                die("Connection failed: " . $conn->connect_error);
+        }
+        else
+        {
+                $s = "SELECT * FROM schedule";
+                ($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+	//Check Connection
+        if($conn2->connect_error){
+                die("Connection failed: " . $conn2->connect_error);
+        }
+        else
+        {
+                $i = "SELECT * FROM history"; 
+                ($result2 = mysqli_query($conn2, $i)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+        //Check Connection
+        if($conn3->connect_error){
+                die("Connection failed: " . $conn3->connect_error);
+        }
+        else
+        {
+                $s = "SELECT * FROM info";
+                ($result3 = mysqli_query($conn3, $s)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
+        //MySQL Connection
+        
+        while($row = $result->fetch_assoc())
+	{
+            if($row['fightid'] == $fightid)
+            {
+                if($row['trainer1id'] == $trainerid)
+                {
+                    $trainer1funds = $funds;
+                    $trainer2funds = 0;
+                }
+                else
+                {
+                    $trainer1funds = 0;
+                    $trainer2funds = $funds;
+                }
+                
+            }
+                    
+            
+	}
+	
+	
+	$winnings = 0;
+	
+        $sqlBet = "INSERT INTO history (fightid, username, trainer1_bet, trainer2_bet, winnings) VALUES ('$fightid', '$username', '$trainer1funds', '$trainer2funds', '$winnings')";
+        
+        if($conn2->query($sqlBet) === TRUE)
+        {
+                echo "\nBet History Updated database\n";
+                    return withdraw($username, $funds);
+        }
+        else {
+
+            echo "Error: " . $sqlBet . "<br>" . $conn2->error;
+                    return array("success"=>'0', 'message'=>"Can't Bet Multiple times for one fight");
+        }
+        
+}
+
 function requestProcessor($request)
 {
 	echo "received request".PHP_EOL;
@@ -508,6 +668,10 @@ function requestProcessor($request)
 		      return schedule();
 		case "tdb":
 		      return trainers($request['trainerid']);
+		case "wdfunds":
+		      return withdraw($request['username'], $request['funds']);
+                case "placebet":
+                      return placebet($request['username'], $request['fid'], $request['tid'], $request['funds']);
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
