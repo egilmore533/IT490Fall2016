@@ -77,6 +77,26 @@ switch($request["request"])
             $response["message"] = "Failed to add $".$request["funds"];
 	}
 	break;
+    case "wdFunds":
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
+	
+	SessionManager::sessionStart('PokemonBets');
+	$requestArr = array();
+	$requestArr["type"] = "wdfunds";
+	$requestArr["username"] = $_SESSION['user'];
+	$requestArr["funds"] = $request["funds"];
+	
+	$response = $login->send_request($requestArr);
+        if ($response["success"]==true)
+	{
+            $_SESSION['balance'] = $response["message"];
+            $response["message"] = $_SESSION['balance'];
+	}
+	else
+	{
+            $response["message"] = "Failed to withdraw $".$request["funds"];
+	}
+	break;
     case "fh":
 	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
@@ -89,7 +109,7 @@ switch($request["request"])
 	}
 	else
 	{
-            $response["message"] = "Failed.";
+            $response["message"] = "Failed to show fight history.";
 	}
 	break;
     case "sched":
@@ -104,7 +124,7 @@ switch($request["request"])
 	}
 	else
 	{
-            $response["message"] = "Failed.";
+            $response["message"] = "Failed to show fight schedule";
 	}
 	break;
     case "bh":
@@ -121,7 +141,7 @@ switch($request["request"])
 	}
 	else
 	{
-            $response["message"] = "Failed.";
+            $response["message"] = "Failed to show bet history";
 	}
 	break;
     case "tdb":

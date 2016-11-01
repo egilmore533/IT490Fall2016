@@ -68,44 +68,6 @@
             window.location = "myaccount.php";
             document.getElementById("output").innerHTML = "<p>"+request.responseText+"</p>";
         }
-        function sendRequestTwo(reqType)
-        {
-            if(reqType == 'show')
-            {
-                document.getElementById("howmuch").style.display = "block";
-                document.getElementById("confirmbutton").style.display = "block";
-            }
-            else
-            {
-                var funds = document.getElementById("howmuch").value;
-                
-                request = new XMLHttpRequest();
-                request.onreadystatechange = handleResponseTwo;
-                request.open("POST","rpc.php",true);
-                request.setRequestHeader("Content-type","application/json");
-                var data = JSON.stringify({request:reqType,funds:funds});
-                request.send(data);
-            }
-        }
-        function handleResponseTwo()
-        {
-            document.getElementById("bal").innerHTML = "Balance: $" + request.responseText;
-            document.getElementById("howmuch").style.display = "none";
-            document.getElementById("confirmbutton").style.display = "none";
-        }
-        function bhRequest()
-        {
-            request = new XMLHttpRequest();
-            request.onreadystatechange = handleBHResponse;
-            request.open("POST","rpc.php",true);
-            request.setRequestHeader("Content-type","application/json");
-            var data = JSON.stringify({request:"bh"});
-            request.send(data);
-        }
-        function handleBHResponse()
-        { 
-            document.getElementById("bh").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
-        }
     </script>
   </body>
   
