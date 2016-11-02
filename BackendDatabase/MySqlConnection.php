@@ -531,7 +531,10 @@ function trainers($trainerid)
 	
 	$tablestring = "";
         $pokestring = "";
-
+        
+        $pokepic = '<img src=..&#47;pokemon&#47;';
+        $pokepic2 = ".png>";
+        
         if($result->num_rows > 0)
         {
         	$tablestring .= "<table><tr><th>Trainer 1<th>Pokemon 1<th>Pokemon 2<th>Pokemon 3<th>Pokemon 4<th>Pokemon 5<th>Pokemon 6";
@@ -540,7 +543,7 @@ function trainers($trainerid)
                     $pokestring = $row["pokemon1"] ." ". $row["pokemon2"] ." ". $row["pokemon3"] ." ". $row["pokemon4"] ." ". $row["pokemon5"] ." ". $row["pokemon6"];
 		
 		echo "tablestring created\n";
-		$tablestring.="<tr><td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$row["pokemon1"]."<td>".$row["pokemon2"]."<td>".$row["pokemon3"]."<td>".$row["pokemon4"]."<td>".$row["pokemon5"]."<td>".$row["pokemon6"]."";
+		$tablestring.="<tr><td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$pokepic.$row["pokemon1"].$pokepic2."<td>".$pokepic.$row["pokemon2"].$pokepic2."<td>".$pokepic.$row["pokemon3"].$pokepic2."<td>".$pokepic.$row["pokemon4"].$pokepic2."<td>".$pokepic.$row["pokemon5"].$pokepic2."<td>".$pokepic.$row["pokemon6"].$pokepic2."";
 		
 		}
 		echo "tablestring sent\n";

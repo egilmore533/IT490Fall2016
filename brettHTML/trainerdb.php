@@ -76,6 +76,7 @@
     function handleFHResponse()
     { 
         document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
+        
     }
 </script>
 <div id="footer">
