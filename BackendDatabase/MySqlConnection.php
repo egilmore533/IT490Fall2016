@@ -152,7 +152,7 @@ function register($username, $password)
 			//$		reg = "INSERT INTO userlogin (username, password) VALUES('$username', '$password')";
 		
 		if($conn->query($reg) === TRUE)
-			{
+                {
 			
 			echo "New user name created";
 			var_dump($username);
@@ -167,17 +167,17 @@ function register($username, $password)
 		}
 		
 		$date = date("Y/m/d H:i:s");
-		$reg = "INSERT INTO info (username, funds, wincount, avg_odds, flagged, email, dateReg) VALUES('$username','0.0', '0', '0.0', '0', '@@@', '$date')";
+		$regAcc = "INSERT INTO info (username, funds, wincount, avg_odds, flagged, dateReg) VALUES('$username','1000.0', '0', '0.0', '0', '$date')";
 		
-		if($conn2->query($reg) === TRUE)
-			{
+		if($conn2->query($regAcc) === TRUE)
+                {
 			
 			echo "New user info created";
 			
 		}
 		else {
 			
-			echo "Error: " . $reg . "<br>" . $conn->error;
+			echo "Error: " . $regAcc . "<br>" . $conn2->error;
 		}
 	}
 	else
@@ -342,12 +342,12 @@ function fightHistory()
 	if($result->num_rows > 0)
 	{	
 		//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
-		$tablestring .= "<table><tr><th>ID<th>Trainer 1<th>Trainer 2<th>Payout<th>Winner<th>Odds";
+		$tablestring .= "<table><tr><th>Trainer 1<th>Trainer 2<th>Payout<th>Winner<th>Odds";
 			//output data of each row
 		while($row = $result->fetch_assoc())
 		{
 			echo "tablestring created\n";
-			$tablestring .= "<tr><td>".$row["fightid"]."<td>".$row["trainer1"]."<td>".$row["trainer2"]."<td>".$row["payout"]."<td>".$row["winner"]."<td>".$row["odds"]."";
+			$tablestring .= "<tr><td>".$row["trainer1"]."<td>".$row["trainer2"]."<td>".$row["payout"]."<td>".$row["winner"]."<td>".$row["odds"]."";
 		}
 			echo "tablestring sent\n";
 			return array("success" => true, 'message'=>$tablestring);	
@@ -453,12 +453,12 @@ function schedule()
 	$tablestring = "";
 	$pokestring1 = "";
 	$pokestring2 = "";
-	$space = " ";
+	$space = htmlspecialchars("&nbsp");
 
 	if($result->num_rows > 0)
 	{
 	//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
-        $tablestring .= "<table><tr><th>ID<th>Trainer 1<th>Trainer 2<th>Odds<th>Date";
+        $tablestring .= "<table id=poketable><tr><th>Trainer 1<th>Trainer 2<th>Odds<th>Date";
        
 	 //output data of each row
         while($row = $result->fetch_assoc())
@@ -466,12 +466,12 @@ function schedule()
 		while($row2 = $result2->fetch_assoc())
                 {
                         if($row["trainer1id"] == $row2["trainerid"])
-                        {
+                        {                                
                                 $pokestring1 = $row2["pokemon1"] . $space . $row2["pokemon2"] . $space . $row2["pokemon3"] . $space . $row2["pokemon4"] . $space . $row2["pokemon5"] . $space . $row2["pokemon6"];           
                         }
                         if($row["trainer2id"] == $row2["trainerid"])
                         {
-                                $pokestring2 = $row2["pokemon1"] ." ". $row2["pokemon2"] ." ". $row2["pokemon3"] ." ". $row2["pokemon4"] ." ". $row2["pokemon5"] ." ". $row2["pokemon6"];
+                                $pokestring2 = $row2["pokemon1"] .$space. $row2["pokemon2"] .$space. $row2["pokemon3"] .$space . $row2["pokemon4"] .$space. $row2["pokemon5"] .$space. $row2["pokemon6"];
                         }
                 }
 		$betbutton = "<input id='placebet' type='button' value ='Place Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
@@ -479,7 +479,7 @@ function schedule()
 		
 
 		echo "tablestring created\n";
-        	$tablestring .= "<tr><td>".$row["fightid"]."<td><bb title=$pokestring1><font color='blue'>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2><font color='blue'>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["time"]."";
+        	$tablestring .= "<tr><td><bb title=$pokestring1><font color='blue'>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2><font color='blue'>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["time"]."";
 
 		$pokestring1 = "";
                 $pokestring2 = "";
@@ -534,13 +534,13 @@ function trainers($trainerid)
 
         if($result->num_rows > 0)
         {
-        	$tablestring .= "<table><tr><th>ID<th>Trainer 1<th>Pokemon 1<th>Pokemon 2<th>Pokemon 3<th>Pokemon 4<th>Pokemon 5<th>Pokemon 6";
+        	$tablestring .= "<table><tr><th>Trainer 1<th>Pokemon 1<th>Pokemon 2<th>Pokemon 3<th>Pokemon 4<th>Pokemon 5<th>Pokemon 6";
 		while($row = $result->fetch_assoc())
 		{
-			$pokestring = $row["pokemon1"] ." ". $row["pokemon2"] ." ". $row["pokemon3"] ." ". $row["pokemon4"] ." ". $row["pokemon5"] ." ". $row["pokemon6"];
+                    $pokestring = $row["pokemon1"] ." ". $row["pokemon2"] ." ". $row["pokemon3"] ." ". $row["pokemon4"] ." ". $row["pokemon5"] ." ". $row["pokemon6"];
 		
 		echo "tablestring created\n";
-		$tablestring.="<tr><td>".$row["trainerid"]."<td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$row["pokemon1"]."<td>".$row["pokemon2"]."<td>".$row["pokemon3"]."<td>".$row["pokemon4"]."<td>".$row["pokemon5"]."<td>".$row["pokemon6"]."";
+		$tablestring.="<tr><td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$row["pokemon1"]."<td>".$row["pokemon2"]."<td>".$row["pokemon3"]."<td>".$row["pokemon4"]."<td>".$row["pokemon5"]."<td>".$row["pokemon6"]."";
 		
 		}
 		echo "tablestring sent\n";

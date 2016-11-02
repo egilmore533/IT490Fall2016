@@ -55,17 +55,9 @@
     $name2 = "";
     $fightid = 0;
 		
-        $hours = 9;
-        $minutes = 00;
+        $hours = 8;
+        $minutes = 60;
         $timestamp = $hours . ":" . $minutes . $minutes;
-		
-	$sqlHistory = "INSERT INTO fightHistory.history (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time) SELECT fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time FROM Schedule.schedule;";
-		if($conn3->query($sqlHistory) ===TRUE)
-        	{
-                	echo "New History Match Stored!\n";
-        	}
-        	else
-        	      	echo "Error: " . $sqlHistory . "\n";
 
 	while($row=mysqli_fetch_array($result))
 	{
@@ -128,10 +120,7 @@
 	    echo $trainer2id . " " . $name2 . "\n";
             $fightnum += 1;
 
-	$sqlSchedule = "INSERT INTO schedule (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time, timestamp) VALUES ('$fightid', '$name1', '$trainer1id', '$name2', '$trainer2id', '1.0', '$date', '$timestamp')";
-	
-	            
-	if($minutes == 60)
+        if($minutes == 60)
 	{
             $hours += 1;
             $minutes = 00;
@@ -141,6 +130,8 @@
 	{
             $timestamp = $hours . ":" . $minutes;
         }
+            
+	$sqlSchedule = "INSERT INTO schedule (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, time, timestamp) VALUES ('$fightid', '$name1', '$trainer1id', '$name2', '$trainer2id', '1.0', '$date', '$timestamp')";
         
         $minutes+=15;
 	

@@ -38,6 +38,27 @@ preg_match_all($trainer_table_regex,$data,$trainer_tables);
 $position = 0;
 $j = 0;
 
+        //MySQL Connection
+	$servername = "localhost";
+	$DBuser = "it490";
+	$DBpass = "whoGivesaFuck!490";
+	$database = "Trainer";
+	
+	//Create Connection
+	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	
+	//Check Connection
+	if($conn->connect_error){
+		die("Connection failed: " . $conn->connect_error);
+	}
+	else
+	{
+		$s = "SELECT * FROM info";
+		($result = mysqli_query($conn, $s)) or die (mysqli_error());
+		echo "Connected Successfully";
+	}
+	//MySQL Connection
+
 //go through each table
 foreach($trainer_tables[1] as $trainer_table)
 {
@@ -111,13 +132,26 @@ var_dump($final_array);
 //make insert statements for each trainer
 foreach($final_array as $trainer)
 {
+        $trainerid++;
+
 	if($trainer[0] == "")
 	{
-		$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainer[1]', '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid','$trainer[1]', '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+		var_dump($sql);
 	}
 	else
 	{
-		$sql = "INSERT INTO trainers (name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES (CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid', CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+		var_dump($sql);
+	}
+
+	if($conn->query($sql) === TRUE)
+	{			
+		echo "New Trainer created";
+	}
+	else 
+	{	
+		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 }
 
