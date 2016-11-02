@@ -56,7 +56,8 @@ while($r=mysqli_fetch_array($result))
 " username: ".$r2['username']."\n";	
 		}
 	}
-        $s = 'insert into fightHistory.history values ("'.$r['fightid']."\",\"".$r['trainer1id']."\",\"".$r['trainer2id']."\",".$payout_total.",\"".$winner."\",". 1.0 .')';
+        $s = 'insert into fightHistory.history values ("'.$r['fightid']."\",\"".$r['trainer1']."\",".$r['trainer1id'].",\"".$r['trainer2']."\",".$r['trainer2id'].",".$payout_total.",\"".$winner."\",". 1.0. ','.$r['time'] .')';
+	var_dump($s);
 	if(mysqli_query($conn,$s))
 	{
 		echo "Fight History Row Added Succesfully\n";
