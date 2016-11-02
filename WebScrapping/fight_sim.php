@@ -23,7 +23,6 @@ while($r=mysqli_fetch_array($result))
 	$winner = randomly_choose_winner($fight_array);
 	$s = 'select * from betHistory.history where fightid='.$r['fightid'];
 	$payout_total = 0;
-	var_dump($s);
 	($result2 = mysqli_query($conn,$s) or die (mysqli_error()));
 	while($r2=mysqli_fetch_array($result2))
 	{
@@ -46,6 +45,16 @@ while($r=mysqli_fetch_array($result))
 			else { echo "payout failed to ".$r2['username']; }
 		}
 		$payout_total += ((int)$r2['trainer1_bet'] + (int)$r2['trainer2_bet']);
+		$s = 'update betHistory.history set winnings='.$payout.' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
+		if(mysqli_query($conn,$s))
+		{
+			echo "Succesfully updated betHistory for fightid: ".$r['fightid']." username: ".$r2['username']."\n";
+		}
+		else
+		{	
+			echo "Failed to Update betHistory for fight: ".$r['fightid'].
+" username: ".$r2['username']."\n";	
+		}
 	}
         $s = 'insert into fightHistory.history values ("'.$r['fightid']."\",\"".$r['trainer1id']."\",\"".$r['trainer2id']."\",".$payout_total.",\"".$winner."\",". 1.0 .')';
 	if(mysqli_query($conn,$s))
@@ -56,7 +65,7 @@ while($r=mysqli_fetch_array($result))
 	{
 		echo "Failed to Add Row to Fight History\n";
 	}
-	//$s = 'delete from Schedule.schedule where fightid='.$r['fightid'];
+	$s = 'delete from Schedule.schedule where fightid='.$r['fightid'];
 	if(mysqli_query($conn,$s))
 	{
 		echo "Schedule Row Updated Succesfully\n";
