@@ -114,15 +114,6 @@
     { 
         document.getElementById("bh").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
     }
-    function sendBetRequest(fid,tid)
-    {
-        request = new XMLHttpRequest();
-        request.onreadystatechange = handleResponse;
-        request.open("POST","rpc.php",true);
-        request.setRequestHeader("Content-type","application/json");
-        var data = JSON.stringify({request:"placebet",fid:fid,tid:tid,funds:funds});
-        request.send(data);
-    }
   </script>
 <div id="footer">
     <a href="aboutus.php" title="About">About</a>

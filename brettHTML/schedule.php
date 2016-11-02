@@ -48,8 +48,18 @@
         </div>
     <div id="table">
         <div id="bet">
-        <input type="number" id="howmuch" style="display: none;"/>
-        <input type="button" id="confirmbutton" onclick="" value= "Confirm" style ="display: none;"/>
+        <?php
+        require_once('SessionManager.php.inc');
+        SessionManager::sessionStart('PokemonBets');
+        if (isset($_SESSION['balance'])) { ?>
+        <h3 id="betbal"> Balance $<?php echo $_SESSION['balance']; ?>
+        </h3>
+        <input type="number" id="hm" style="display: none;">
+        <input type="button" id="confirm" onclick="" value= "Confirm" style ="display: none;"/>
+        <?php } 
+        else { ?>
+        <a href="http://www.pokefights.com/" title="Account">Sign In to view Balance and Place Bets</a>
+        <?php } ?>
         </div>
         <p id="sched"></p>
     </div>
@@ -81,12 +91,12 @@
     {
         if(reqType == 'show')
         {
-            document.getElementById("howmuch").style.display = "block";
-            document.getElementById("confirmbutton").style.display = "block";
-            document.getElementById("confirmbutton").onclick = function(){sendBetRequest("placebet",fid,tid);};
+            document.getElementById("hm").style.display = "block";
+            document.getElementById("confirm").style.display = "block";
+            document.getElementById("confirm").onclick = function(){sendBetRequest("placebet",fid,tid);};
         }
         else{
-            var funds = document.getElementById("howmuch").value;
+            var funds = document.getElementById("hm").value;
             
             request = new XMLHttpRequest();
             request.onreadystatechange = handleBetResponse;
@@ -98,9 +108,9 @@
     }
     function handleBetResponse()
     {
-        document.getElementById("bet").innerHTML = "New Balance: $" + request.responseText;
-        document.getElementById("howmuch").style.display = "none";
-        document.getElementById("confirmbutton").style.display = "none";
+        document.getElementById("betbal").innerHTML = "Balance: $" + request.responseText;
+        document.getElementById("hm").style.display = "none";
+        document.getElementById("confirm").style.display = "none";
     }
 </script>
 <div id="footer">

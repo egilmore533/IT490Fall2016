@@ -13,7 +13,8 @@ switch($request["request"])
 {
     case "login":
 	$username = $request['username'];
-	$password = sha1($request['password']);
+	$password = sha1($request['username'].$request['password']);
+
 	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
 	$requestArr = array();
@@ -39,7 +40,7 @@ switch($request["request"])
 	break;
     case "register":
         $username = $request['username'];
-	$password = sha1($request['password']);
+	$password = sha1($request['username'].$request['password']);
 	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
 	
 	$requestArr = array();
@@ -159,6 +160,28 @@ switch($request["request"])
 	else
 	{
             $response["message"] = "Failed.";
+	}
+	break;
+    case "placebet":
+	$login = new rabbitMQClient("pokeRabbitMQ.ini","pokeServer");
+	
+	SessionManager::sessionStart('PokemonBets');
+	$requestArr = array();
+	$requestArr["type"] = "placebet";
+	$requestArr["username"] = $_SESSION['user'];
+	$requestArr["fid"] = $request['fid'];
+	$requestArr["tid"] = $request['tid'];
+	$requestArr["funds"] = $request['funds'];
+	
+	$response = $login->send_request($requestArr);
+        if ($response["success"]==true)
+	{
+            $_SESSION['balance'] = $response["message"];
+            $response["message"] = $_SESSION['balance'];
+	}
+	else
+	{
+            $response["message"] = "Failed to place bets with $".$request["funds"];
 	}
 	break;
     
