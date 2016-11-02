@@ -82,7 +82,5 @@ return $final_moves;
 }
 
 
-
-
 ?>
 

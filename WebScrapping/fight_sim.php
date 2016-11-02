@@ -23,14 +23,57 @@ while($r=mysqli_fetch_array($result))
 	$winner = randomly_choose_winner($fight_array);
 	$s = 'select * from betHistory.history where fightid='.$r['fightid'];
 	$payout_total = 0;
-	var_dump($s);
 	($result2 = mysqli_query($conn,$s) or die (mysqli_error()));
 	while($r2=mysqli_fetch_array($result2))
 	{
-		var_dump($r2);
+		$payout = $r2['trainer1_bet'];
+		if($payout <= 0)
+		{
+			$payout = $r2['trainer2_bet'];
+		}
+		
+		$s = 'select * from Accounts.info where username="'.$r2['username'].'"';
+		($result3= mysqli_query($conn,$s) or die (mysqli_error()));
+		while($r3=mysqli_fetch_array($result3))
+		{
+			$s='update Accounts.info set funds='.($payout + $r3['funds']).' where username="'.$r2['username'].'"';
+			echo $s."\n";
+			if(mysqli_query($conn,$s))
+			{
+				echo $r2['username']." succesfully paid\n";
+			}
+			else { echo "payout failed to ".$r2['username']; }
+		}
 		$payout_total += ((int)$r2['trainer1_bet'] + (int)$r2['trainer2_bet']);
+		$s = 'update betHistory.history set winnings='.$payout.' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
+		if(mysqli_query($conn,$s))
+		{
+			echo "Succesfully updated betHistory for fightid: ".$r['fightid']." username: ".$r2['username']."\n";
+		}
+		else
+		{	
+			echo "Failed to Update betHistory for fight: ".$r['fightid'].
+" username: ".$r2['username']."\n";	
+		}
 	}
-	
+        $s = 'insert into fightHistory.history values ("'.$r['fightid']."\",\"".$r['trainer1id']."\",\"".$r['trainer2id']."\",".$payout_total.",\"".$winner."\",". 1.0 .')';
+	if(mysqli_query($conn,$s))
+	{
+		echo "Fight History Row Added Succesfully\n";
+	}
+	else
+	{
+		echo "Failed to Add Row to Fight History\n";
+	}
+	$s = 'delete from Schedule.schedule where fightid='.$r['fightid'];
+	if(mysqli_query($conn,$s))
+	{
+		echo "Schedule Row Updated Succesfully\n";
+	}
+	else
+	{
+		echo "Schedule Row Failed to Update\n";
+	}
 	break;
 }
 
