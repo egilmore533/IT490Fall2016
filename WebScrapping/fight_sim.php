@@ -49,7 +49,10 @@ while($r=mysqli_fetch_array($result))
 		{
 			$s = 'update betHistory.history set winnings='.$payout.' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
 		}
-		$s = 'update betHistory.history set winnings=0 where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
+		else 
+		{
+			$s = 'update betHistory.history set winnings=0 where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
+		}
 		if(mysqli_query($conn,$s))
 		{
 			echo "Succesfully updated betHistory for fightid: ".$r['fightid']." username: ".$r2['username']."\n";
