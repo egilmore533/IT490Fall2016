@@ -57,7 +57,7 @@ while($r=mysqli_fetch_array($result))
 		$payout_total += ((int)$r2['trainer1_bet'] + (int)$r2['trainer2_bet']);
 		if( ($r['trainer1']==$winner && $r2['trainer1_bet'] > 0) || ($r['trainer2']==$winner && $r2['trainer2_bet'] > 0) )
 		{
-			$s = 'update betHistory.history set winnings='.$payout.' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
+			$s = 'update betHistory.history set winnings='.($payout + $payout).' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
 		}
 		else 
 		{
