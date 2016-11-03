@@ -36,13 +36,16 @@ while($r=mysqli_fetch_array($result))
 		($result3= mysqli_query($conn,$s) or die (mysqli_error()));
 		while($r3=mysqli_fetch_array($result3))
 		{
+			echo $winner."\n";
+			var_dump($r2);
+			var_dump($r3);
 			if( ($r2['trainer1']==$winner && $r2['trainer1_bet'] > 0) || ($r2['trainer2']==$winner && $r2['trainer2_bet'] > 0) )
 			{
 				$s='update Accounts.info set funds='.($payout + $payout + $r3['funds']).' where username="'.$r2['username'].'"';
 			}
 			else
 			{
-				$s="select * from Accounts.info set funds='".$r3['funds']."' where username='".$r2['username']."'";
+				$s="update Accounts.info set funds='".$r3['funds']."' where username='".$r2['username']."'";
 			}
 			echo $s."\n";
 			if(mysqli_query($conn,$s))
