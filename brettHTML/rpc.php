@@ -75,7 +75,7 @@ switch($request["request"])
 	}
 	else
 	{
-            $response["message"] = "Failed to add $".$request["funds"];
+            $response["message"] = "Failed to add $".$request["funds"].".".$request["message"];
 	}
 	break;
     case "wdFunds":
@@ -142,7 +142,7 @@ switch($request["request"])
 	}
 	else
 	{
-            $response["message"] = "Failed to show bet history";
+            $response["message"] = "Failed to show bet history. ".$response["message"];
 	}
 	break;
     case "tdb":
@@ -151,7 +151,7 @@ switch($request["request"])
 	SessionManager::sessionStart('PokemonBets');
 	$requestArr = array();
 	$requestArr["type"] = "tdb";
-	$requestArr["trainerid"] = $request['trainerid'];
+	$requestArr["trainer"] = $request['trainer'];
 	
 	$response = $login->send_request($requestArr);
         if ($response["success"]==true)
@@ -159,7 +159,7 @@ switch($request["request"])
 	}
 	else
 	{
-            $response["message"] = "Failed.";
+            $response["message"] = "Failed: ".$response["message"];
 	}
 	break;
     case "placebet":

@@ -210,7 +210,7 @@ function addfunds($username, $add)
 	}
 	else
 	{
-		$s = "SELECT * FROM info";
+		$s = "SELECT * FROM info where username=\"$username\"";
 		($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
 		echo "Connected Successfully";
 	}
@@ -220,35 +220,37 @@ function addfunds($username, $add)
 	$f = 0;
 	if($add >= 0)
 	{
-	while($a=mysqli_fetch_array($result2))
-	{
-		if($username == $a["username"])
-		{
-			$f = $a['funds']; 
-			$f = $f+$add;
-			$reg = "UPDATE info SET funds='$f' WHERE username='$username'";
-		
-		
-		if($conn2->query($reg) === TRUE)
-		{
-			echo "\nFunds added to database\n";
-		}
-		else {
-			
-			echo "Error: " . $reg . "<br>" . $conn2->error;
-		}
-			echo "Funds Added!" . "<br>";
-			$conn2->close();
-			return array("success" => true, 'message'=>$f);
+            if($result2->num_rows > 0)
+            {
+                while($a = $result2->fetch_assoc())
+                {
+                    $f = $a['funds']; 
+                    $f = $f+$add;
+                    $reg = "UPDATE info SET funds='$f' WHERE username='$username'";
+                
+                
+                    if($conn2->query($reg) === TRUE)
+                    {
+                            echo "\nFunds added to database\n";
+                    }
+                    else {
+                            
+                            echo "Error: " . $reg . "<br>" . $conn2->error;
+                    }
+                    
+                    echo "Funds Added!";
+                    $conn2->close();
+                    return array("success" => true, 'message'=>$f);
 
-		}
-		else{
-			echo "error no username";
-			$conn2->close();
-			return array("success" => '0', 'message'=>"Error with adding funds");
-		}
-			
-	}
+                }
+                
+            }
+            else
+            {
+                echo "error no username";
+                $conn2->close();
+                return array("success" => '0', 'message'=>"Error with adding funds");
+            }
 	}
 	else
 		return array("success" => '0', 'message' => "Can't add negative or zero funds");
@@ -272,7 +274,7 @@ function withdraw($username, $wd)
         }
         else
         {
-                $s = "SELECT * FROM info";
+                $s = "SELECT * FROM info where username=\"$username\"";
                 ($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
                 echo "Connected Successfully";
         }
@@ -282,38 +284,38 @@ function withdraw($username, $wd)
         $f = 0;
         if($wd >= 0)
         {
-        while($a=mysqli_fetch_array($result2))
-        {
-                if($username == $a["username"])
+            if($result2->num_rows > 0)
+            {
+                while($a = $result2->fetch_assoc())
                 {
-                        $f = $a['funds'];
-                        $f = $f-$wd;
+                    $f = $a['funds'];
+                    $f = $f-$wd;
+                    
+                    if($f < 0)
+                        return array ("success" => '0', 'message' => "Can't withdraw over your balance.");
+
+                    $reg = "UPDATE info SET funds='$f' WHERE username='$username'";
                         
-			if($f < 0)
-				return array ("success" => '0', 'message' => "Can't withdraw over your balance.");
-
-			$reg = "UPDATE info SET funds='$f' WHERE username='$username'";
-			
-                if($conn2->query($reg) === TRUE)
-                {
+                    if($conn2->query($reg) === TRUE)
+                    {
                         echo "\nFunds subtracted from database\n";
-                }
-                else {
-
+                    }
+                    else 
+                    {
                         echo "Error: " . $reg . "<br>" . $conn2->error;
+                    }
+                    
+                    echo "Funds Withdrawn!";
+                    $conn2->close();
+                    return array("success" => true, 'message'=>$f);
                 }
-                        echo "Funds Withdrawn!" . "<br>";
-                        $conn2->close();
-                        return array("success" => true, 'message'=>$f);
-
-                }
-                else{
-                        echo "error no username";
-                        $conn2->close();
-                        return array("success" => '0', 'message'=>"Error with adding funds");
-                }
-
-        }
+            }
+            else
+            {
+                echo "error no username";
+                $conn2->close();
+                return array("success" => '0', 'message'=>"Error with adding funds");
+            }
         }
         else
                 return array("success" => '0', 'message' => "Can't withdraw negative or zero funds");
@@ -380,7 +382,7 @@ function betHistory($username)
 	}
 	else
 	{
-		$s = "SELECT * FROM history";
+		$s = "SELECT * FROM history where username=\"$username\"";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
 		echo "Connected Successfully";
 	}
@@ -391,23 +393,23 @@ function betHistory($username)
 	$tablestring .= "<table><tr><th>FightID<th>Trainer 1 Bet<th>Trainer 2 Bet<th>Winnings";
 	//output data of each row
 
-	while($row=mysqli_fetch_array($result))
+	if($result->num_rows > 0)
 	{
-		if($username == $row["username"])
-		{
-			echo "\nbet history found\n";
-			$tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
-		
-			echo "bet history gathered and sent" . "\n";
+            while($row = $result->fetch_assoc())
+            {
+                    echo "\nbet history found\n";
+                    $tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
+            
+                    echo "bet history gathered and sent" . "\n";
 
-		}
-		else{
-			echo "error no username";
-			$conn->close();
-			return array("success" => '0', 'message'=>"Error with getting bet history");
-		}
-			
+            }
 	}
+	else
+	{
+            echo "error no username";
+            $conn->close();
+            return array("success" => '0', 'message'=>"$username may not have a bet history yet.");
+        }
 	
         $conn->close();
                 return array("success" => true, 'message'=>$tablestring);
@@ -453,7 +455,7 @@ function schedule()
 	$tablestring = "";
 	$pokestring1 = "";
 	$pokestring2 = "";
-	$space = htmlspecialchars("&nbsp");
+	$space = "&nbsp;";
 
 	if($result->num_rows > 0)
 	{
@@ -467,19 +469,19 @@ function schedule()
                 {
                         if($row["trainer1id"] == $row2["trainerid"])
                         {                                
-                                $pokestring1 = $row2["pokemon1"] . $space . $row2["pokemon2"] . $space . $row2["pokemon3"] . $space . $row2["pokemon4"] . $space . $row2["pokemon5"] . $space . $row2["pokemon6"];           
+                                $pokestring1 = isNidoFamily($row2["pokemon1"]) . $space . isNidoFamily($row2["pokemon2"]) . $space .            isNidoFamily($row2["pokemon3"]) . $space . isNidoFamily($row2["pokemon4"]) . $space . isNidoFamily($row2["pokemon5"]) . $space . isNidoFamily($row2["pokemon6"]);           
                         }
                         if($row["trainer2id"] == $row2["trainerid"])
                         {
-                                $pokestring2 = $row2["pokemon1"] .$space. $row2["pokemon2"] .$space. $row2["pokemon3"] .$space . $row2["pokemon4"] .$space. $row2["pokemon5"] .$space. $row2["pokemon6"];
+                                $pokestring2 = isNidoFamily($row2["pokemon1"]) . $space . isNidoFamily($row2["pokemon2"]) . $space .            isNidoFamily($row2["pokemon3"]) . $space . isNidoFamily($row2["pokemon4"]) . $space . isNidoFamily($row2["pokemon5"]) . $space . isNidoFamily($row2["pokemon6"]);
                         }
                 }
-		$betbutton = "<input id='placebet' type='button' value ='Place Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
-		$betbutton2 = "<input id='placebet' type='button' value ='Place Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer2id']."'".")".">";
+		$betbutton = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
+		$betbutton2 = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer2id']."'".")".">";
 		
 
-		echo "tablestring created\n";
-        	$tablestring .= "<tr><td><bb title=$pokestring1><font color='blue'>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2><font color='blue'>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["time"]."";
+		//echo "tablestring created\n";
+        	$tablestring .= "<tr><td><bb title=$pokestring1>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["time"]."";
 
 		$pokestring1 = "";
                 $pokestring2 = "";
@@ -498,7 +500,7 @@ function schedule()
 
 }
 
-function trainers($trainerid)
+function trainers($trainer)
 {
 	$servername = "localhost";
         $username = "it490";
@@ -514,17 +516,29 @@ function trainers($trainerid)
 	else
 	{
 	
-		if($trainerid==0)
+		if($trainer=="")
 		{
 			$s = "SELECT * FROM info";
                         ($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                        
+                        echo $trainer;
                         echo "Connected Successfully";
 		}
 		else
 		{
-		       	$s = "SELECT * FROM info where trainerid=$trainerid";
+		       	$s = "SELECT * FROM info where name LIKE \"%$trainer%\" or
+                                                        pokemon1 LIKE \"%$trainer%\" or
+                                                        pokemon2 LIKE \"%$trainer%\" or
+                                                        pokemon3 LIKE \"%$trainer%\" or
+                                                        pokemon4 LIKE \"%$trainer%\" or
+                                                        pokemon5 LIKE \"%$trainer%\" or
+                                                        pokemon6 LIKE \"%$trainer%\"";
                 	($result = mysqli_query($conn, $s)) or die (mysqli_error());
-                	echo "Connected Successfully";
+                	
+                	echo "Searching for ".$trainer."\n";
+                	echo "Searched Successfully\n";
+                	
+                	
 
 		}
 	}
@@ -533,28 +547,25 @@ function trainers($trainerid)
         $pokestring = "";
         
         $pokepic = '<img src=pokemon&#47;';
-        $pokepic2 = ".png"." onerror=this.style.display='none'>";
+        $pokepic2 = ".png";
+        $pokepic3 = " onerror=this.style.display='none' title=";
         
         if($result->num_rows > 0)
         {
-        	$tablestring .= "<table><tr><th>Trainer 1<th>Pokemon 1<th>Pokemon 2<th>Pokemon 3<th>Pokemon 4<th>Pokemon 5<th>Pokemon 6";
-		while($row = $result->fetch_assoc())
-		{
-                    $pokestring = $row["pokemon1"] ." ". $row["pokemon2"] ." ". $row["pokemon3"] ." ". $row["pokemon4"] ." ". $row["pokemon5"] ." ". $row["pokemon6"];
-                    
-                    
-                    echo "tablestring created\n";
-                    $tablestring.="<tr><td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$pokepic.isNidoFamily($row["pokemon1"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon2"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon3"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon4"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon5"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon6"]).$pokepic2."";
-		
-		}
-		echo "tablestring sent\n";
-		return array("success"=>true, 'message'=>$tablestring);
+            $tablestring .= "<table><tr><th>Trainers<th><img title=Slot1 src=pokeball.png><th><img title=Slot2 src=pokeball.png><th><img title=Slot3 src=pokeball.png><th><img title=Slot4 src=pokeball.png><th><img title=Slot5 src=pokeball.png><th><img title=Slot6 src=pokeball.png>";
+            while($row = $result->fetch_assoc())
+            {
+                //echo "tablestring created\n";
+                $tablestring.="<tr><td><b>".$row["name"]."<td>".$pokepic.isNidoFamily($row["pokemon1"]).$pokepic2.$pokepic3.$row["pokemon1"].">"."<td>".$pokepic.isNidoFamily($row["pokemon2"]).$pokepic2.$pokepic3.$row["pokemon2"].">"."<td>".$pokepic.isNidoFamily($row["pokemon3"]).$pokepic2.$pokepic3.$row["pokemon3"].">"."<td>".$pokepic.isNidoFamily($row["pokemon4"]).$pokepic2.$pokepic3.$row["pokemon4"].">"."<td>".$pokepic.isNidoFamily($row["pokemon5"]).$pokepic2.$pokepic3.$row["pokemon5"].">"."<td>".$pokepic.isNidoFamily($row["pokemon6"]).$pokepic2.$pokepic3.$row["pokemon6"].">"."";
+            }
+            echo "tablestring sent\n";
+            return array("success"=>true, 'message'=>$tablestring);
 	}
 	else
 	{
-		$tablestring ="0 results";
-		echo "0 results\n";
-		return array("success"=>'0', 'message'=>$tablestring);
+            $tablestring ="0 results";
+            echo "0 results\n";
+            return array("success"=>'0', 'message'=>$tablestring);
 	}
 
 	$conn->close();
@@ -689,7 +700,7 @@ function requestProcessor($request)
 		case "sched":
 		      return schedule();
 		case "tdb":
-		      return trainers($request['trainerid']);
+		      return trainers($request['trainer']);
 		case "wdfunds":
 		      return withdraw($request['username'], $request['funds']);
                 case "placebet":

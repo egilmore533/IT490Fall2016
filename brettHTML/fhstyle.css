@@ -149,6 +149,27 @@ td.text-right {
 
 }
 
+#placebet {
+  background:url(pokebet.png);
+
+  border-radius: 60px;
+  font-family: Courier New;
+  text-shadow: 1px 1px 5px #000000;
+  color: #ffffff;
+  padding: 11px 3px 12px 4px;
+  text-decoration: none;
+}
+
+#placebet:hover {
+  background: #fc3c3c;
+  background-image: -webkit-linear-gradient(top, #fc3c3c, #733636);
+  background-image: -moz-linear-gradient(top, #fc3c3c, #733636);
+  background-image: -ms-linear-gradient(top, #fc3c3c, #733636);
+  background-image: -o-linear-gradient(top, #fc3c3c, #733636);
+  background-image: linear-gradient(to bottom, #fc3c3c, #733636);
+  text-decoration: none;
+}
+
 #header {
     background-color: #b50000;
     color: white;

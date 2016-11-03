@@ -43,11 +43,13 @@
 
     <div id="contents">
         <div id="search">
-            <h3>ID Input</h3>
-            <form method="GET">
-                <input id="searchbar" type="number" name="tid"/><br><br>
-                <input type="submit" value="Search"/>
-            </form>
+            <h3>Search</h3>
+            
+            <input id="searchbar" type="text" name="tid"/><br><br>
+            <input type="submit" value="Search" onclick="tdbRequest()"/>
+            <p><font size="1pt">
+            Search by: <br>trainer type <br>trainer name <br>pokemon</p>
+
         </div>
     <div id="table">
         <p id="tdb"></p>
@@ -55,7 +57,7 @@
     </div>
 <script language="javascript">
     
-    var id = document.getElementById("searchbar").value;
+    
     function openNav() {
         document.getElementById("sidenav").style.width = "250px";
     }
@@ -66,12 +68,12 @@
 
     function tdbRequest()
     {
-
+        var trainer = document.getElementById("searchbar").value;
         request = new XMLHttpRequest();
         request.onreadystatechange = handleFHResponse;
         request.open("POST","rpc.php",true);
         request.setRequestHeader("Content-type","application/json");
-        var data = JSON.stringify({request:"tdb",trainerid:id});
+        var data = JSON.stringify({request:"tdb",trainer:trainer});
         request.send(data);        
         
     }
@@ -79,10 +81,6 @@
     { 
         document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
         
-        var imgArr = document.getElementsByTagName("img");
-        for (var i = 0; i <  imgArr.length; i++) {
-            imgArr[i].onerror.style.display = "none";
-        }
         
     }
 </script>
