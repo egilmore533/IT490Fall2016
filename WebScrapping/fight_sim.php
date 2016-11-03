@@ -45,7 +45,7 @@ while($r=mysqli_fetch_array($result))
 			else { echo "payout failed to ".$r2['username']; }
 		}
 		$payout_total += ((int)$r2['trainer1_bet'] + (int)$r2['trainer2_bet']);
-		if( ($r2['trainer1']==$winner && $r2['trainer1bet'] > 0) || ($r2['trainer2']==$winner && $r2['trainer2_bet'] > 0) )
+		if( ($r2['trainer1']==$winner && $r2['trainer1_bet'] > 0) || ($r2['trainer2']==$winner && $r2['trainer2_bet'] > 0) )
 		{
 			$s = 'update betHistory.history set winnings='.$payout.' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
 		}
