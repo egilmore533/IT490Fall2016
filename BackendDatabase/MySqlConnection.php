@@ -532,8 +532,8 @@ function trainers($trainerid)
 	$tablestring = "";
         $pokestring = "";
         
-        $pokepic = '<img src=..&#47;pokemon&#47;';
-        $pokepic2 = ".png>";
+        $pokepic = '<img src=pokemon&#47;';
+        $pokepic2 = ".png"." onerror=this.style.display='none'>";
         
         if($result->num_rows > 0)
         {
@@ -541,9 +541,10 @@ function trainers($trainerid)
 		while($row = $result->fetch_assoc())
 		{
                     $pokestring = $row["pokemon1"] ." ". $row["pokemon2"] ." ". $row["pokemon3"] ." ". $row["pokemon4"] ." ". $row["pokemon5"] ." ". $row["pokemon6"];
-		
-		echo "tablestring created\n";
-		$tablestring.="<tr><td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$pokepic.$row["pokemon1"].$pokepic2."<td>".$pokepic.$row["pokemon2"].$pokepic2."<td>".$pokepic.$row["pokemon3"].$pokepic2."<td>".$pokepic.$row["pokemon4"].$pokepic2."<td>".$pokepic.$row["pokemon5"].$pokepic2."<td>".$pokepic.$row["pokemon6"].$pokepic2."";
+                    
+                    
+                    echo "tablestring created\n";
+                    $tablestring.="<tr><td><bb title=$pokestring><font color='blue'>".$row["name"]."<td>".$pokepic.isNidoFamily($row["pokemon1"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon2"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon3"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon4"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon5"]).$pokepic2."<td>".$pokepic.isNidoFamily($row["pokemon6"]).$pokepic2."";
 		
 		}
 		echo "tablestring sent\n";
@@ -559,7 +560,25 @@ function trainers($trainerid)
 	$conn->close();
 
 }
-
+function isNidoFamily($pokemon)
+{
+    if($pokemon == "Nidoran-M (M)")
+        return "NidoranM";
+    else if($pokemon == "Nidoran-F (F)")
+        return "NidoranF";
+    else if($pokemon == "Nidorino (M)")
+        return "Nidorino";
+    else if($pokemon == "Nidorina (F)")
+        return "Nidorina";
+    else if($pokemon == "Nidoking (M)")
+        return "Nidoking";
+    else if($pokemon == "Nidoqueen (F)")
+        return "Nidoqueen";
+    else if($pokemon == "Mr. Mime")
+        return "MrMime";
+    else
+        return $pokemon;
+}
 function placebet($username, $fightid, $trainerid, $funds)
 {
     //MySQL Connection

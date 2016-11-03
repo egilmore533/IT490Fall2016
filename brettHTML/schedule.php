@@ -76,6 +76,7 @@
 
     function schedRequest()
     {
+        
         request = new XMLHttpRequest();
         request.onreadystatechange = handleFHResponse;
         request.open("POST","rpc.php",true);

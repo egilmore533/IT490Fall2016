@@ -66,16 +66,23 @@
 
     function tdbRequest()
     {
+
         request = new XMLHttpRequest();
         request.onreadystatechange = handleFHResponse;
         request.open("POST","rpc.php",true);
         request.setRequestHeader("Content-type","application/json");
         var data = JSON.stringify({request:"tdb",trainerid:id});
-        request.send(data);
+        request.send(data);        
+        
     }
     function handleFHResponse()
     { 
         document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
+        
+        var imgArr = document.getElementsByTagName("img");
+        for (var i = 0; i <  imgArr.length; i++) {
+            imgArr[i].onerror.style.display = "none";
+        }
         
     }
 </script>
