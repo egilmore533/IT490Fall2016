@@ -103,6 +103,7 @@ $pokemon_num = 0;
 foreach($trainers[0] as $trainer)
 {
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
+	$final_array[$i+$position]['Pokemon_Count'] = count($trainer_pokemons[$i][1]);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
