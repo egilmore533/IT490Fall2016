@@ -102,6 +102,8 @@ $i = 0;
 $pokemon_num = 0;
 foreach($trainers[0] as $trainer)
 {
+	preg_match_all('/\/a> (.+)<\/td>/',$trainer,$trainer_pokemons_levels[$i]);
+	var_dump($trainer_pokemons_levels[$i][1]);
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
 	$final_array[$i+$position]['Pokemon_Count'] = count($trainer_pokemons[$i][1]);
 	foreach($trainer_pokemons[$i][1] as $pokemon)
