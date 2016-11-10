@@ -55,7 +55,7 @@ $j = 0;
 	{
 		$s = "SELECT * FROM info";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully";
+		echo "Connected Successfully\n";
 	}
 	//MySQL Connection
 
@@ -102,30 +102,53 @@ $i = 0;
 $pokemon_num = 0;
 foreach($trainers[0] as $trainer)
 {
-	preg_match_all('/\/a> ([0-9]+)<\/td>/',$trainer,$trainer_pokemons_levels[$i]);
-	if(count($trainer_pokemons_levels[$i][1]) == 0) 
-	{
-		preg_match_all('/<\/a><br \/>\n([0-9]+)<\/td>/sU',$trainer,$trainer_pokemons_levels[$i]);
-	}
-	if(count($trainer_pokemons_levels[$i][1]) == 0)
-        {
-                preg_match_all('/\(lvl. ([0-9]+)\)<\/td>/U',$trainer,$trainer_pokemons_levels[$i]);
-        }
-	var_dump($trainer_pokemons_levels[$i][1]);
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
-	$final_array[$i+$position]['Pokemon_Count'] = count($trainer_pokemons[$i][1]);
+	
+	$trainer_pokemons_levels = array();
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
+		preg_match_all("/$pokemon<\/a> ([0-9][0-9]?)<\/td>/",$trainer,$trainer_pokemons_levels[$pokemon]);
+		if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+		{
+			preg_match_all("/$pokemon<\/a>([0-9][0-9]?)<\/td>/",$trainer,$trainer_pokemons_levels[$pokemon]);
+		}
+		if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+		{
+			preg_match_all("/$pokemon<\/a> ([0-9][0-9]?)\n<p><br \/><\/p>\n<\/td>/s",$trainer,$trainer_pokemons_levels[$pokemon]);
+		}
+        	if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+        	{
+                	preg_match_all("/$pokemon<\/a><br \/>\n([0-9]+)<\/td>/sU",$trainer,$trainer_pokemons_levels[$pokemon]);
+        	}
+        	if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+        	{
+                	preg_match_all('/\(lvl. ([0-9]+)\)<\/td>/U',$trainer,$trainer_pokemons_levels[$pokemon]);
+        	}
+	}
+
+	$insert_reg = array();
+	$final_array[$i+$position]['Pokemon_Count'] = count($trainer_pokemons[$i][1]);  
+	foreach($trainer_pokemons[$i][1] as $pokemon)
+	{
+
+		$pokemon_old = $pokemon;
+		if($insert_reg[$pokemon_old] == null)
+		{
+			$insert_reg[$pokemon_old] = 0;
+		}
+		$insert_reg[$pokemon_old]++;
+
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
 		$pokemon = name_change(trim($pokemon));
-		$final_array[$i+$position][$pokemon_num + 2] = ($pokemon);
+		$final_array[$i+$position][$pokemon_num + 2][0] = ($pokemon);
+		$final_array[$i+$position][$pokemon_num + 2][1] = ($trainer_pokemons_levels[$pokemon_old][1][($insert_reg[$pokemon_old] - 1)]);
 		$pokemon_num++;
 		
 	}
 	//here we need to fill the rest of the trainer's pokemon slots with empty strings that way we can insert the trainers properly into the database
 	for($pokemon_num; $pokemon_num + 2 < 8; $pokemon_num++)
 	{
-		$final_array[$i+$position][$pokemon_num + 2] = "";
+		$final_array[$i+$position][$pokemon_num + 2][0] = "";
 	}
 	$pokemon_num = 0;
 	$i++;
@@ -144,15 +167,15 @@ var_dump($final_array);
 foreach($final_array as $trainer)
 {
         $trainerid++;
-
+	
 	if($trainer[0] == "")
 	{
-		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid','$trainer[1]', '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid','$trainer[1]', '".$trainer[2][0]."', '".$trainer[3][0]."', '".$trainer[4][0]."', '".$trainer[5][0]."', '".$trainer[6][0]."', '".$trainer[7][0]."' )";
 		var_dump($sql);
 	}
 	else
 	{
-		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid', CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
+		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid', CONCAT('$trainer[0] ', '$trainer[1]'), '".$trainer[2][0]."', '".$trainer[3][0]."', '".$trainer[4][0]."', '".$trainer[5][0]."', '".$trainer[6][0]."', '".$trainer[7][0]."' )";
 		var_dump($sql);
 	}
 

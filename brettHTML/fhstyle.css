@@ -1,18 +1,19 @@
 body {
     background-color: #D8DBE2;
     font-family: Verdana, sans-serif;
-    background:url('pokeball4.jpg');
+    background:url('images/pokeball1.png');
+    background-size: 110%;
     width:100%;
-    padding: 100px 0px 0px 0px;
+    padding: 50px 0px 0px 0px;
 
 }
 
-.table-fill {
+#table table{
   background: white;
   border-radius:3px;
   border-collapse: collapse;
   height: 100px;
-  max-width: 600px;
+  max-width: 800px;
   padding:5px;
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -128,7 +129,6 @@ td.text-right {
 
     width: 480px;
 
-    margin-bottom: 3px;
     margin-left: auto;
     margin-right: auto;
     padding: 0px 0px 0px 0px;
@@ -153,10 +153,11 @@ td.text-right {
   background:url(pokebet.png);
 
   border-radius: 60px;
+  border-style: none;
   font-family: Courier New;
   text-shadow: 1px 1px 5px #000000;
-  color: #ffffff;
-  padding: 11px 3px 12px 4px;
+  color: #ff0550;
+  padding: 11px 3px 11px 4px;
   text-decoration: none;
 }
 
@@ -308,7 +309,7 @@ h1, h2, h3{
     text-decoration: none;
 }
   #banner {
-    background:url('cockfight.jpg');
+    background:url('images/cockfight.jpg');
     width:100%;
     min-height:342px;
   }
