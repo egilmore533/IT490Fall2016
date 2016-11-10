@@ -8,11 +8,11 @@
 
   </head>
 
-  <body id="output">
+  <body>
   
     <!--- sidenav info --->
     <div id="opennav">
-    <a href="javascript:void(0)" class="closebtn" onclick="openNav()"><img border="0" alt="Navigation" src="pokeballspin.gif" width="40" height="40"></a>
+    <a href="javascript:void(0)" class="closebtn" onclick="openNav()"><img border="0" alt="O" src="images/pokeballspin.gif" width="40" height="40"></a>
     </div>
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -23,15 +23,16 @@
     
     <!--- Main page info --->
     <div id="maincontainer">
-    <div id="banner"></div>
+    <a href="http://www.pokefights.com"><div id="banner"></div></a>
     <h1 id="header">PokéFights Login</h1>
     <form name="login">
         <div id="output"></div>
         Username<input type="text" id="username" name="username"/>
         <br>
         Password<input type="password" id="password" name="password"/>        
-        <input type="button" onclick="sendRequest('login')" value="Login"/><br>
-        <input type="button" onclick="sendRequest('register')" value="Register"/>
+        <input type="button" onclick="sendLoginRequest()" value="Login"/><br>
+        Don't have an Account? 
+        <input type="button" onclick="sendRegRequest()" value="Register"/>
     
     </form>
     <div id="footer">
@@ -52,24 +53,37 @@
             document.getElementById("sidenav").style.width = "0";
         }
         
-        function sendRequest(reqType)
+        function sendLoginRequest()
         {
             var name = document.getElementById("username").value;
             var pw = document.getElementById("password").value;
             request = new XMLHttpRequest();
-            request.onreadystatechange = handleResponse;
-            request.open("POST","rpc.php",true);
+            request.onreadystatechange = handleLoginResponse;
+            request.open("POST","../rpc/rpc.php",true);
             request.setRequestHeader("Content-type","application/json");
-            var data = JSON.stringify({request:reqType,username:name,password:pw});
+            var data = JSON.stringify({request:"login",username:name,password:pw});
             request.send(data);
         }
-        function handleResponse()
+        function sendRegRequest()
         {
-            document.getElementById("output").innerHTML = "<p>"+request.responseText+"</p>";
+            var name = document.getElementById("username").value;
+            var pw = document.getElementById("password").value;
+            request = new XMLHttpRequest();
+            request.onreadystatechange = handleRegResponse;
+            request.open("POST","../rpc/rpc.php",true);
+            request.setRequestHeader("Content-type","application/json");
+            var data = JSON.stringify({request:"register",username:name,password:pw});
+            request.send(data);
+        }
+        function handleLoginResponse()
+        {
             window.location = "myaccount.php";
+        }
+        function handleRegResponse()
+        {
+            document.getElementById("output").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
         }
     </script>
   </body>
   
 </html>
-

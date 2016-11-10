@@ -11,7 +11,7 @@
     <!--- accountbar info --->
     <div id="accountbar" class="accountbar">
         <?php
-        require_once('SessionManager.php.inc');
+        require_once('rpc/SessionManager.php.inc');
         SessionManager::sessionStart('PokemonBets');
         if (isset($_SESSION['user'])) { ?>
         <div> Logged in as <?php echo $_SESSION['user']; ?>
@@ -21,14 +21,14 @@
         <?php } 
         else { ?>
         <div> Logged in as Anonymous
-        <a href="http://www.pokefights.com/" title="Account">Sign In</a>
+        <a href="Login.php" title="Account">Sign In</a>
         </div>
         <?php } ?>
     </div>
     
     <!--- sidenav info --->
     <div id="opennav">
-    <a href="javascript:void(0)" class="closebtn" onclick="openNav()"><img border="0" alt="Navigation" src="pokeballspin.gif" width="40" height="40"></a>
+    <a href="javascript:void(0)" class="closebtn" onclick="openNav()"><img border="0" alt="O" src="images/pokeballspin.gif" width="40" height="40"></a>
     </div>
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -40,7 +40,7 @@
     <!--- page info --->
     <div id="container">
     <?php
-        require_once('SessionManager.php.inc');
+        require_once('rpc/SessionManager.php.inc');
         SessionManager::sessionStart('PokemonBets');        
         if (!isset($_SESSION['user']))
         {
@@ -89,7 +89,7 @@
             
             request = new XMLHttpRequest();
             request.onreadystatechange = handleResponse;
-            request.open("POST","rpc.php",true);
+            request.open("POST","rpc/rpc.php",true);
             request.setRequestHeader("Content-type","application/json");
             var data = JSON.stringify({request:reqType,funds:funds});
             request.send(data);
@@ -105,7 +105,7 @@
     {
         request = new XMLHttpRequest();
         request.onreadystatechange = handleBHResponse;
-        request.open("POST","rpc.php",true);
+        request.open("POST","rpc/rpc.php",true);
         request.setRequestHeader("Content-type","application/json");
         var data = JSON.stringify({request:"bh"});
         request.send(data);

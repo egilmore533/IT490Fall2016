@@ -552,11 +552,12 @@ function trainers($trainer)
         
         if($result->num_rows > 0)
         {
-            $tablestring .= "<table><tr><th>Trainers<th><img title=Slot1 src=pokeball.png><th><img title=Slot2 src=pokeball.png><th><img title=Slot3 src=pokeball.png><th><img title=Slot4 src=pokeball.png><th><img title=Slot5 src=pokeball.png><th><img title=Slot6 src=pokeball.png>";
+            $tablestring .= "<table><tr><th>Trainers<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
             while($row = $result->fetch_assoc())
             {
                 //echo "tablestring created\n";
-                $tablestring.="<tr><td><b>".$row["name"]."<td>".$pokepic.isNidoFamily($row["pokemon1"]).$pokepic2.$pokepic3.$row["pokemon1"].">"."<td>".$pokepic.isNidoFamily($row["pokemon2"]).$pokepic2.$pokepic3.$row["pokemon2"].">"."<td>".$pokepic.isNidoFamily($row["pokemon3"]).$pokepic2.$pokepic3.$row["pokemon3"].">"."<td>".$pokepic.isNidoFamily($row["pokemon4"]).$pokepic2.$pokepic3.$row["pokemon4"].">"."<td>".$pokepic.isNidoFamily($row["pokemon5"]).$pokepic2.$pokepic3.$row["pokemon5"].">"."<td>".$pokepic.isNidoFamily($row["pokemon6"]).$pokepic2.$pokepic3.$row["pokemon6"].">"."";
+                $tablestring.="<tr><td><b>".$row["name"]."<td>".
+                $pokepic.isNidoFamily($row["pokemon1"]).$pokepic2.$pokepic3.$row["pokemon1"].">"."<td>".$pokepic.isNidoFamily($row["pokemon2"]).$pokepic2.$pokepic3.$row["pokemon2"].">"."<td>".$pokepic.isNidoFamily($row["pokemon3"]).$pokepic2.$pokepic3.$row["pokemon3"].">"."<td>".$pokepic.isNidoFamily($row["pokemon4"]).$pokepic2.$pokepic3.$row["pokemon4"].">"."<td>".$pokepic.isNidoFamily($row["pokemon5"]).$pokepic2.$pokepic3.$row["pokemon5"].">"."<td>".$pokepic.isNidoFamily($row["pokemon6"]).$pokepic2.$pokepic3.$row["pokemon6"].">"."";
             }
             echo "tablestring sent\n";
             return array("success"=>true, 'message'=>$tablestring);

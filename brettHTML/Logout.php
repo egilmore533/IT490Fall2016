@@ -1,5 +1,5 @@
 <?php
-require_once('SessionManager.php.inc');
+require_once('rpc/SessionManager.php.inc');
 SessionManager::sessionStart('PokemonBets');   
 unset($_SESSION['user']); 
 session_destroy();

@@ -51,11 +51,11 @@ switch($request["request"])
 	$response = $login->send_request($requestArr);
         if ($response["success"]==true)
 	{
-            $response["message"] = "Register Successful: ".$response["message"];
+            $response["message"] = "Register Successful. You may login now.";
 	}
 	else
 	{
-            $response["message"] = "Register Failed: ".$response["message"];
+            $response["message"] = "Register Failed. Username Taken.";
 	}
 	break;
     case "addFunds":
@@ -139,6 +139,7 @@ switch($request["request"])
 	$response = $login->send_request($requestArr);
         if ($response["success"]==true)
 	{
+            $_SESSION['balance'] = $response["funds"];
 	}
 	else
 	{
