@@ -372,6 +372,21 @@ function betHistory($username)
 	$DBuser = "it490";
 	$DBpass = "whoGivesaFuck!490";
 	$database = "betHistory";
+	$database2 = "Accounts";
+
+        //Create Connection
+        $conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
+
+        //Check Connection
+        if($conn2->connect_error){
+                die("Connection failed: " . $conn2->connect_error);
+        }
+        else
+        {
+                $s = "SELECT * FROM info where username=\"$username\"";
+                ($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
+                echo "Connected Successfully";
+        }
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -399,7 +414,8 @@ function betHistory($username)
             {
                     echo "\nbet history found\n";
                     $tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
-            
+                    
+
                     echo "bet history gathered and sent" . "\n";
 
             }
@@ -410,9 +426,14 @@ function betHistory($username)
             $conn->close();
             return array("success" => '0', 'message'=>"$username may not have a bet history yet.");
         }
+        
+            while($row2 = $result2->fetch_assoc())
+            {
+                $funds = $row2['funds'];
+            }
 	
         $conn->close();
-                return array("success" => true, 'message'=>$tablestring);
+                return array("success" => true, 'message'=>$tablestring, 'funds'=>$funds);
 
 }
 
