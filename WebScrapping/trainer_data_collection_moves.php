@@ -2,6 +2,8 @@
 <?php
 include 'move_data_collection.php';
 
+$pokemon_type_table = array();
+
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
 
@@ -132,7 +134,7 @@ foreach($trainers[0] as $trainer)
 	{
 
 		$pokemon_old = $pokemon;
-		if($insert_reg[$pokemon_old] == null)
+		if(!isset($insert_reg[$pokemon_old]))
 		{
 			$insert_reg[$pokemon_old] = 0;
 		}
@@ -142,6 +144,25 @@ foreach($trainers[0] as $trainer)
 		$pokemon = name_change(trim($pokemon));
 		$final_array[$i+$position][$pokemon_num + 2][0] = ($pokemon);
 		$final_array[$i+$position][$pokemon_num + 2][1] = ($trainer_pokemons_levels[$pokemon_old][1][($insert_reg[$pokemon_old] - 1)]);
+		if(isset($pokemon_type_table[$pokemon]))
+		{
+			$final_array[$i+$position][$pokemon_num + 2][2] = $pokemon_type_table[$pokemon];
+		}
+		else
+		{
+			$temp_types = get_pokemon_types($pokemon);
+			$final_types = array();
+			$final_types[0] = $temp_types[0];
+			if(isset($temp_types[1]))
+			{
+				$final_types[1] = $temp_types[1];
+			}
+			$final_array[$i+$position][$pokemon_num + 2][2] = $final_types;
+			$pokemon_type_table[$pokemon] = $final_types;
+		}
+	
+		var_dump($final_array[$i+$position][$pokemon_num + 2][2]);
+		
 		$pokemon_num++;
 		
 	}
