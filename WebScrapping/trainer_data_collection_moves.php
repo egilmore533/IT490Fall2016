@@ -204,7 +204,7 @@ foreach($final_array as $trainer)
 	}
 	else 
 	{	
-		echo "Error: " . $sql . "<br>" . $conn->error;
+	//	echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 }
 

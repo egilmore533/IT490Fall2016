@@ -200,6 +200,33 @@ function pokemon_name_change_back($pokemon_name)
 	return preg_array_replace($pokemon_name,$patterns,$replacements);	
 }
 
+function pokemon_name_bulb_change($name)
+{
+	$patterns = array(
+                '/Mr._Mime/',
+                '/Nidoran-F \(F\)/',
+                '/Nidoran-M \(M\)/',
+                '/Nidorino \(M\)/',
+                '/Nidorina \(F\)/',
+                '/Nidoqueen \(F\)/',
+                '/Nidoking \(M\)/',
+                "/Farfetch%27d/"
+        );
+
+        $replacements = array(
+                "Mr. Mime",
+                "Nidoran♀",
+                "Nidoran♂",
+                "Nidorino",
+                "Nidorina",
+                "Nidoqueen",
+                "Nidoking",
+                "Farfetch'd"
+	);
+        return preg_array_replace($name,$patterns,$replacements);
+
+}
+
 function amp_replace($string)
 {
 	return preg_replace('/&amp;/','&',$string);
