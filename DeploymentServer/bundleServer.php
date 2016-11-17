@@ -24,7 +24,7 @@ function bundle($versionName)
 	{
 		$s = "SELECT * FROM files";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully";
+		echo "Connected Successfully \n";
 	}
 	//MySQL Connection
 	
@@ -57,6 +57,10 @@ function insertBundle($versionName)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
+	$bundlelocation = "/var/packages/test0/" . $versionName;
+	$deploylocation = "/var/packages";
+	$ipaddress = "10.200.20.184";
+	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
 	
@@ -68,7 +72,7 @@ function insertBundle($versionName)
 	{
 		$s = "SELECT * FROM files";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully";
+		echo "Connected Successfully \n";
 	}
 	//MySQL Connection
 	
@@ -87,7 +91,7 @@ function insertBundle($versionName)
 	
 	if($checkDB == 1)
 	{
-                $verNum = 00;
+                $verNum = 0.0;
 		while($r=mysqli_fetch_array($result))
                 {
                     if($verNum == $r['versionNum'])
@@ -98,8 +102,11 @@ function insertBundle($versionName)
 		if($conn->query($reg) === TRUE)
                 {
 			
-			echo "New Package created";
+			echo "New Package created \n";
+			shell_exec("sudo scp it490@" . $ipaddress . ":" . $bundlelocation . " " . $deploylocation);
 			var_dump($versionName);
+			var_dump($bundlelocation);
+			var_dump($deploylocation);
 			var_dump($verNum);
 			
 		}
@@ -112,7 +119,7 @@ function insertBundle($versionName)
 		
 	}
 	else
-		echo "File Name Taken";
+		echo "File Name Taken \n";
 	
 	
 	$conn->close();
@@ -121,6 +128,66 @@ function insertBundle($versionName)
 		return array("success" => true, 'message'=>"File Successfully put in DB, $verNum");
 	else
 		return array("success" => '0', 'message'=>"File Name is Taken, please rename");
+}
+
+function deploy($versionName, $ipaddress, $config, $name)
+{
+
+        //MySQL Connection
+	$servername = "localhost";
+	$DBuser = "it490";
+	$DBpass = "whoGivesaFuck!490";
+	$database = "Files";
+	
+	$bundlelocation = "/var/packages/" . $versionName;
+	$QALocation = "/var/packages";
+	
+	//Create Connection
+	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	
+	//Check Connection
+	if($conn->connect_error){
+		die("Connection failed: " . $conn->connect_error);
+	}
+	else
+	{
+		$s = "SELECT * FROM files";
+		($result = mysqli_query($conn, $s)) or die (mysqli_error());
+		echo "Connected Successfully \n";
+	}
+	//MySQL Connection
+	
+	var_dump($versionName);
+	
+	// 	lookup versionName and versionNum in database
+	while($r=mysqli_fetch_array($result))
+	{
+		
+		if($versionName == $r['versionName']){
+			$localLocation = "/var/packages/" . $r['versionName'];
+			$version_num = $r['versionNum'];
+			$version_name = $r['versionName'];
+			
+                        var_dump($localLocation);
+                        var_dump($QALocation);
+			
+			shell_exec("sudo scp " . $localLocation . " it490@" . $ipaddress . ":" . $QALocation);
+			
+			$request['type'] = "install";
+                        $request['number'] = $version_num;
+			$request['config'] = $config;
+			$request['name'] = $name;
+			
+			$connect = new RabbitMQClient("deployment.ini","installServer");
+                        return $connect->send_request($request);
+			
+			break;
+		}
+		else
+                    return array ("success" => '0', 'message'=>"Package File Name not found");
+		
+	}
+        
 }
 
 function requestProcessor($request)
@@ -137,6 +204,8 @@ function requestProcessor($request)
 		      return insertBundle($request['version_name']);
                 case "version_number":
 		      return bundle($request['version_name']);
+                case "deploy_and_install":
+		      return deploy($request['file_name'], $request['ip_address'], $request['config'], $request['name']);
 		
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
