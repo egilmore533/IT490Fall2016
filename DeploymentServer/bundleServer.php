@@ -31,7 +31,7 @@ function bundle($versionName)
 	// 	lookup versionName and versionNum in database
 	
 
-                $verNum = 00;
+                $verNum = 0.1;
 		while($r=mysqli_fetch_array($result))
                 {
                     if($verNum == $r['versionNum'])
@@ -59,7 +59,7 @@ function insertBundle($versionName)
 	
 	$bundlelocation = "/var/packages/test0/" . $versionName;
 	$deploylocation = "/var/packages";
-	$ipaddress = "10.200.20.184";
+	$ipaddress = "127.0.0.1";
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -79,7 +79,6 @@ function insertBundle($versionName)
 	// 	lookup versionName and versionNum in database
 	while($r=mysqli_fetch_array($result))
 	{
-		
 		if($versionName == $r['versionName']){
 			$checkDB = 0;
 			break;
@@ -91,9 +90,12 @@ function insertBundle($versionName)
 	
 	if($checkDB == 1)
 	{
-                $verNum = 0.0;
+		($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                $verNum = 0.1;
 		while($r=mysqli_fetch_array($result))
                 {
+		    var_dump($r['versionName']);
+                    var_dump($versionName);
                     if($verNum == $r['versionNum'])
                             $verNum+=0.1; 
                 }
@@ -139,7 +141,7 @@ function deploy($versionName, $ipaddress, $config, $name)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
-	$bundlelocation = "/var/packages/" . $versionName;
+	$bundlelocation = "/var/packages/$versionName.tar.gz";
 	$QALocation = "/var/packages";
 	
 	//Create Connection
@@ -164,7 +166,7 @@ function deploy($versionName, $ipaddress, $config, $name)
 	{
 		
 		if($versionName == $r['versionName']){
-			$localLocation = "/var/packages/" . $r['versionName'];
+			$localLocation = "/var/packages/" . $r['versionName'].".tar.gz";
 			$version_num = $r['versionNum'];
 			$version_name = $r['versionName'];
 			
@@ -183,10 +185,8 @@ function deploy($versionName, $ipaddress, $config, $name)
 			
 			break;
 		}
-		else
-                    return array ("success" => '0', 'message'=>"Package File Name not found");
-		
 	}
+	return array ("success" => '0', 'message'=>"Package File Name not found");
         
 }
 
