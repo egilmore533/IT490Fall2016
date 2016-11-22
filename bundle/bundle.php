@@ -20,9 +20,9 @@ $response = make_deployment_machine_request($request);
 
 $version=$response['version_number'];
 $package_name=$name.$version;
-$directory="/var/packages/$package_name";
+$directory="/var/packages/$name/$version";
 
-shell_exec("mkdir $directory");
+shell_exec("mkdir -p $directory");
 
 $source_directory=$ini_array['SOURCE_DIRECTORY'];
 foreach($ini_array['FILES'] as $file)
