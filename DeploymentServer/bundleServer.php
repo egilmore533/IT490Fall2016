@@ -57,9 +57,9 @@ function insertBundle($versionName)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
-	$bundlelocation = "/var/packages/test0/" . $versionName;
+	$bundlelocation = "/var/packages/" . $versionName;
 	$deploylocation = "/var/packages";
-	$ipaddress = "127.0.0.1";
+	$ipaddress = "10.200.20.62";
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -94,9 +94,8 @@ function insertBundle($versionName)
                 $verNum = 0.1;
 		while($r=mysqli_fetch_array($result))
                 {
-		    var_dump($r['versionName']);
-                    var_dump($versionName);
-                    if($verNum == $r['versionNum'])
+                    
+		    if($verNum == $r['versionNum'])
                             $verNum+=0.1; 
                 }
 		$reg = "INSERT INTO files (versionNum, versionName) VALUES('$verNum','$versionName' )";
@@ -105,7 +104,7 @@ function insertBundle($versionName)
                 {
 			
 			echo "New Package created \n";
-			shell_exec("sudo scp it490@" . $ipaddress . ":" . $bundlelocation . " " . $deploylocation);
+			shell_exec("sudo sshpass -p 'password' scp it490@" . $ipaddress . ":" . $bundlelocation . "/$versionName.tar.gz " . $deploylocation );
 			var_dump($versionName);
 			var_dump($bundlelocation);
 			var_dump($deploylocation);
@@ -173,7 +172,7 @@ function deploy($versionName, $ipaddress, $config, $name)
                         var_dump($localLocation);
                         var_dump($QALocation);
 			
-			shell_exec("sudo scp " . $localLocation . " it490@" . $ipaddress . ":" . $QALocation);
+			shell_exec("sudo sshpass -p 'password' scp " . $localLocation . " it490@" . $ipaddress . ":" . $QALocation);
 			
 			$request['type'] = "install";
                         $request['number'] = $version_num;

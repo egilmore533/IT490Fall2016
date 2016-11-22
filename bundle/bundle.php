@@ -41,7 +41,7 @@ $ipaddress=$ini_array['IP_ADDRESS'];
 
 $bundle_request = array();
 $bundle_request['type'] = 'bundle';
-$bundle_request['version_name'] = $package_name;
+$bundle_request['version_name'] = $name;
 
 $response = make_deployment_machine_request($bundle_request);
 
