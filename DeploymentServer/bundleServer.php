@@ -22,7 +22,7 @@ function bundle($versionName)
 	}
 	else
 	{
-		$s = "SELECT * FROM files";
+		$s = "SELECT * FROM files where versionName='$versionName'";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
 		echo "Connected Successfully \n";
 	}
@@ -57,8 +57,6 @@ function insertBundle($versionName)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
-	$bundlelocation = "/var/packages/" . $versionName;
-	$deploylocation = "/var/packages";
 	$ipaddress = "10.200.20.62";
 	
 	//Create Connection
@@ -70,26 +68,13 @@ function insertBundle($versionName)
 	}
 	else
 	{
-		$s = "SELECT * FROM files";
+		$s = "SELECT * FROM files where versionName='$versionName'";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
 		echo "Connected Successfully \n";
 	}
 	//MySQL Connection
 	
-	// 	lookup versionName and versionNum in database
-	while($r=mysqli_fetch_array($result))
-	{
-		if($versionName == $r['versionName']){
-			$checkDB = 0;
-			break;
-		}
-		else
-				$checkDB = 1;
-		
-	}
 	
-	if($checkDB == 1)
-	{
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
                 $verNum = 0.1;
 		while($r=mysqli_fetch_array($result))
@@ -98,15 +83,15 @@ function insertBundle($versionName)
 		    if($verNum == $r['versionNum'])
                             $verNum+=0.1; 
                 }
-		$reg = "INSERT INTO files (versionNum, versionName) VALUES('$verNum','$versionName' )";
-		
+		$reg = "INSERT INTO files (versionNum, versionName, full_package_name) VALUES('$verNum','$versionName', '$versionName$verNum')";
+		$deploylocation = "/var/packages/$versionName/$verNum";	
 		if($conn->query($reg) === TRUE)
                 {
 			
 			echo "New Package created \n";
-			shell_exec("sudo sshpass -p 'password' scp it490@" . $ipaddress . ":" . $bundlelocation . "/$versionName.tar.gz " . $deploylocation );
+			shell_exec("mkdir -p /var/packages/$versionName/$verNum");
+			shell_exec("sudo sshpass -p 'password' scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation );
 			var_dump($versionName);
-			var_dump($bundlelocation);
 			var_dump($deploylocation);
 			var_dump($verNum);
 			
@@ -118,10 +103,6 @@ function insertBundle($versionName)
 			var_dump($verNum);
 		}
 		
-	}
-	else
-		echo "File Name Taken \n";
-	
 	
 	$conn->close();
 	
