@@ -4,6 +4,15 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
+function ipcall($machineName)
+{
+    $ini_array=parse_ini_file('hosts_addressess.ini');
+
+    $ini_array[$machineName] = $ip;
+    
+    return $ip;
+}
+
 function bundle($versionName)
 {
 	
@@ -57,7 +66,7 @@ function insertBundle($versionName)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
-	$ipaddress = "10.200.20.62";
+	$ipaddress = ipcall('brett_dev');
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -112,7 +121,7 @@ function insertBundle($versionName)
 		return array("success" => '0', 'message'=>"File Name is Taken, please rename");
 }
 
-function deploy($versionName, $ipaddress, $config, $name)
+function deploy($versionName, $hostname, $config, $name)
 {
 
         //MySQL Connection
@@ -123,6 +132,8 @@ function deploy($versionName, $ipaddress, $config, $name)
 	
 	$bundlelocation = "/var/packages/$versionName.tar.gz";
 	$QALocation = "/var/packages";
+	
+	$ipaddress = ipcall($hostname);
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -185,7 +196,7 @@ function requestProcessor($request)
                 case "version_number":
 		      return bundle($request['version_name']);
                 case "deploy_and_install":
-		      return deploy($request['file_name'], $request['ip_address'], $request['config'], $request['name']);
+		      return deploy($request['file_name'], $request['host_name'], $request['config'], $request['name']);
 		
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
@@ -195,3 +206,4 @@ $server = new rabbitMQServer("testRabbitMQ.ini","deploymentServer");
 $server->process_requests('requestProcessor');
 exit();
 ?>
+return $ip;return $ip;
