@@ -160,8 +160,6 @@ foreach($trainers[0] as $trainer)
 			$final_array[$i+$position][$pokemon_num + 2][2] = $final_types;
 			$pokemon_type_table[$pokemon] = $final_types;
 		}
-	
-		var_dump($final_array[$i+$position][$pokemon_num + 2][2]);
 		
 		$pokemon_num++;
 		
@@ -206,7 +204,7 @@ foreach($final_array as $trainer)
 	}
 	else 
 	{	
-		echo "Error: " . $sql . "<br>" . $conn->error;
+	//	echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 }
 

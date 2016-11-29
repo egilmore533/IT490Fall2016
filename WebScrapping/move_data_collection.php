@@ -86,9 +86,20 @@ function get_pokemon_types($name)
 	$name = pokemon_name_change_back($name);
 	$start_url = 'http://bulbapedia.bulbagarden.net/wiki/'.$name.'_(Pok%C3%A9mon)';
 	$data = file_get_contents($start_url);
-	$name = name_change($name);
 
+	if(!isset($data))
+	{
+		echo "No $start_url found\n";
+	}
+
+	$name = pokemon_name_bulb_change($name);
 	preg_match("/<p><b>$name<\/b>(.+)<\/p>/sU",$data,$type_paragraph);
+
+	if(!isset($type_paragraph[1]))
+	{
+		echo "No $name found in page\n";
+	}
+	
 	preg_match_all('/href="\/wiki\/([A-Z][a-z]+)_\(type\)/sU',$type_paragraph[1],$types_array);
 	
 	return $types_array[1];
