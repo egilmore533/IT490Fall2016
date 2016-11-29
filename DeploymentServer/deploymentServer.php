@@ -4,6 +4,14 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+function deploy()
+{
+	//shell_exec(scp );
+=======
+>>>>>>> 15c11b132b82b696813f28ffe69ac9bc68e8a97a
 function deploy($versionNum)
 {
 
@@ -55,11 +63,23 @@ function deploy($versionNum)
         
 	shell_exec("sudo scp " . $localLocation . "it490@" . $ipaddress . ":" . $QALocation);
 	return array ("success" => '1', 'message'=>"Please Install Package Version Number " . $version_num . " Version Name " . $version_name);
+<<<<<<< HEAD
+=======
+>>>>>>> b7318ea178c2e2a0b4acbe8f0e7690fdadd26b3b
+>>>>>>> 15c11b132b82b696813f28ffe69ac9bc68e8a97a
 }
 
 function install()
 {
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> b7318ea178c2e2a0b4acbe8f0e7690fdadd26b3b
+>>>>>>> 15c11b132b82b696813f28ffe69ac9bc68e8a97a
 }
 
 function requestProcessor($request)
@@ -73,7 +93,15 @@ function requestProcessor($request)
 	switch ($request['type'])
 	  {
 		case "deploy":
+<<<<<<< HEAD
 		      return deploy($request['versionNum']);
+=======
+<<<<<<< HEAD
+		      return deploy();
+=======
+		      return deploy($request['versionNum']);
+>>>>>>> b7318ea178c2e2a0b4acbe8f0e7690fdadd26b3b
+>>>>>>> 15c11b132b82b696813f28ffe69ac9bc68e8a97a
 		case "install":
 			  return install();
 		
