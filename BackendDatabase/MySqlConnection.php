@@ -477,11 +477,15 @@ function schedule()
 	$pokestring1 = "";
 	$pokestring2 = "";
 	$space = "&nbsp;";
+	
+	$pokepic = '<img src=pokemon&#47;';
+        $pokepic2 = ".png";
+        $pokepic3 = " onerror=this.style.display='none' title=";
 
 	if($result->num_rows > 0)
 	{
 	//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
-        $tablestring .= "<table id=poketable><tr><th>Trainer 1<th>Trainer 2<th>Odds<th>Date";
+        $tablestring .= "<table id=poketable><tr><th>".$pokepic.'Trainer1'.$pokepic2.$pokepic3."Trainer".$space."1><th>".$pokepic.'Trainer2'.$pokepic2.$pokepic3."Trainer".$space."2><th>Odds<th>Date";
        
 	 //output data of each row
         while($row = $result->fetch_assoc())
@@ -573,7 +577,7 @@ function trainers($trainer)
         
         if($result->num_rows > 0)
         {
-            $tablestring .= "<table><tr><th>Trainers<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
+            $tablestring .= "<table><tr><th>".$pokepic.'Trainer1'.$pokepic2.$pokepic3."Trainers><th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
             while($row = $result->fetch_assoc())
             {
                 //echo "tablestring created\n";
