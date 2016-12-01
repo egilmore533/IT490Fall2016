@@ -35,10 +35,6 @@ shell_exec("scp $source_directory$ini_file $directory");
 shell_exec("tar -czvf $package_name.tar.gz -C $directory .");
 shell_exec("mv $package_name.tar.gz $directory");
 
-$user=$ini_array['USER'];
-$pass=$ini_array['PASSWORD'];
-$ipaddress=$ini_array['IP_ADDRESS'];
-
 $bundle_request = array();
 $bundle_request['type'] = 'bundle';
 $bundle_request['version_name'] = $name;
@@ -52,7 +48,7 @@ function deploy($argv)
 {
 	$request = array();
 	$request['type'] = "deploy_and_install";
-	$request['ip_address'] = $argv[2];
+	$request['host_name'] = $argv[2];
 	$request['name'] = $argv[3];
 	$request['version_number'] = $argv[4];
 	$request['file_name'] = "$argv[3]$argv[4]";
