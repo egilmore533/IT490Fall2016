@@ -1,10 +1,11 @@
 body {
     background-color: #D8DBE2;
     font-family: Verdana, sans-serif;
-    background:url('images/pokeball1.png');
+    background:url('images/pokeball2.png');
     background-size: 110%;
     width:100%;
     padding: 50px 0px 0px 0px;
+    background-repeat: no-repeat;
 
 }
 
@@ -17,6 +18,7 @@ body {
   padding:5px;
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
   animation: float 5s infinite;
 }
  
@@ -140,13 +142,107 @@ td.text-right {
     text-align: center;
     
 }
-#container {
+
+#logincontainer {
+    background-color: #D8DBE2;
+    font-family: Verdana, sans-serif;
+    position: fixed;
+
+    width: 485px;
+
+    margin-left: 33%;
+    margin-right: auto;
+    margin-top: 5%;
+    padding: 0px 0px 0px 0px;
+
+    border-width: 1px;
+    border-color: #212738;
+    border-style: solid;
+
+    text-align: center;
+    
+    z-index: 1001; /* Stay on top */
+    
+    border-width: 3px;
+    border-color: #212738;
+    border-style: solid;
+
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden;
+
+    
+}
+
+#loginform {
+    background-color: #D8DBE2;
+    font-family: Verdana, sans-serif;
+    
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    
+    width: 480px;
+
+    text-align: center;
+    
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden;
+    
+}
+
+#loginframe {
+    z-index: 1; /* Stay on top */
+
+    padding: 0 50 0 50;
+    text-align: right;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden;
+    
+}
+
+#accountcontainer {
+    position:fixed;
     padding: 3px 3px 3px 3px;
     background-color: white;
-    width: 1200px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: auto;
+
+}
+
+#fightcontainer {
+    padding: 3px 3px 3px 3px;
+    background-color: rgba(255,255,255,0.92);
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 
+}
+
+#container {
+    padding: 3px 3px 3px 3px;
+    background-color: rgba(255,255,255,0.92);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#profilepic {
+
+    width: 8%;
+    
+    border-radius: 80px;
+    border-style: solid;
+    border-color: #800000;
+    border-width: 5px;
+    
 }
 
 #placebet {
@@ -176,6 +272,7 @@ td.text-right {
     color: white;
     text-shadow: 0px 3px 3px #800000;
     padding: 10px;
+    z-index: 10;
 }
 
 h1, h2, h3{
@@ -187,7 +284,35 @@ h1, h2, h3{
     padding: 10px;
 
 }
-#accountbar {
+
+#home{
+    height: 8%; /* 100% Full-height */
+    width: 6%; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 6px;
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    /*padding-top: 60px; /* Place content 60px from the top */
+    text-align: left;
+}
+
+#home a {
+    padding: 0px 0px 0px 0px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #e2d0d0;
+    /*display: block;*/
+}
+
+#home img {
+    padding: 0px 0px 0px 5px;
+    width: 52%;
+    text-shadow: 1px 1px 5px #ff0000;
+    /*display: block;*/
+}
+
+#accountbar{
     height: 30px; /* 100% Full-height */
     width: 100%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -199,6 +324,7 @@ h1, h2, h3{
     /*padding-top: 60px; /* Place content 60px from the top */
     text-align: right;
 }
+
 #accountbar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -254,7 +380,6 @@ h1, h2, h3{
     margin-left: 50px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #opennav {
     height: 100%; /* 100% Full-height */
     width: 10;
@@ -264,14 +389,9 @@ h1, h2, h3{
     left: 0;
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px; /* Place content 60px from the top */
+    padding-top: 60px; /* Place content 60px from the top */
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    #sidenav, #opennav {padding-top: 15px;}
-    #sidenav a, #opennav a {font-size: 18px;}
-}
 #search {
     width: 240px;
     float: left;
@@ -281,15 +401,29 @@ h1, h2, h3{
     float: left;
 }
 
+
+
+#confirmpanel {
+    position: fixed;
+    padding: 3px 3px 3px 3px;
+    background-color: rgba(200,100,100,0.85);
+    width: 8%;
+}
 #bal {
+    position: fixed;
+    margin-left: 15%;
+    margin-bottom: 10%;
     font-size: 24px;
 }
 #addfunds {
 
 }
 #wins {
+    position: fixed;
+    margin-left: 25%;
+    margin-right: auto;
+    margin-top: 1%;
     font-size: 35px;
-    padding-left: 62%;
 }
 #main {
     width: 600px;
@@ -308,8 +442,26 @@ h1, h2, h3{
     font-size: 12px;
     text-decoration: none;
 }
-  #banner {
+#banner {
     background:url('images/cockfight.jpg');
     width:100%;
     min-height:342px;
-  }
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+    width: 105px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

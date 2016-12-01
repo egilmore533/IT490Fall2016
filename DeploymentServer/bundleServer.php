@@ -6,9 +6,9 @@ require_once('rabbitMQLib.inc');
 
 function ipcall($machineName)
 {
-    $ini_array=parse_ini_file('hosts_addressess.ini');
+    $ini_array=parse_ini_file('hosts_addresses.ini');
 
-    $ini_array[$machineName] = $ip;
+    $ip = $ini_array[$machineName];
     
     return $ip;
 }
@@ -40,11 +40,11 @@ function bundle($versionName)
 	// 	lookup versionName and versionNum in database
 	
 
-                $verNum = 0.1;
+                $verNum = 1;
 		while($r=mysqli_fetch_array($result))
                 {
                     if($verNum == $r['versionNum'])
-                            $verNum+=0.1; 
+                            $verNum+=1; 
                 }
 		
 
@@ -66,7 +66,7 @@ function insertBundle($versionName)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
-	$ipaddress = ipcall('brett_dev');
+	$ipaddress = ipcall('stephen_dev');
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -85,12 +85,14 @@ function insertBundle($versionName)
 	
 	
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-                $verNum = 0.1;
+                $verNum = 1;
 		while($r=mysqli_fetch_array($result))
                 {
-                    
-		    if($verNum == $r['versionNum'])
-                            $verNum+=0.1; 
+		    if($verNum == (float)$r['versionNum'])
+                    {
+		        $verNum+=1;
+		    }  
+			
                 }
 		$reg = "INSERT INTO files (versionNum, versionName, full_package_name) VALUES('$verNum','$versionName', '$versionName$verNum')";
 		$deploylocation = "/var/packages/$versionName/$verNum";	
@@ -99,11 +101,13 @@ function insertBundle($versionName)
 			
 			echo "New Package created \n";
 			shell_exec("mkdir -p /var/packages/$versionName/$verNum");
-			shell_exec("sudo sshpass -p 'password' scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation );
+			$test_string = "sshpass -p password scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation;
+			var_dump($test_string);
+			shell_exec($test_string);
 			var_dump($versionName);
 			var_dump($deploylocation);
 			var_dump($verNum);
-			
+			var_dump($ipaddress);	
 		}
 		else {
 			
@@ -164,7 +168,7 @@ function deploy($versionName, $hostname, $config, $name)
                         var_dump($localLocation);
                         var_dump($QALocation);
 			
-			shell_exec("sudo sshpass -p 'password' scp " . $localLocation . " it490@" . $ipaddress . ":" . $QALocation);
+			shell_exec("sshpass -p 'password' scp " . $localLocation . " it490@" . $ipaddress . ":" . $QALocation);
 			
 			$request['type'] = "install";
                         $request['number'] = $version_num;
@@ -206,4 +210,4 @@ $server = new rabbitMQServer("testRabbitMQ.ini","deploymentServer");
 $server->process_requests('requestProcessor');
 exit();
 ?>
-return $ip;return $ip;
+
