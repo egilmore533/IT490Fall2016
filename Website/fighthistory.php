@@ -10,27 +10,16 @@
     ?>
     
     <!---page info --->
-    <div id="container">
-    <div id="header"> <h1>Poké Fight History</h1> </div>
+    <div id="fightcontainer">
+        <div id="header"> <h1>Poké Fight History</h1> </div>
 
-    <div id="contents">
-        <div id="search">
-            <h3>Search</h3>
-            <input id="searchbar" type="text" id="search" name="search"/>
+        <div id="contents">
+
+            <div id="table">
+            <p id="fh"></p>
         </div>
-    <div id="table">
-        <p id="fh"></p>
-    </div>
     </div>
 <script language="javascript">
-    
-    function openNav() {
-        document.getElementById("sidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("sidenav").style.width = "0";
-    }
 
     function fhRequest()
     {

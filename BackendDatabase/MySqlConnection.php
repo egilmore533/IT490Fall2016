@@ -340,11 +340,17 @@ function fightHistory()
 	$sql = "SELECT * FROM history";
 	$result = $conn->query($sql);
 	$tablestring = "";
+	
+	$space = "&nbsp;";
+	
+	$pokepic = '<img src=pokemon&#47;';
+        $pokepic2 = ".png";
+        $pokepic3 = " onerror=this.style.display='none' title=";
 
 	if($result->num_rows > 0)
 	{	
 		//$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
-		$tablestring .= "<table><tr><th>Trainer 1<th>Trainer 2<th>Payout<th>Winner<th>Odds";
+		$tablestring .= "<table><tr><th>".$pokepic.'Trainer1'.$pokepic2.$pokepic3."Trainer".$space."1><th>".$pokepic.'Trainer2'.$pokepic2.$pokepic3."Trainer".$space."2><th>Payout<th>Winner<th>Odds";
 			//output data of each row
 		while($row = $result->fetch_assoc())
 		{
@@ -501,8 +507,8 @@ function schedule()
                                 $pokestring2 = isNidoFamily($row2["pokemon1"]) . $space . isNidoFamily($row2["pokemon2"]) . $space .            isNidoFamily($row2["pokemon3"]) . $space . isNidoFamily($row2["pokemon4"]) . $space . isNidoFamily($row2["pokemon5"]) . $space . isNidoFamily($row2["pokemon6"]);
                         }
                 }
-		$betbutton = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
-		$betbutton2 = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest("."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer2id']."'".")".">";
+		$betbutton = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest(event,"."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
+		$betbutton2 = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest(event,"."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer2id']."'".")".">";
 		
 
 		//echo "tablestring created\n";
@@ -574,10 +580,14 @@ function trainers($trainer)
         $pokepic = '<img src=pokemon&#47;';
         $pokepic2 = ".png";
         $pokepic3 = " onerror=this.style.display='none' title=";
+        $trainers = $pokepic."Trainer1".$pokepic2.$pokepic3."Trainers>".$pokepic.'a'.$pokepic2.$pokepic3."Trainers>"
+        .$pokepic.'b'.$pokepic2.$pokepic3."Trainers>".$pokepic.'c'.$pokepic2.$pokepic3."Trainers>"
+        .$pokepic.'d'.$pokepic2.$pokepic3."Trainers>".$pokepic.'e'.$pokepic2.$pokepic3."Trainers>"
+        .$pokepic.'f'.$pokepic2.$pokepic3."Trainers>".$pokepic.'g'.$pokepic2.$pokepic3."Trainers>";
         
         if($result->num_rows > 0)
         {
-            $tablestring .= "<table><tr><th>".$pokepic.'Trainer1'.$pokepic2.$pokepic3."Trainers><th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
+            $tablestring .= "<table><tr><th>".$trainers."<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
             while($row = $result->fetch_assoc())
             {
                 //echo "tablestring created\n";

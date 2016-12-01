@@ -22,7 +22,7 @@
         }
     ?> 
     <h2 id="header"><div id="wins">Wins: <?php echo $_SESSION['wins']; ?>
-    Losses: <?php echo "1";?></div><img id="profilepic" src="pokemon/<?php echo substr($_SESSION['user'], -1,1);?>.png"></img>PokéBetter <?php echo $_SESSION['user']; ?>
+    Losses: <?php echo "0";?></div><img id="profilepic" src="pokemon/<?php echo substr($_SESSION['user'], -1,1);?>.png"></img>PokéBetter <?php echo $_SESSION['user']; ?>
     
     </h2>
     
@@ -37,14 +37,7 @@
   <script language="javascript">
     var request;
     var reqType;
-        
-    function openNav() {
-        document.getElementById("sidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("sidenav").style.width = "0";
-    }
+    
     function sendBalRequest(reqType)
     {
         if(reqType == 'show')

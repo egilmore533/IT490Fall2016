@@ -28,15 +28,6 @@
     </div>
     </div>
 <script language="javascript">
-    
-    
-    function openNav() {
-        document.getElementById("sidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("sidenav").style.width = "0";
-    }
 
     function tdbRequest()
     {
@@ -51,9 +42,7 @@
     }
     function handleFHResponse()
     { 
-        document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
-        
-        
+        document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);      
     }
 </script>
 <div id="footer">
