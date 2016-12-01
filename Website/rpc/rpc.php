@@ -1,4 +1,3 @@
-Hi
 <?php
 
 require_once("path.inc");
