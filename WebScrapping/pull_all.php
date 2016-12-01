@@ -2,6 +2,11 @@
 <?php
 include 'move_data_collection.php';
 
+$pokemonid = 0;
+$trainerid = 0;
+
+$pokemon_type_table = array();
+
 $start_url = 'Walkthrough';
 $url_base = 'http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/';
 
@@ -55,7 +60,7 @@ $j = 0;
 	{
 		$s = "SELECT * FROM info";
 		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully";
+		echo "Connected Successfully\n";
 	}
 	//MySQL Connection
 
@@ -76,7 +81,7 @@ foreach($trainers[0] as $trainer)
 	preg_match($trainer_type_regex,$trainer,$trainer_types[$i]);
 	//here we use the type_change.php file to switch the strange trainer types with ones I defined in type_changes.php
 	$trainer_types[$i][1] = type_switch($trainer_types[$i][1]);
-	$final_array[$i+$position][0] = trim($trainer_types[$i][1]);
+	$final_array[$i+$position]['trainer_type'] = trim($trainer_types[$i][1]);
 	$i++;
 }
 
@@ -90,7 +95,7 @@ foreach($trainers[0] as $trainer)
 	preg_match($trainer_name_regex,$trainer,$trainer_names[$i]);
 	$trainer_names[$i][1] = amp_replace($trainer_names[$i][1]);
 	$trainer_names[$i][1] = html_jank_replace($trainer_names[$i][1]);
-	$final_array[$i+$position][1] = trim($trainer_names[$i][1]);
+	$final_array[$i+$position]['trainer_name'] = trim($trainer_names[$i][1]);
 	$i++;
 }
 
@@ -99,33 +104,75 @@ $trainer_pokemon_regex = '/"bulbapedia:(.+) \(/U';
 $trainer_pokemons = array();
 $trainer_levels = array();
 $i = 0;
-$pokemon_num = 0;
+$pokemon_num = 1;
 foreach($trainers[0] as $trainer)
 {
-	preg_match_all('/\/a> ([0-9]+)<\/td>/',$trainer,$trainer_pokemons_levels[$i]);
-	if(count($trainer_pokemons_levels[$i][1]) == 0) 
-	{
-		preg_match_all('/<\/a><br \/>\n([0-9]+)<\/td>/sU',$trainer,$trainer_pokemons_levels[$i]);
-	}
-	if(count($trainer_pokemons_levels[$i][1]) == 0)
-        {
-                preg_match_all('/\(lvl. ([0-9]+)\)<\/td>/U',$trainer,$trainer_pokemons_levels[$i]);
-        }
-	var_dump($trainer_pokemons_levels[$i][1]);
 	preg_match_all($trainer_pokemon_regex,$trainer,$trainer_pokemons[$i]);
-	$final_array[$i+$position]['Pokemon_Count'] = count($trainer_pokemons[$i][1]);
+	
+	$trainer_pokemons_levels = array();
 	foreach($trainer_pokemons[$i][1] as $pokemon)
 	{
+		preg_match_all("/$pokemon<\/a> ([0-9][0-9]?)<\/td>/",$trainer,$trainer_pokemons_levels[$pokemon]);
+		if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+		{
+			preg_match_all("/$pokemon<\/a>([0-9][0-9]?)<\/td>/",$trainer,$trainer_pokemons_levels[$pokemon]);
+		}
+		if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+		{
+			preg_match_all("/$pokemon<\/a> ([0-9][0-9]?)\n<p><br \/><\/p>\n<\/td>/s",$trainer,$trainer_pokemons_levels[$pokemon]);
+		}
+        	if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+        	{
+                	preg_match_all("/$pokemon<\/a><br \/>\n([0-9]+)<\/td>/sU",$trainer,$trainer_pokemons_levels[$pokemon]);
+        	}
+        	if(count($trainer_pokemons_levels[$pokemon][1]) == 0)
+        	{
+                	preg_match_all('/\(lvl. ([0-9]+)\)<\/td>/U',$trainer,$trainer_pokemons_levels[$pokemon]);
+        	}
+	}
+
+	$insert_reg = array();
+	$final_array[$i+$position]['Pokemon_Count'] = count($trainer_pokemons[$i][1]);  
+	foreach($trainer_pokemons[$i][1] as $pokemon)
+	{
+
+		$pokemon_old = $pokemon;
+		if(!isset($insert_reg[$pokemon_old]))
+		{
+			$insert_reg[$pokemon_old] = 0;
+		}
+		$insert_reg[$pokemon_old]++;
+
 		//some pokemon have leading/trailing whitespace so we just need to trim that here, whilst we fix the nidoran names
 		$pokemon = name_change(trim($pokemon));
-		$final_array[$i+$position][$pokemon_num + 2] = ($pokemon);
+		$final_array[$i+$position]["pokemon$pokemon_num"]['name'] = ($pokemon);
+		$final_array[$i+$position]["pokemon$pokemon_num"]['level'] = ($trainer_pokemons_levels[$pokemon_old][1][($insert_reg[$pokemon_old] - 1)]);
+		if(isset($pokemon_type_table[$pokemon]))
+		{
+			$final_array[$i+$position]["pokemon$pokemon_num"]['types'] = $pokemon_type_table[$pokemon];
+		}
+		else
+		{
+			$temp_types = get_pokemon_types($pokemon);
+			$final_types = array();
+			$final_types[0] = $temp_types[0];
+			if(isset($temp_types[1]))
+			{
+				$final_types[1] = $temp_types[1];
+				if(!isset($final_types[1]))
+					$final_types[1] = "";
+			}
+			$final_array[$i+$position]["pokemon$pokemon_num"]['type'] = $final_types;
+			$pokemon_type_table[$pokemon] = $final_types;
+		}
+		
 		$pokemon_num++;
 		
 	}
 	//here we need to fill the rest of the trainer's pokemon slots with empty strings that way we can insert the trainers properly into the database
 	for($pokemon_num; $pokemon_num + 2 < 8; $pokemon_num++)
 	{
-		$final_array[$i+$position][$pokemon_num + 2] = "";
+		$final_array[$i+$position]["pokemon$pokemon_num"]['name'] = "";
 	}
 	$pokemon_num = 0;
 	$i++;
@@ -137,34 +184,43 @@ $j++;
 
 }//end of loop for seperate trainer tables
 
-//this to check or output is good
-var_dump($final_array);
+
 
 //make insert statements for each trainer
 foreach($final_array as $trainer)
 {
         $trainerid++;
+	$pokemonidArray = array();
 
-	if($trainer[0] == "")
-	{
-		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid','$trainer[1]', '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
-		var_dump($sql);
-	}
-	else
-	{
-		$sql = "INSERT INTO info (trainerid, name, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6) VALUES ('$trainerid', CONCAT('$trainer[0] ', '$trainer[1]'), '$trainer[2]', '$trainer[3]', '$trainer[4]', '$trainer[5]', '$trainer[6]', '$trainer[7]' )";
-		var_dump($sql);
-	}
+	var_dump($trainer["pokemon1"]["type"]);
 
-	if($conn->query($sql) === TRUE)
-	{			
-		echo "New Trainer created";
-	}
-	else 
-	{	
-		echo "Error: " . $sql . "<br>" . $conn->error;
-	}
+
+	$name = $trainer['trainer_type'] .' ' . $trainer['trainer_name'];
+	$salary = 0;
+	for($pokemon_num = 1; $pokemon_num < 7; $pokemon_num++)
+	{
+		$pokemonidArray[$pokemon_num] = $pokemonid++;
+		if($trainer["pokemon$pokemon_num"]["name"] == "")
+		{
+			continue;
+		}
+
+		$sql_pokemon = "INSERT INTO pokemon (pokemonid, name, type1, type2, level) VALUES ($pokemonidArray[$pokemon_num], ".$trainer["pokemon$pokemon_num"]['name'].', '.$trainer["pokemon$pokemon_num"]['type'][0].', '.$trainer["pokemon$pokemon_num"]['type'][1].', '.$trainer["pokemon$pokemon_num"]['level'].")";
+		
+		$pokemon_moves = get_pokemon_moves($trainer["pokemon$pokemon_num"]['name'], $trainer["pokemon$pokemon_num"]['level']);
+                
+                $sql_moves = "INSERT INTO moves (pokemonid, move1, move2, move3, move4) VALUES ($pokemonidArray[$pokemon_num], '$pokemon_moves[0]', '$pokemon_moves[1]', '$pokemon_moves[2]', '$pokemon_moves[3]')";
+
+		var_dump($sql_pokemon);
+	}	var_dump($sql_moves);
+
+	$sql_trainer = "INSERT INTO info (trainerid, name, pokemon1id, pokemon2id, pokemon3id, pokemon4id, pokemon5id, pokemon6id, salary) VALUES ($trainerid, $name, $pokemonidArray[1], $pokemonidArray[2], $pokemonidArray[3], $pokemonidArray[4], $pokemonidArray[5], $pokemonidArray[6], $salary)";
+
+	var_dump($sql_trainer);
 }
+
+if($url_tag == "Viridian_Forest")
+	break;
 
 }//end of url loop
 

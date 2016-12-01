@@ -70,11 +70,21 @@ foreach($all_moves as $move)
 	}
 }
 
-if(empty($final_moves))
+if(!isset($final_moves[3]))
 {
-	var_dump($level);
-	var_dump($pokemon_name);
+	$final_moves[3] = "";
 }
+
+if(!isset($final_moves[2]))
+{
+	$final_moves[2] = "";
+}
+
+if(!isset($final_moves[1]))
+{
+	$final_moves[1] = "";
+}
+
 
 return $final_moves;
 
