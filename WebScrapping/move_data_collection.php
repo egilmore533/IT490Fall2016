@@ -45,7 +45,12 @@ foreach($moves_temp[1] as $move)
 	$pos++;
 }
 
-$final_moves = array();
+$final_moves = array(
+	0 => '',
+	1 => '',
+	2 => '',
+	3 => ''
+);
 foreach($all_moves as $move)
 {
 	$flag = 1;
@@ -68,21 +73,6 @@ foreach($all_moves as $move)
 		$final_moves[1] = $final_moves[0];
 		$final_moves[0] = $move[1];	
 	}
-}
-
-if(!isset($final_moves[3]))
-{
-	$final_moves[3] = "";
-}
-
-if(!isset($final_moves[2]))
-{
-	$final_moves[2] = "";
-}
-
-if(!isset($final_moves[1]))
-{
-	$final_moves[1] = "";
 }
 
 

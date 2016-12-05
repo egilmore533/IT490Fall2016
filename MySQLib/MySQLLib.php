@@ -23,7 +23,7 @@ class MySQLLib
 
     function makeDBSelection($select_statement,$database)
     {
-            $conn = makeDBConnection($database);
+            $conn = self::makeDBConnection($database);
             ($result = mysqli_query($conn, $select_statement)) or die (mysqli_error());
             echo "Succesful lookup\n";
             return $result;

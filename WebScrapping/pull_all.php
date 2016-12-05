@@ -1,6 +1,8 @@
 #!/usr/bin/php
 <?php
 include 'move_data_collection.php';
+include '/var/lib/rpc/MySQLLib.php';
+
 
 $pokemonid = 0;
 $trainerid = 0;
@@ -162,7 +164,7 @@ foreach($trainers[0] as $trainer)
 				if(!isset($final_types[1]))
 					$final_types[1] = "";
 			}
-			$final_array[$i+$position]["pokemon$pokemon_num"]['type'] = $final_types;
+			$final_array[$i+$position]["pokemon$pokemon_num"]['types'] = $final_types;
 			$pokemon_type_table[$pokemon] = $final_types;
 		}
 		
@@ -170,11 +172,11 @@ foreach($trainers[0] as $trainer)
 		
 	}
 	//here we need to fill the rest of the trainer's pokemon slots with empty strings that way we can insert the trainers properly into the database
-	for($pokemon_num; $pokemon_num + 2 < 8; $pokemon_num++)
+	for($pokemon_num; $pokemon_num + 1 < 8; $pokemon_num++)
 	{
 		$final_array[$i+$position]["pokemon$pokemon_num"]['name'] = "";
 	}
-	$pokemon_num = 0;
+	$pokemon_num = 1;
 	$i++;
 }
 
@@ -184,15 +186,13 @@ $j++;
 
 }//end of loop for seperate trainer tables
 
-
+var_dump($final_array);
 
 //make insert statements for each trainer
 foreach($final_array as $trainer)
 {
         $trainerid++;
 	$pokemonidArray = array();
-
-	var_dump($trainer["pokemon1"]["type"]);
 
 
 	$name = $trainer['trainer_type'] .' ' . $trainer['trainer_name'];
@@ -205,22 +205,23 @@ foreach($final_array as $trainer)
 			continue;
 		}
 
-		$sql_pokemon = "INSERT INTO pokemon (pokemonid, name, type1, type2, level) VALUES ($pokemonidArray[$pokemon_num], ".$trainer["pokemon$pokemon_num"]['name'].', '.$trainer["pokemon$pokemon_num"]['type'][0].', '.$trainer["pokemon$pokemon_num"]['type'][1].', '.$trainer["pokemon$pokemon_num"]['level'].")";
+		$sql_pokemon = "INSERT INTO pokemon (pokemonid, name, type1, type2, level) VALUES ($pokemonidArray[$pokemon_num], ".'"'.$trainer["pokemon$pokemon_num"]['name'].'"'.", '".$trainer["pokemon$pokemon_num"]['types'][0]."', '".$trainer["pokemon$pokemon_num"]['types'][1]."', ".$trainer["pokemon$pokemon_num"]['level'].");";
 		
+		$salary +=  $trainer["pokemon$pokemon_num"]['level'];	
 		$pokemon_moves = get_pokemon_moves($trainer["pokemon$pokemon_num"]['name'], $trainer["pokemon$pokemon_num"]['level']);
                 
-                $sql_moves = "INSERT INTO moves (pokemonid, move1, move2, move3, move4) VALUES ($pokemonidArray[$pokemon_num], '$pokemon_moves[0]', '$pokemon_moves[1]', '$pokemon_moves[2]', '$pokemon_moves[3]')";
+                $sql_moves = "INSERT INTO moves (pokemonid, move1, move2, move3, move4) VALUES ($pokemonidArray[$pokemon_num], '$pokemon_moves[0]', '$pokemon_moves[1]', '$pokemon_moves[2]', '$pokemon_moves[3]');";
 
-		var_dump($sql_pokemon);
-	}	var_dump($sql_moves);
+		echo MySQLLib::makeDBSelection($sql_pokemon,'Trainer');
+		echo MySQLLib::makeDBSelection($sql_moves,'Trainer'); 		
 
-	$sql_trainer = "INSERT INTO info (trainerid, name, pokemon1id, pokemon2id, pokemon3id, pokemon4id, pokemon5id, pokemon6id, salary) VALUES ($trainerid, $name, $pokemonidArray[1], $pokemonidArray[2], $pokemonidArray[3], $pokemonidArray[4], $pokemonidArray[5], $pokemonidArray[6], $salary)";
+	}
 
-	var_dump($sql_trainer);
+	$sql_trainer = "INSERT INTO info (trainerid, name, pokemon1id, pokemon2id, pokemon3id, pokemon4id, pokemon5id, pokemon6id, salary) VALUES ($trainerid, '$name', $pokemonidArray[1], $pokemonidArray[2], $pokemonidArray[3], $pokemonidArray[4], $pokemonidArray[5], $pokemonidArray[6], $salary);";
+
+		echo MySQLLib::makeDBSelection($sql_trainer,'Trainer'); 
 }
 
-if($url_tag == "Viridian_Forest")
-	break;
 
 }//end of url loop
 
