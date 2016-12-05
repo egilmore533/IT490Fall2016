@@ -2,7 +2,7 @@
 
 <?php
 
-include "/var/lib/rpc/MySQLCreate.php";
+include "/var/lib/rpc/MySQLLib.php";
 
 function makeFile($filename, $textArray)
 {
