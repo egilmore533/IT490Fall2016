@@ -29,9 +29,9 @@
     function sendCLRequest()
     {
         var name = document.getElementById("name").value;
-        var pw = document.getElementById("fee").value;
+        var fee = document.getElementById("fee").value;
         request = new XMLHttpRequest();
-        request.onreadystatechange = handleLoginResponse;
+        request.onreadystatechange = handleCLResponse;
         request.open("POST","rpc/rpc.php",true);
         request.setRequestHeader("Content-type","application/json");
         var data = JSON.stringify({request:"cl",name:name,fee:fee});

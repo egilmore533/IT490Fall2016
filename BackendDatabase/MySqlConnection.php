@@ -350,18 +350,30 @@ function schedule()
             {
                 $id = $row["trainer1id"];
                 $s2 = "select * from info where trainerid=$id";
-                $result2 = MySQLLib::makeDBSelection($s2,$conn);
+                $result2 = MySQLLib::makeDBSelection($s2,$conn2);
                 $row2=$result2->fetch_assoc();
-	       	$pokestring1.=isNidoFamily($row2["pokemon$pokemonNum"]) . $space;
+                
+                $pokeid=$row2["pokemon$pokemonNum"."id"];
+                
+                $s3 = "select * from pokemon where pokemonid=$pokeid";
+                $result3 = MySQLLib::makeDBSelection($s3,$conn2);
+                $row3=$result3->fetch_assoc();
+	       	$pokestring1.=isNidoFamily($row3['name']) . $space;
 	    }   
 			                          
             for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
             {
-                $id = $row["trainer2id"];
+               $id = $row["trainer2id"];
                 $s2 = "select * from info where trainerid=$id";
-                $result2 = MySQLLib::makeDBSelection($s2,$conn);
+                $result2 = MySQLLib::makeDBSelection($s2,$conn2);
                 $row2=$result2->fetch_assoc();
-                $pokestring2.=isNidoFamily($row2["pokemon$pokemonNum"]) . $space;
+                
+                $pokeid=$row2["pokemon$pokemonNum"."id"];
+                
+                $s3 = "select * from pokemon where pokemonid=$pokeid";
+                $result3 = MySQLLib::makeDBSelection($s3,$conn2);
+                $row3=$result3->fetch_assoc();
+	       	$pokestring2.=isNidoFamily($row3['name']) . $space;
             }
  
             $betbutton = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest(event,"."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
@@ -482,6 +494,7 @@ function isNidoFamily($pokemon)
     else
         return $pokemon;
 }
+
 function placebet($username, $fightid, $trainerid, $funds)
 {
     $database = "Schedule";
@@ -544,13 +557,14 @@ function leagues()
 
     if($result->num_rows > 0)
     {	
-        $tablestring .= "<table><tr><th>League<th>Commissioner<th>Entry Fee<th>Players";
+        $tablestring .= "<table><tr><th>League<th>Commissioner<th>Entry Fee<th>Slots Open";
                 //output data of each row
         while($row = $result->fetch_assoc())
         {
             //echo "tablestring created\n";
-            $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>".$row["entryfee"]."<td>".$row["freeslots"]."";
+            $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>".$row["entryFee"]."<td>".$row["freeSlots"]."";
         }
+        
         echo "tablestring sent\n";
         return array("success" => true, 'message'=>$tablestring);	
     }
@@ -564,6 +578,43 @@ function leagues()
     $conn -> close();
 }
 
+function createLeague($leaguename, $entryfee, $username)
+{
+    $database = "League";
+    $defaultSalCap = 1000;
+    $defaultSlots = 3;
+    $defaultPool = $entryfee;
+    $addLeague = "INSERT INTO info (name, owner, salaryCap, entryFee, freeSlots, pool) VALUES ('$leaguename','$username','$defaultSalCap','$entryfee','$defaultSlots','$defaultPool')";
+    
+    $canWD = withdraw($username, $entryfee);
+    
+    if($canWD["success"] === TRUE)
+    {
+        $conn = MySQLLib::makeDBConnection($database);
+        $result = MySQLLib::makeDBSelection($addLeague,$conn);
+        
+        $s = "SELECT * FROM info where name='$leaguename'";
+        
+        $result = MySQLLib::makeDBSelection($s,$conn);
+        
+        while($row = $result->fetch_assoc())
+        {
+            $leagueid = $row["leagueid"];
+            $salary = $row["salaryCap"];
+            $trainer = 0;
+            
+            $createCommishTeam = "INSERT INTO teams (leagueid, username, trainer1id, trainer2id, trainer3id, trainer4id, trainer5id, trainer6id, personalSalary) VALUES ('$leagueid','$username','$trainer','$trainer','$trainer','$trainer','$trainer','$trainer','$salary')";
+            
+            $result2 = MySQLLib::makeDBSelection($createCommishTeam,$conn);
+        }
+        
+    }
+    else
+    {
+        echo "No funds to create league.";
+        return array("success" => '0', 'message'=>"Unable to create league.");
+    }
+}
 function requestProcessor($request)
 {
     echo "received request".PHP_EOL;
@@ -594,10 +645,10 @@ function requestProcessor($request)
             return withdraw($request['username'], $request['funds']);
         case "placebet":
             return placebet($request['username'], $request['fid'], $request['tid'], $request['funds']);
-        /*case "league":
+        case "league":
             return leagues();
         case "cl":
-            return createLeague($request["leaguename"], $request["entryfee"]);*/
+            return createLeague($request["leaguename"], $request["entryfee"], $request["username"]);
         default:
             return "ERROR: unsupported message type.";
     }

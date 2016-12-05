@@ -188,9 +188,11 @@ function sendRequest($request)
             break;
         case "cl":
             $requestArr = array();
+            SessionManager::sessionStart('PokemonBets');
             $requestArr["type"] = "cl";
             $requestArr["leaguename"] = $request['name'];
             $requestArr["entryfee"] = $request['fee'];
+            $requestArr["username"] = $_SESSION['user'];
             
             $response = $client->send_request($requestArr);
             if ($response["success"]==true)

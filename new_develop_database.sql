@@ -102,11 +102,11 @@ DROP TABLE IF EXISTS `info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `info` (
-  `leagueid` int(11) DEFAULT NULL,
+  `leagueid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `owner` varchar(40) DEFAULT NULL,
   `salaryCap` float DEFAULT NULL,
-  `entryFee` float DEFAULT NULL,
+  `entryFee` int(11) DEFAULT NULL,
   `freeSlots` int(11) DEFAULT NULL,
   `pool` float DEFAULT NULL,
   UNIQUE KEY `leagueid` (`leagueid`)
