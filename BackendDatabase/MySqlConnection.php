@@ -4,40 +4,18 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
+include "/var/lib/mysqlib/MySQLCreate.php";
+
 function doLogin($username,$password)
 {
 	
 	///MySQL Connection
-	$servername = "localhost";
-	$DBuser = "it490";
-	$DBpass = "whoGivesaFuck!490";
 	$database = "userlogin";
 	$database2 = "Accounts";
-	
-	//Create Connection
-	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
-	$conn2 = new mysqli($servername, $DBuser, $DBpass, $database2);
-	
-	//Check Connection
-	if($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
-	}
-	else
-	{
-		$s = "SELECT * FROM userlogin";
-		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully";
-	}
-	if($conn2->connect_error){
-		die("Connection failed: " . $conn2->connect_error);
-	}
-	else
-	{
-		$s = "SELECT * FROM info";
-		($result2 = mysqli_query($conn2, $s)) or die (mysqli_error());
-		echo "Connected Successfully";
-	}
-	//MySQL Connection
+	$s = "SELECT * FROM userlogin";
+        $s2 = "SELECT * FROM info";
+        
+        MySQLCreate::makeDBSelection($s,$database)
 	
 	$checkDB = 0;
 	
@@ -607,6 +585,8 @@ function trainers($trainer)
 	$conn->close();
 
 }
+
+
 function isNidoFamily($pokemon)
 {
     if($pokemon == "Nidoran-M (M)")
@@ -716,31 +696,37 @@ function requestProcessor($request)
 	echo "received request".PHP_EOL;
 	
 	if(!isset($request['type']))
-	  {
-		return "ERROR: unsupported message type";
+        {
+		return "ERROR: request type not set";
 	}
 	switch ($request['type'])
-	  {
-		case "login":
-		      return doLogin($request['username'],$request['password']);
-		case "register":
-		      return register($request['username'],$request['password']);
-		case "addfunds":
-			  return addfunds($request['username'], $request['funds']);
-		case "validate_session":
-		      return doValidate($request['sessionId']);
-		case "fh":
-		      return fightHistory();
-		case "bh":
-		      return betHistory($request['user']);
-		case "sched":
-		      return schedule();
-		case "tdb":
-		      return trainers($request['trainer']);
-		case "wdfunds":
-		      return withdraw($request['username'], $request['funds']);
-                case "placebet":
-                      return placebet($request['username'], $request['fid'], $request['tid'], $request['funds']);
+        {
+            case "login":
+                return doLogin($request['username'],$request['password']);
+            case "register":
+                return register($request['username'],$request['password']);
+            case "addfunds":
+                return addfunds($request['username'], $request['funds']);
+            case "validate_session":
+                return doValidate($request['sessionId']);
+            case "fh":
+                return fightHistory();
+            case "bh":
+                return betHistory($request['user']);
+            case "sched":
+                return schedule();
+            case "tdb":
+                return trainers($request['trainer']);
+            case "wdfunds":
+                return withdraw($request['username'], $request['funds']);
+            case "placebet":
+                return placebet($request['username'], $request['fid'], $request['tid'], $request['funds']);
+            case "league":
+                return leagues();
+            case "cl":
+                return createLeague($request["leaguename"], $request["entryfee"]);
+            default:
+                return "ERROR: unsupported message type.";
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
