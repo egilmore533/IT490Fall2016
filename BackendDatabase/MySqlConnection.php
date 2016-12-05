@@ -323,13 +323,11 @@ function schedule()
     $database = "Schedule";
     $database2 = "Trainer";
     $s = "SELECT * FROM schedule";
-    $s2 = "SELECT * FROM info";
     
     $conn = MySQLLib::makeDBConnection($database);
     $conn2 = MySQLLib::makeDBConnection($database2);
     
     $result = MySQLLib::makeDBSelection($s,$conn);
-    $result2 = MySQLLib::makeDBSelection($s2,$conn2);
 	
     $tablestring = "";
     $pokestring1 = "";
@@ -348,17 +346,24 @@ function schedule()
             //output data of each row
         while($row = $result->fetch_assoc())
         {
-            while($row2 = $result2->fetch_assoc())
+            for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
             {
-                if($row["trainer1id"] == $row2["trainerid"])
-                {                                
-                    $pokestring1 = isNidoFamily($row2["pokemon1"]) . $space . isNidoFamily($row2["pokemon2"]) . $space .            isNidoFamily($row2["pokemon3"]) . $space . isNidoFamily($row2["pokemon4"]) . $space . isNidoFamily($row2["pokemon5"]) . $space . isNidoFamily($row2["pokemon6"]);           
-                }
-                if($row["trainer2id"] == $row2["trainerid"])
-                {
-                    $pokestring2 = isNidoFamily($row2["pokemon1"]) . $space . isNidoFamily($row2["pokemon2"]) . $space .            isNidoFamily($row2["pokemon3"]) . $space . isNidoFamily($row2["pokemon4"]) . $space . isNidoFamily($row2["pokemon5"]) . $space . isNidoFamily($row2["pokemon6"]);
-                }
+                $id = $row["trainer1id"];
+                $s2 = "select * from info where trainerid=$id";
+                $result2 = MySQLLib::makeDBSelection($s2,$conn);
+                $row2=$result2->fetch_assoc();
+	       	$pokestring1.=isNidoFamily($row2["pokemon$pokemonNum"]) . $space;
+	    }   
+			                          
+            for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
+            {
+                $id = $row["trainer2id"];
+                $s2 = "select * from info where trainerid=$id";
+                $result2 = MySQLLib::makeDBSelection($s2,$conn);
+                $row2=$result2->fetch_assoc();
+                $pokestring2.=isNidoFamily($row2["pokemon$pokemonNum"]) . $space;
             }
+ 
             $betbutton = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest(event,"."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer1id']."'".")".">";
             $betbutton2 = "<input id='placebet' type='button' value ='Bet'  onclick="."sendBetRequest(event,"."'"."show"."'".","."'".$row['fightid']."'".","."'".$row['trainer2id']."'".")".">";
             
@@ -368,7 +373,6 @@ function schedule()
 
             $pokestring1 = "";
             $pokestring2 = "";
-            $result2 = $conn2->query($s2);
         }
         echo "tablestring sent\n";
         return array("success" => true, 'message' =>$tablestring); 
@@ -385,52 +389,37 @@ function schedule()
 
 function trainers($trainer)
 {
-    $database = "fightHistory";
-    $s = "SELECT * FROM history";
+    $database = "Trainer";
+    $s = "SELECT * FROM info";
     
     $conn = MySQLLib::makeDBConnection($database);
     $result = MySQLLib::makeDBSelection($s,$conn);
     
-	$servername = "localhost";
-        $username = "it490";
-        $password = "whoGivesaFuck!490";
-        $dbname = "Trainer";
-
-        //Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        //Check connection
-        if($conn->connect_error){
-                die("Connection failed: " . $conn->connect_error);
-        }
-	else
-	{
 	
-		if($trainer=="")
-		{
-			$s = "SELECT * FROM info";
-                        ($result = mysqli_query($conn, $s)) or die (mysqli_error());
+    if($trainer=="")
+    {
+   	$s = "SELECT * FROM info";
+        ($result = mysqli_query($conn, $s)) or die (mysqli_error());
                         
-                        echo $trainer;
-                        echo "Connected Successfully";
-		}
-		else
-		{
-		       	$s = "SELECT * FROM info where name LIKE \"%$trainer%\" or
+        echo $trainer;
+        echo "Connected Successfully";
+    }
+    else
+    {
+      	$s = "SELECT * FROM info where name LIKE \"%$trainer%\" or
                                                         pokemon1 LIKE \"%$trainer%\" or
                                                         pokemon2 LIKE \"%$trainer%\" or
                                                         pokemon3 LIKE \"%$trainer%\" or
                                                         pokemon4 LIKE \"%$trainer%\" or
                                                         pokemon5 LIKE \"%$trainer%\" or
                                                         pokemon6 LIKE \"%$trainer%\"";
-                	($result = mysqli_query($conn, $s)) or die (mysqli_error());
+      	($result = mysqli_query($conn, $s)) or die (mysqli_error());
                 	
-                	echo "Searching for ".$trainer."\n";
-                	echo "Searched Successfully\n";
-                	
-                	
+       	echo "Searching for ".$trainer."\n";
+      	echo "Searched Successfully\n";            	
 
-		}
-	}
+    }
+	
 	
 	$tablestring = "";
         $pokestring = "";
@@ -449,8 +438,16 @@ function trainers($trainer)
             while($row = $result->fetch_assoc())
             {
                 //echo "tablestring created\n";
-                $tablestring.="<tr><td><b>".$row["name"]."<td>".
-                $pokepic.isNidoFamily($row["pokemon1"]).$pokepic2.$pokepic3.$row["pokemon1"].">"."<td>".$pokepic.isNidoFamily($row["pokemon2"]).$pokepic2.$pokepic3.$row["pokemon2"].">"."<td>".$pokepic.isNidoFamily($row["pokemon3"]).$pokepic2.$pokepic3.$row["pokemon3"].">"."<td>".$pokepic.isNidoFamily($row["pokemon4"]).$pokepic2.$pokepic3.$row["pokemon4"].">"."<td>".$pokepic.isNidoFamily($row["pokemon5"]).$pokepic2.$pokepic3.$row["pokemon5"].">"."<td>".$pokepic.isNidoFamily($row["pokemon6"]).$pokepic2.$pokepic3.$row["pokemon6"].">"."";
+                $tablestring.="<tr><td><b>".$row["name"];
+		for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
+		{
+		    $id = $row["pokemon$pokemonNum"."id"];
+                    $s2 = "select * from pokemon where pokemonid=$id";
+		    $result2 = MySQLLib::makeDBSelection($s2,$conn);
+		    $row2=$result2->fetch_assoc();
+		    $tablestring.="<td>".$pokepic.isNidoFamily($row2["name"]).$pokepic2.$pokepic3.$row2["name"].">";
+		}
+
             }
             echo "tablestring sent\n";
             return array("success"=>true, 'message'=>$tablestring);
