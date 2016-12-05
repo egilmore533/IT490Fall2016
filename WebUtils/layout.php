@@ -31,10 +31,11 @@
     <a href="fighthistory.php" title="Fight History">Fight History</a>
     <a href="schedule.php" title="Schedule">Schedule</a>
     <a href="trainerdb.php" title="TrainerDB">Trainer DB</a>
+    <a href="league.php" title="League">PokéFight League</a>
 </div>
 
 <div id="home">
-    <a href="http://www.pokefights.com" title="Home">Home</a>
+    <a href="http://www.pokefights.com" title="Home"><img src="images/pokehome.png"></img></a>
 </div>
 <div id="logincontainer" style="display: none;">
     <iframe id="loginframe" src="Login.php" width=100% height=500></iframe>

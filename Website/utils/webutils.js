@@ -60,8 +60,9 @@ var loginOverlay = {
         return Y;
     }
 }
-
+var clMusic = new Audio('../sound/title.mp3');
 var createLeagueOverlay = {
+    
     show: function() {
         
         var color = 'black'; // SET THE COLOR HERE (IT CAN BE A HEX COLOR e.g. #FF00FF)
@@ -88,10 +89,13 @@ var createLeagueOverlay = {
             createLeagueOverlay.style(o,{background:color||'#000',display:'block'});
         }
         document.getElementById("clcontainer").style.display = "block";
+        clMusic.play();
     },
     hide: function() {
         var o = document.getElementById('doc_overlay');
         o.style.display = 'none';
+        clMusic.pause();
+        clMusic.currentTime = 0;
     },
     style: function(obj,s) {
         for ( var i in s ) {

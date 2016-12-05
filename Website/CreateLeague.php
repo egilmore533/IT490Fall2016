@@ -10,7 +10,7 @@
 <body>
     <!--- Main page info --->
     <div id="clform">
-        <sound src="sound/battle.mp3"></sound>
+        <audio id="clmusic" src="sound/battle.mp3"></audio>
         <h1 id="header">Create PokéFights League</h1>
         <form name="cl">
             <div id="output"></div>

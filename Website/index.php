@@ -7,7 +7,7 @@
 
 <body id="body">
     <?php
-        include "/var/lib/webutils/layout.php"
+        include "/var/lib/pokelibs/webutils/layout.php"
     ?>
     <!--- Main page info --->
     <div id="maincontainer">
@@ -40,7 +40,7 @@
     <?php } ?>
     
     <?php
-        include "/var/lib/webutils/footer.php"
+        include "/var/lib/pokelibs/webutils/footer.php"
     ?>
     </div>
 </body>

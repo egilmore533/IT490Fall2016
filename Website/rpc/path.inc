@@ -1,5 +1,5 @@
 <?php
-$path = '/var/lib/rpc';
+$path = '/var/lib/pokelibs/rpc';
     if (file_exists('local.ini'))
     {
         $parse = parse_ini_file('local.ini',true);
