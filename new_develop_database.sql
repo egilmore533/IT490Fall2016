@@ -87,6 +87,72 @@ INSERT INTO `files` VALUES (1,'pokefight_cron','pokefight_cron1');
 UNLOCK TABLES;
 
 --
+-- Current Database: `League`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `League` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `League`;
+
+--
+-- Table structure for table `info`
+--
+
+DROP TABLE IF EXISTS `info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `info` (
+  `leagueid` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `owner` varchar(40) DEFAULT NULL,
+  `salaryCap` float DEFAULT NULL,
+  `entryFee` float DEFAULT NULL,
+  `freeSlots` int(11) DEFAULT NULL,
+  `pool` float DEFAULT NULL,
+  UNIQUE KEY `leagueid` (`leagueid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `info`
+--
+
+LOCK TABLES `info` WRITE;
+/*!40000 ALTER TABLE `info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `teams`
+--
+
+DROP TABLE IF EXISTS `teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `teams` (
+  `leagueid` int(11) DEFAULT NULL,
+  `username` varchar(40) DEFAULT NULL,
+  `trainer1id` int(11) DEFAULT NULL,
+  `trainer2id` int(11) DEFAULT NULL,
+  `trainer3id` int(11) DEFAULT NULL,
+  `trainer4id` int(11) DEFAULT NULL,
+  `trainer5id` int(11) DEFAULT NULL,
+  `trainer6id` int(11) DEFAULT NULL,
+  `personalSalary` float DEFAULT NULL,
+  UNIQUE KEY `teamid` (`leagueid`,`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teams`
+--
+
+LOCK TABLES `teams` WRITE;
+/*!40000 ALTER TABLE `teams` DISABLE KEYS */;
+/*!40000 ALTER TABLE `teams` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Current Database: `Schedule`
 --
 
@@ -622,7 +688,7 @@ CREATE TABLE `innodb_index_stats` (
 
 LOCK TABLES `innodb_index_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT INTO `innodb_index_stats` VALUES ('Accounts','info','GEN_CLUST_INDEX','2016-11-03 14:14:46','n_diff_pfx01',1,1,'DB_ROW_ID'),('Accounts','info','GEN_CLUST_INDEX','2016-11-03 14:14:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','GEN_CLUST_INDEX','2016-11-03 14:14:46','size',1,NULL,'Number of pages in the index'),('Accounts','info','email','2016-11-03 14:14:46','n_diff_pfx01',1,1,'email'),('Accounts','info','email','2016-11-03 14:14:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','email','2016-11-03 14:14:46','size',1,NULL,'Number of pages in the index'),('Accounts','info','username','2016-11-03 14:14:46','n_diff_pfx01',1,1,'username'),('Accounts','info','username','2016-11-03 14:14:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','username','2016-11-03 14:14:46','size',1,NULL,'Number of pages in the index'),('Files','files','PRIMARY','2016-11-29 22:19:28','n_diff_pfx01',0,1,'full_package_name'),('Files','files','PRIMARY','2016-11-29 22:19:28','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Files','files','PRIMARY','2016-11-29 22:19:28','size',1,NULL,'Number of pages in the index'),('Schedule','schedule','GEN_CLUST_INDEX','2016-11-22 03:04:38','n_diff_pfx01',20,1,'DB_ROW_ID'),('Schedule','schedule','GEN_CLUST_INDEX','2016-11-22 03:04:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Schedule','schedule','GEN_CLUST_INDEX','2016-11-22 03:04:38','size',1,NULL,'Number of pages in the index'),('Trainer','info','GEN_CLUST_INDEX','2016-12-05 02:45:52','n_diff_pfx01',414,3,'DB_ROW_ID'),('Trainer','info','GEN_CLUST_INDEX','2016-12-05 02:45:52','n_leaf_pages',3,NULL,'Number of leaf pages in the index'),('Trainer','info','GEN_CLUST_INDEX','2016-12-05 02:45:52','size',4,NULL,'Number of pages in the index'),('Trainer','info','trainerid','2016-12-05 02:45:52','n_diff_pfx01',414,1,'trainerid'),('Trainer','info','trainerid','2016-12-05 02:45:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Trainer','info','trainerid','2016-12-05 02:45:52','size',1,NULL,'Number of pages in the index'),('Trainer','moves','GEN_CLUST_INDEX','2016-12-05 02:45:32','n_diff_pfx01',986,5,'DB_ROW_ID'),('Trainer','moves','GEN_CLUST_INDEX','2016-12-05 02:45:32','n_leaf_pages',5,NULL,'Number of leaf pages in the index'),('Trainer','moves','GEN_CLUST_INDEX','2016-12-05 02:45:32','size',6,NULL,'Number of pages in the index'),('Trainer','moves','pokemonid','2016-12-05 02:45:32','n_diff_pfx01',986,2,'pokemonid'),('Trainer','moves','pokemonid','2016-12-05 02:45:32','n_leaf_pages',2,NULL,'Number of leaf pages in the index'),('Trainer','moves','pokemonid','2016-12-05 02:45:32','size',3,NULL,'Number of pages in the index'),('Trainer','pokemon','GEN_CLUST_INDEX','2016-12-05 02:45:31','n_diff_pfx01',977,4,'DB_ROW_ID'),('Trainer','pokemon','GEN_CLUST_INDEX','2016-12-05 02:45:31','n_leaf_pages',4,NULL,'Number of leaf pages in the index'),('Trainer','pokemon','GEN_CLUST_INDEX','2016-12-05 02:45:31','size',5,NULL,'Number of pages in the index'),('Trainer','pokemon','pokemonid','2016-12-05 02:45:31','n_diff_pfx01',977,1,'pokemonid'),('Trainer','pokemon','pokemonid','2016-12-05 02:45:31','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Trainer','pokemon','pokemonid','2016-12-05 02:45:31','size',1,NULL,'Number of pages in the index'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','n_diff_pfx01',3,1,'fightid'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','n_diff_pfx02',3,1,'fightid,username'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','size',1,NULL,'Number of pages in the index'),('fightHistory','history','GEN_CLUST_INDEX','2016-11-22 03:04:48','n_diff_pfx01',21,1,'DB_ROW_ID'),('fightHistory','history','GEN_CLUST_INDEX','2016-11-22 03:04:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fightHistory','history','GEN_CLUST_INDEX','2016-11-22 03:04:48','size',1,NULL,'Number of pages in the index'),('fightHistory','history','fightid','2016-11-22 03:04:48','n_diff_pfx01',21,1,'fightid'),('fightHistory','history','fightid','2016-11-22 03:04:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fightHistory','history','fightid','2016-11-22 03:04:48','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-11-22 03:04:58','n_diff_pfx01',2,1,'DB_ROW_ID'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-11-22 03:04:58','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-11-22 03:04:58','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','username','2016-11-22 03:04:58','n_diff_pfx01',2,1,'username'),('userlogin','userlogin','username','2016-11-22 03:04:58','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','username','2016-11-22 03:04:58','size',1,NULL,'Number of pages in the index');
+INSERT INTO `innodb_index_stats` VALUES ('Accounts','info','GEN_CLUST_INDEX','2016-11-03 14:14:46','n_diff_pfx01',1,1,'DB_ROW_ID'),('Accounts','info','GEN_CLUST_INDEX','2016-11-03 14:14:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','GEN_CLUST_INDEX','2016-11-03 14:14:46','size',1,NULL,'Number of pages in the index'),('Accounts','info','email','2016-11-03 14:14:46','n_diff_pfx01',1,1,'email'),('Accounts','info','email','2016-11-03 14:14:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','email','2016-11-03 14:14:46','size',1,NULL,'Number of pages in the index'),('Accounts','info','username','2016-11-03 14:14:46','n_diff_pfx01',1,1,'username'),('Accounts','info','username','2016-11-03 14:14:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Accounts','info','username','2016-11-03 14:14:46','size',1,NULL,'Number of pages in the index'),('Files','files','PRIMARY','2016-11-29 22:19:28','n_diff_pfx01',0,1,'full_package_name'),('Files','files','PRIMARY','2016-11-29 22:19:28','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Files','files','PRIMARY','2016-11-29 22:19:28','size',1,NULL,'Number of pages in the index'),('League','info','GEN_CLUST_INDEX','2016-12-05 04:29:40','n_diff_pfx01',0,1,'DB_ROW_ID'),('League','info','GEN_CLUST_INDEX','2016-12-05 04:29:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('League','info','GEN_CLUST_INDEX','2016-12-05 04:29:40','size',1,NULL,'Number of pages in the index'),('League','info','leagueid','2016-12-05 04:29:40','n_diff_pfx01',0,1,'leagueid'),('League','info','leagueid','2016-12-05 04:29:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('League','info','leagueid','2016-12-05 04:29:40','size',1,NULL,'Number of pages in the index'),('League','teams','GEN_CLUST_INDEX','2016-12-05 04:29:40','n_diff_pfx01',0,1,'DB_ROW_ID'),('League','teams','GEN_CLUST_INDEX','2016-12-05 04:29:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('League','teams','GEN_CLUST_INDEX','2016-12-05 04:29:40','size',1,NULL,'Number of pages in the index'),('League','teams','teamid','2016-12-05 04:29:40','n_diff_pfx01',0,1,'leagueid'),('League','teams','teamid','2016-12-05 04:29:40','n_diff_pfx02',0,1,'leagueid,username'),('League','teams','teamid','2016-12-05 04:29:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('League','teams','teamid','2016-12-05 04:29:40','size',1,NULL,'Number of pages in the index'),('Schedule','schedule','GEN_CLUST_INDEX','2016-11-22 03:04:38','n_diff_pfx01',20,1,'DB_ROW_ID'),('Schedule','schedule','GEN_CLUST_INDEX','2016-11-22 03:04:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Schedule','schedule','GEN_CLUST_INDEX','2016-11-22 03:04:38','size',1,NULL,'Number of pages in the index'),('Trainer','info','GEN_CLUST_INDEX','2016-12-05 02:45:52','n_diff_pfx01',414,3,'DB_ROW_ID'),('Trainer','info','GEN_CLUST_INDEX','2016-12-05 02:45:52','n_leaf_pages',3,NULL,'Number of leaf pages in the index'),('Trainer','info','GEN_CLUST_INDEX','2016-12-05 02:45:52','size',4,NULL,'Number of pages in the index'),('Trainer','info','trainerid','2016-12-05 02:45:52','n_diff_pfx01',414,1,'trainerid'),('Trainer','info','trainerid','2016-12-05 02:45:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Trainer','info','trainerid','2016-12-05 02:45:52','size',1,NULL,'Number of pages in the index'),('Trainer','moves','GEN_CLUST_INDEX','2016-12-05 02:45:32','n_diff_pfx01',986,5,'DB_ROW_ID'),('Trainer','moves','GEN_CLUST_INDEX','2016-12-05 02:45:32','n_leaf_pages',5,NULL,'Number of leaf pages in the index'),('Trainer','moves','GEN_CLUST_INDEX','2016-12-05 02:45:32','size',6,NULL,'Number of pages in the index'),('Trainer','moves','pokemonid','2016-12-05 02:45:32','n_diff_pfx01',986,2,'pokemonid'),('Trainer','moves','pokemonid','2016-12-05 02:45:32','n_leaf_pages',2,NULL,'Number of leaf pages in the index'),('Trainer','moves','pokemonid','2016-12-05 02:45:32','size',3,NULL,'Number of pages in the index'),('Trainer','pokemon','GEN_CLUST_INDEX','2016-12-05 02:45:31','n_diff_pfx01',977,4,'DB_ROW_ID'),('Trainer','pokemon','GEN_CLUST_INDEX','2016-12-05 02:45:31','n_leaf_pages',4,NULL,'Number of leaf pages in the index'),('Trainer','pokemon','GEN_CLUST_INDEX','2016-12-05 02:45:31','size',5,NULL,'Number of pages in the index'),('Trainer','pokemon','pokemonid','2016-12-05 02:45:31','n_diff_pfx01',977,1,'pokemonid'),('Trainer','pokemon','pokemonid','2016-12-05 02:45:31','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('Trainer','pokemon','pokemonid','2016-12-05 02:45:31','size',1,NULL,'Number of pages in the index'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','n_diff_pfx01',3,1,'fightid'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','n_diff_pfx02',3,1,'fightid,username'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('betHistory','history','PRIMARY','2016-11-22 03:04:28','size',1,NULL,'Number of pages in the index'),('fightHistory','history','GEN_CLUST_INDEX','2016-11-22 03:04:48','n_diff_pfx01',21,1,'DB_ROW_ID'),('fightHistory','history','GEN_CLUST_INDEX','2016-11-22 03:04:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fightHistory','history','GEN_CLUST_INDEX','2016-11-22 03:04:48','size',1,NULL,'Number of pages in the index'),('fightHistory','history','fightid','2016-11-22 03:04:48','n_diff_pfx01',21,1,'fightid'),('fightHistory','history','fightid','2016-11-22 03:04:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fightHistory','history','fightid','2016-11-22 03:04:48','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2016-09-26 20:15:07','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2016-09-26 20:15:08','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-11-22 03:04:58','n_diff_pfx01',2,1,'DB_ROW_ID'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-11-22 03:04:58','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','GEN_CLUST_INDEX','2016-11-22 03:04:58','size',1,NULL,'Number of pages in the index'),('userlogin','userlogin','username','2016-11-22 03:04:58','n_diff_pfx01',2,1,'username'),('userlogin','userlogin','username','2016-11-22 03:04:58','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('userlogin','userlogin','username','2016-11-22 03:04:58','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -650,7 +716,7 @@ CREATE TABLE `innodb_table_stats` (
 
 LOCK TABLES `innodb_table_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT INTO `innodb_table_stats` VALUES ('Accounts','info','2016-11-03 14:14:46',1,1,2),('Files','files','2016-11-29 22:19:28',0,1,0),('Schedule','schedule','2016-11-22 03:04:38',20,1,0),('Trainer','info','2016-12-05 02:45:52',414,4,1),('Trainer','moves','2016-12-05 02:45:32',986,6,3),('Trainer','pokemon','2016-12-05 02:45:31',977,5,1),('betHistory','history','2016-11-22 03:04:28',3,1,0),('fightHistory','history','2016-11-22 03:04:48',21,1,1),('mysql','gtid_executed','2016-09-26 20:15:07',0,1,0),('sys','sys_config','2016-09-26 20:15:08',2,1,0),('userlogin','userlogin','2016-11-22 03:04:58',2,1,1);
+INSERT INTO `innodb_table_stats` VALUES ('Accounts','info','2016-11-03 14:14:46',1,1,2),('Files','files','2016-11-29 22:19:28',0,1,0),('League','info','2016-12-05 04:29:40',0,1,1),('League','teams','2016-12-05 04:29:40',0,1,1),('Schedule','schedule','2016-11-22 03:04:38',20,1,0),('Trainer','info','2016-12-05 02:45:52',414,4,1),('Trainer','moves','2016-12-05 02:45:32',986,6,3),('Trainer','pokemon','2016-12-05 02:45:31',977,5,1),('betHistory','history','2016-11-22 03:04:28',3,1,0),('fightHistory','history','2016-11-22 03:04:48',21,1,1),('mysql','gtid_executed','2016-09-26 20:15:07',0,1,0),('sys','sys_config','2016-09-26 20:15:08',2,1,0),('userlogin','userlogin','2016-11-22 03:04:58',2,1,1);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1275,4 +1341,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-04 21:50:47
+-- Dump completed on 2016-12-04 23:34:20
