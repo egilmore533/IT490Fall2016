@@ -102,7 +102,7 @@ DROP TABLE IF EXISTS `info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `info` (
-  `leagueid` int(11) NOT NULL AUTO_INCREMENT,
+  `leagueid` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `owner` varchar(40) DEFAULT NULL,
   `salaryCap` float DEFAULT NULL,
@@ -1342,4 +1342,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-06 10:42:12
+-- Dump completed on 2016-12-06 10:43:11
