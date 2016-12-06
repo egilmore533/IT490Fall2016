@@ -418,14 +418,30 @@ function trainers($trainer)
     }
     else
     {
-      	$s = "SELECT * FROM info where name LIKE \"%$trainer%\" or
-                                                        pokemon1 LIKE \"%$trainer%\" or
-                                                        pokemon2 LIKE \"%$trainer%\" or
-                                                        pokemon3 LIKE \"%$trainer%\" or
-                                                        pokemon4 LIKE \"%$trainer%\" or
-                                                        pokemon5 LIKE \"%$trainer%\" or
-                                                        pokemon6 LIKE \"%$trainer%\"";
-      	($result = mysqli_query($conn, $s)) or die (mysqli_error());
+        $pokesearchresult = array();
+        $pokesearch = "SELECT * FROM pokemon where name LIKE \"%$trainer%\"";
+        $result = MySQLLib::makeDBSelection($pokesearch,$conn);
+        while($row = $result->fetch_assoc())
+        {
+            $pokesearchresult[] = $row["pokemonid"];
+        }
+        $list_pokesearch = implode(', ', $pokesearchresult);
+        var_dump($list_pokesearch);
+        
+        if($list_pokesearch == "")
+        {
+            $list_pokesearch = "-1,-2";
+        }
+        
+      	$s = "SELECT * FROM info where info.name LIKE \"%$trainer%\" or 
+                                        info.pokemon1id IN ($list_pokesearch) or 
+                                        info.pokemon2id IN ($list_pokesearch) or 
+                                        info.pokemon3id IN ($list_pokesearch) or 
+                                        info.pokemon4id IN ($list_pokesearch) or 
+                                        info.pokemon5id IN ($list_pokesearch) or 
+                                        info.pokemon6id IN ($list_pokesearch)";
+                                        
+      	$result = MySQLLib::makeDBSelection($s,$conn);
                 	
        	echo "Searching for ".$trainer."\n";
       	echo "Searched Successfully\n";            	
@@ -433,45 +449,45 @@ function trainers($trainer)
     }
 	
 	
-	$tablestring = "";
-        $pokestring = "";
-        
-        $pokepic = '<img src=pokemon&#47;';
-        $pokepic2 = ".png";
-        $pokepic3 = " onerror=this.style.display='none' title=";
-        $trainers = $pokepic."Trainer1".$pokepic2.$pokepic3."Trainers>".$pokepic.'a'.$pokepic2.$pokepic3."Trainers>"
-        .$pokepic.'b'.$pokepic2.$pokepic3."Trainers>".$pokepic.'c'.$pokepic2.$pokepic3."Trainers>"
-        .$pokepic.'d'.$pokepic2.$pokepic3."Trainers>".$pokepic.'e'.$pokepic2.$pokepic3."Trainers>"
-        .$pokepic.'f'.$pokepic2.$pokepic3."Trainers>".$pokepic.'g'.$pokepic2.$pokepic3."Trainers>";
-        
-        if($result->num_rows > 0)
+    $tablestring = "";
+    $pokestring = "";
+    
+    $pokepic = '<img src=pokemon&#47;';
+    $pokepic2 = ".png";
+    $pokepic3 = " onerror=this.style.display='none' title=";
+    $trainers = $pokepic."Trainer1".$pokepic2.$pokepic3."Trainers>".$pokepic.'a'.$pokepic2.$pokepic3."Trainers>"
+    .$pokepic.'b'.$pokepic2.$pokepic3."Trainers>".$pokepic.'c'.$pokepic2.$pokepic3."Trainers>"
+    .$pokepic.'d'.$pokepic2.$pokepic3."Trainers>".$pokepic.'e'.$pokepic2.$pokepic3."Trainers>"
+    .$pokepic.'f'.$pokepic2.$pokepic3."Trainers>".$pokepic.'g'.$pokepic2.$pokepic3."Trainers>";
+    
+    if($result->num_rows > 0)
+    {
+        $tablestring .= "<table><tr><th>".$trainers."<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
+        while($row = $result->fetch_assoc())
         {
-            $tablestring .= "<table><tr><th>".$trainers."<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
-            while($row = $result->fetch_assoc())
+            //echo "tablestring created\n";
+            $tablestring.="<tr><td><b>".$row["name"];
+            for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
             {
-                //echo "tablestring created\n";
-                $tablestring.="<tr><td><b>".$row["name"];
-		for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
-		{
-		    $id = $row["pokemon$pokemonNum"."id"];
-                    $s2 = "select * from pokemon where pokemonid=$id";
-		    $result2 = MySQLLib::makeDBSelection($s2,$conn);
-		    $row2=$result2->fetch_assoc();
-		    $tablestring.="<td>".$pokepic.isNidoFamily($row2["name"]).$pokepic2.$pokepic3.$row2["name"].">";
-		}
-
+                $id = $row["pokemon$pokemonNum"."id"];
+                $s2 = "select * from pokemon where pokemonid=$id";
+                $result2 = MySQLLib::makeDBSelection($s2,$conn);
+                $row2=$result2->fetch_assoc();
+                $tablestring.="<td>".$pokepic.isNidoFamily($row2["name"]).$pokepic2.$pokepic3.$row2["name"].">";
             }
-            echo "tablestring sent\n";
-            return array("success"=>true, 'message'=>$tablestring);
-	}
-	else
-	{
-            $tablestring ="0 results";
-            echo "0 results\n";
-            return array("success"=>'0', 'message'=>$tablestring);
-	}
 
-	$conn->close();
+        }
+        echo "tablestring sent\n";
+        return array("success"=>true, 'message'=>$tablestring);
+    }
+    else
+    {
+        $tablestring ="0 results";
+        echo "0 results\n";
+        return array("success"=>'0', 'message'=>$tablestring);
+    }
+
+    $conn->close();
 
 }
 
