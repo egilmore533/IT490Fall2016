@@ -1,13 +1,13 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <title>PokeFights</title>
-  </head>
+</head>
 
-  <body id="body">
+<body id="body">
     <?php
-        include "/var/lib/webutils/layout.php"
+        include "/var/lib/pokelibs/webutils/layout.php"
     ?>
     <!--- Main page info --->
     <div id="maincontainer">
@@ -39,13 +39,11 @@
         </div>
     <?php } ?>
     
-    <div id="footer">
-        <a href="aboutus.php" title="About">About</a>
-        <a href="contactus.php" title="Contact Us">Contact Us</a>
-        Copyright PokéFights &copy; 2016
+    <?php
+        include "/var/lib/pokelibs/webutils/footer.php"
+    ?>
     </div>
-    </div>
-  </body>
+</body>
   
 </html>
 

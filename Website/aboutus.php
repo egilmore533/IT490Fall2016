@@ -6,7 +6,7 @@
 <body id="body">  
 
     <?php
-        include "/var/lib/webutils/layout.php"
+        include "/var/lib/pokelibs/webutils/layout.php"
     ?>
     
     <!---page info --->
@@ -17,11 +17,9 @@
         Brett Aiken<br>Eric Gilmore<br>Stephen Larson<br>Daniel Crandall
     </div>
 
-<div id="footer">
-    <a href="aboutus.php" title="About">About</a>
-    <a href="contactus.php" title="Contact Us">Contact Us</a>
-    Copyright PokéFights &copy; 2016
-</div>
+    <?php
+        include "/var/lib/pokelibs/webutils/footer.php"
+    ?>
 </div>
 </body>
 </html>
