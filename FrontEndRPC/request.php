@@ -173,6 +173,37 @@ function sendRequest($request)
                 $response["message"] = "Failed to place bets with $".$request["funds"];
             }
             break;
+        case "league":
+            $requestArr = array();
+            $requestArr["type"] = "league";
+            
+            $response = $client->send_request($requestArr);
+            if ($response["success"]==true)
+            {
+            }
+            else
+            {
+                $response["message"] = "Failed to get League Tables";
+            }
+            break;
+        case "cl":
+            $requestArr = array();
+            SessionManager::sessionStart('PokemonBets');
+            $requestArr["type"] = "cl";
+            $requestArr["leaguename"] = $request['name'];
+            $requestArr["entryfee"] = $request['fee'];
+            $requestArr["username"] = $_SESSION['user'];
+            
+            $response = $client->send_request($requestArr);
+            if ($response["success"]==true)
+            {
+                $response["message"] = "League Joined!";
+            }
+            else
+            {
+                $response["message"] = "Failed to Join League";
+            }
+            break;
         
     }
         echo json_encode($response['message']);

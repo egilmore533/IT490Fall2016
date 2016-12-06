@@ -6,7 +6,7 @@
 <body id="body" onload="tdbRequest()"> 
 
     <?php
-        include "/var/lib/webutils/layout.php"
+        include "/var/lib/pokelibs/webutils/layout.php"
     ?>
     
     <!---page info --->
@@ -27,6 +27,13 @@
         <p id="tdb"></p>
     </div>
     </div>
+
+    <?php
+        include "/var/lib/pokelibs/webutils/footer.php"
+    ?>
+</div>
+</body>
+
 <script language="javascript">
 
     function tdbRequest()
@@ -45,11 +52,5 @@
         document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);      
     }
 </script>
-<div id="footer">
-    <a href="aboutus.php" title="About">About</a>
-    <a href="contactus.php" title="Contact Us">Contact Us</a>
-    Copyright PokéFights &copy; 2016
-</div>
-</div>
-</body>
+
 </html>

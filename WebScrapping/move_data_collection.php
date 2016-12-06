@@ -45,7 +45,12 @@ foreach($moves_temp[1] as $move)
 	$pos++;
 }
 
-$final_moves = array();
+$final_moves = array(
+	0 => '',
+	1 => '',
+	2 => '',
+	3 => ''
+);
 foreach($all_moves as $move)
 {
 	$flag = 1;
@@ -70,11 +75,6 @@ foreach($all_moves as $move)
 	}
 }
 
-if(empty($final_moves))
-{
-	var_dump($level);
-	var_dump($pokemon_name);
-}
 
 return $final_moves;
 

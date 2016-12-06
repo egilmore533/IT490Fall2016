@@ -1,5 +1,5 @@
 <?php
-$path = '/usr/local/lib/system_libs';
+$path = '/var/lib/pokelibs/backend';
     if (file_exists('local.ini'))
     {
         $parse = parse_ini_file('local.ini',true);
