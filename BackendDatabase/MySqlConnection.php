@@ -432,7 +432,7 @@ function trainers($trainer)
         {
             $list_pokesearch = "-1,-2";
         }
-        
+        //search for certain keywords in the trainer db
       	$s = "SELECT * FROM info where info.name LIKE \"%$trainer%\" or 
                                         info.pokemon1id IN ($list_pokesearch) or 
                                         info.pokemon2id IN ($list_pokesearch) or 
