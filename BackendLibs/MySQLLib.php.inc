@@ -2,6 +2,22 @@
 
 class MySQLLib 
 {
+    function makeConnection()
+    {
+	$servername = 'localhost';
+	$username = 'it490';
+	$password = 'whoGivesaFuck!490';
+
+	$conn = new mysqli($servername, $username, $password);
+
+	if($conn->connect_error)
+	{
+            die("Connection attempt failed: ".$conn->connect_error);
+	}
+	return $conn;
+	
+    }
+
     function makeDBConnection($database)
     {
         //MySQL Connection

@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?php
+include 'path.inc';
+include 'MySQLLib.php';
 
 $servername = 'localhost';
 $username = 'it490';
