@@ -18,6 +18,12 @@ class MySQLLib
 	
     }
 
+    function makeSelection($select_statement, $conn)
+    {
+	($result = mysqli_query($conn, $select_statement)) or die (mysqli_error($conn));
+        return $result;
+    }
+
     function makeDBConnection($database)
     {
         //MySQL Connection
@@ -35,8 +41,9 @@ class MySQLLib
         return $conn;
     }
 
-    function makeDBSelection($select_statement,$dbconn)
+    function makeDBSelection($select_statement,$dbname)
     {
+	$dbconn = $this->makeDBConnection($dbname);
         ($result = mysqli_query($dbconn, $select_statement)) or die (mysqli_error($dbconn));
         return $result;
     }
