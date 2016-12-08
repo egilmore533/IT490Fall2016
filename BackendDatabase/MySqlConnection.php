@@ -293,10 +293,10 @@ function betHistory($username)
     {
         while($row = $result2->fetch_assoc())
         {
-            echo "\nbet history found\n";
+            //echo "\nbet history found\n";
             $tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
             
-            echo "bet history gathered and sent" . "\n";
+            //echo "bet history gathered and sent" . "\n";
         }
     }
     else
@@ -574,10 +574,9 @@ function leagues()
     if($result->num_rows > 0)
     {	
         $tablestring .= "<table><tr><th>League<th>Commissioner<th>Entry Fee<th>Slots Open";
-                //output data of each row
+
         while($row = $result->fetch_assoc())
         {
-            //echo "tablestring created\n";
             $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>".$row["entryFee"]."<td>".$row["freeSlots"]."";
         }
         
@@ -601,7 +600,6 @@ function createLeague($leaguename, $entryfee, $username)
     $defaultSlots = 3;
     $defaultPool = $entryfee;
     $addLeague = "INSERT INTO info (name, owner, salaryCap, entryFee, freeSlots, pool) VALUES ('$leaguename','$username','$defaultSalCap','$entryfee','$defaultSlots','$defaultPool')";
-    
     $canWD = withdraw($username, $entryfee);
     
     if($canWD["success"] === TRUE)
@@ -618,9 +616,11 @@ function createLeague($leaguename, $entryfee, $username)
             $leagueid = $row["leagueid"];
             $salary = $row["salaryCap"];
             $trainer = 0;
-            
+            $null = "-";
+            $addLHistory = "INSERT INTO history (leagueid, name, owner, pool, winner1st, winner2nd) VALUES ('$leagueid','$leaguename','$username','$defaultPool','$null', '$null')";
             $createCommishTeam = "INSERT INTO teams (leagueid, username, trainer1id, trainer2id, trainer3id, trainer4id, trainer5id, trainer6id, personalSalary) VALUES ('$leagueid','$username','$trainer','$trainer','$trainer','$trainer','$trainer','$trainer','$salary')";
             
+            MySQLLib::makeDBSelection($addLHistory,$conn);
             $result2 = MySQLLib::makeDBSelection($createCommishTeam,$conn);
         }
         
@@ -630,6 +630,61 @@ function createLeague($leaguename, $entryfee, $username)
         echo "No funds to create league.";
         return array("success" => '0', 'message'=>"Unable to create league.");
     }
+}
+
+function leagueHistory($username)
+{
+
+    $database = "League";
+
+    $teamsearch = "SELECT * FROM teams where username=\"$username\"";
+    
+    $conn = MySQLLib::makeDBConnection($database);
+    $result = MySQLLib::makeDBSelection($teamsearch,$conn);
+    
+    while($row = $result->fetch_assoc())
+    {
+        $teamsearchresult[] = $row["leagueid"];
+    }
+    
+    $list_teamsearch = implode(', ', $teamsearchresult);
+    
+    var_dump($list_teamsearch);
+    
+    $s = "SELECT * FROM history where leagueid IN ($list_teamsearch)";
+    
+    $result = MySQLLib::makeDBSelection($s,$conn);
+
+    $tablestring = "";
+    //$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
+    $tablestring .= "<table><tr><th>League Name<th>Owner<th>Pool<th>Winnings";
+    //output data of each row
+
+    if($result->num_rows > 0)
+    {
+        while($row = $result->fetch_assoc())
+        {
+            if($username == $row["winner1st"])
+            {
+                $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>"."$".$row["pool"]."<td>".$row["winner1st"]."";
+            }
+            else
+            {
+                $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>"."$".$row["pool"]."<td>"."$".$row["winner2nd"]."";
+            }
+        }
+    }
+    else
+    {
+        echo "error no username";
+        $conn2->close();
+        $conn->close();
+        return array("success" => '0', 'message'=>"$username may not have a league history yet.");
+    }
+    
+    $conn->close();
+    return array("success" => true, 'message'=>$tablestring);
+
 }
 function requestProcessor($request)
 {
@@ -665,6 +720,8 @@ function requestProcessor($request)
             return leagues();
         case "cl":
             return createLeague($request["leaguename"], $request["entryfee"], $request["username"]);
+        case "lh":
+            return leagueHistory($request['user']);
         default:
             return "ERROR: unsupported message type.";
     }
