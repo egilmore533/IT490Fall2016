@@ -43,7 +43,7 @@ class MySQLLib
 
     function makeDBSelection($select_statement,$dbname)
     {
-	$dbconn = $this->makeDBConnection($dbname);
+	$dbconn = MySQLLib::makeDBConnection($dbname);
         ($result = mysqli_query($dbconn, $select_statement)) or die (mysqli_error($dbconn));
         return $result;
     }
