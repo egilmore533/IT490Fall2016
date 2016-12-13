@@ -7,11 +7,7 @@ require_once('rabbitMQLib.inc');
 function ipcall($machineName)
 {
     $ini_array=parse_ini_file('hosts_addresses.ini');
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 977a0cf75fcc259db28cabc6e04db1c0709b45be
     $ip = $ini_array[$machineName];
     
     return $ip;
@@ -70,11 +66,10 @@ function insertBundle($versionName)
 	$DBpass = "whoGivesaFuck!490";
 	$database = "Files";
 	
-<<<<<<< HEAD
+
 	$ipaddress = ipcall('eric_dev');
-=======
 	$ipaddress = ipcall('stephen_dev');
->>>>>>> 977a0cf75fcc259db28cabc6e04db1c0709b45be
+
 	
 	//Create Connection
 	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
@@ -109,13 +104,10 @@ function insertBundle($versionName)
 			
 			echo "New Package created \n";
 			shell_exec("mkdir -p /var/packages/$versionName/$verNum");
-<<<<<<< HEAD
 			shell_exec("sshpass -p 'password' scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation );
-=======
 			$test_string = "sshpass -p password scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation;
 			var_dump($test_string);
 			shell_exec($test_string);
->>>>>>> 977a0cf75fcc259db28cabc6e04db1c0709b45be
 			var_dump($versionName);
 			var_dump($ipaddress);
 			var_dump($deploylocation);
