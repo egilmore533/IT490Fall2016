@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-require_once(pokeOddsCalc.php);
+    require_once('pokeOddsCalc.php');
 
     ///MySQL Connection
 	$servername = "localhost";
@@ -107,6 +107,10 @@ require_once(pokeOddsCalc.php);
 	    var_dump($fightid);
             echo $trainer1id . " " . $name1 . "\n";
 	    echo $trainer2id . " " . $name2 . "\n";
+	    
+	    $oddspay = array();
+	    $oddspay = oddsCalculation($name1, $name2);
+            
             $fightnum += 1;
         if($minutes == 60)
 	{
@@ -119,7 +123,10 @@ require_once(pokeOddsCalc.php);
             $timestamp = $hours . ":" . $minutes;
         }
             
-	$sqlSchedule = "INSERT INTO schedule (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, odds2, time, timestamp) VALUES ('$fightid', '$name1', '$trainer1id', '$name2', '$trainer2id', '1.0', '1.0', '$date', '$timestamp')";
+            $odds1pay = $oddspay[0];
+            $odds2pay = $oddspay[1];
+            
+	$sqlSchedule = "INSERT INTO schedule (fightid, trainer1, trainer1id, trainer2, trainer2id, odds, odds2, time, timestamp) VALUES ('$fightid', '$name1', '$trainer1id', '$name2', '$trainer2id', '$odds1pay', '$odds2pay', '$date', '$timestamp')";
         
         $minutes+=15;
 	
