@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
+include 'path.inc';
 include 'move_data_collection.php';
-include '/var/lib/rpc/MySQLLib.php';
+include 'MySQLLib.php';
 
 
 $pokemonid = 0;
@@ -44,27 +45,6 @@ preg_match_all($trainer_table_regex,$data,$trainer_tables);
 //keep track of position in final array throughout the multiple tables
 $position = 0;
 $j = 0;
-
-        //MySQL Connection
-	$servername = "localhost";
-	$DBuser = "it490";
-	$DBpass = "whoGivesaFuck!490";
-	$database = "Trainer";
-	
-	//Create Connection
-	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
-	
-	//Check Connection
-	if($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
-	}
-	else
-	{
-		$s = "SELECT * FROM info";
-		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully\n";
-	}
-	//MySQL Connection
 
 //go through each table
 foreach($trainer_tables[1] as $trainer_table)

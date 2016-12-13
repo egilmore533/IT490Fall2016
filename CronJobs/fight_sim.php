@@ -1,29 +1,33 @@
 #!/usr/bin/php
 <?php
+include 'path.inc';
+include 'MySQLLib.php';
 
-$servername = 'localhost';
-$username = 'it490';
-$password = 'whoGivesaFuck!490';
+$conn = MySQLLib::makeConnection();
 
-$conn = new mysqli($servername, $username, $password);
-
-if($conn->connect_error)
-{
-	die("Connection attempt failed: ".$conn->connect_error);
-}
-echo "Successful Connection\n";
 $fight_array = array();
 $winner = '';
 $s = 'select * from Schedule.schedule';
-($result = mysqli_query($conn, $s)) or die (mysqli_error());
+$result = MySQLLib::makeSelection($s,$conn);
 while($r=mysqli_fetch_array($result))
 {
 	$fight_array = array($r['trainer1'],$r['trainer2']);
 	var_dump($fight_array);
 	$winner = randomly_choose_winner($fight_array);
+	if($r['trainer1'] == $winner)
+	{
+		$winnerID = $r['trainer1id'];
+	}
+	if($r['trainer2'] == $winner)
+        {
+                $winnerID = $r['trainer2id'];
+        }
+
+
+
 	$s = 'select * from betHistory.history where fightid='.$r['fightid'];
 	$payout_total = 0;
-	($result2 = mysqli_query($conn,$s) or die (mysqli_error()));
+	$result2 = MySQLLib::makeSelection($s,$conn);
 	while($r2=mysqli_fetch_array($result2))
 	{
 		$payout = $r2['trainer1_bet'];
@@ -33,7 +37,7 @@ while($r=mysqli_fetch_array($result))
 		}
 		
 		$s = 'select * from Accounts.info where username="'.$r2['username'].'"';
-		($result3= mysqli_query($conn,$s) or die (mysqli_error()));
+		$result3 = MySQLLib::makeSelection($s3,$conn);
 		while($r3=mysqli_fetch_array($result3))
 		{
 			echo $winner."\n";
@@ -92,6 +96,20 @@ while($r=mysqli_fetch_array($result))
 	{
 		echo "Schedule Row Failed to Update\n";
 	}
+
+
+	//league updates
+	$s = "update League.teams set points=points+1 where (trainer1id=$winnerID)";
+	for($count = 2; $count < 7; $count++)
+	{
+		$s.=" or (trainer".$count."id=$winnerID)";
+	}
+	echo $s . "\n";
+	if($result2 = MySQLLib::makeSelection($s,$conn))
+	{
+		echo "Succesfully updated League teams\n";
+	}
+
 	break;
 }
 

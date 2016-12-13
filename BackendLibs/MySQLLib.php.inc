@@ -2,6 +2,28 @@
 
 class MySQLLib 
 {
+    function makeConnection()
+    {
+	$servername = 'localhost';
+	$username = 'it490';
+	$password = 'whoGivesaFuck!490';
+
+	$conn = new mysqli($servername, $username, $password);
+
+	if($conn->connect_error)
+	{
+            die("Connection attempt failed: ".$conn->connect_error);
+	}
+	return $conn;
+	
+    }
+
+    function makeSelection($select_statement, $conn)
+    {
+	($result = mysqli_query($conn, $select_statement)) or die (mysqli_error($conn));
+        return $result;
+    }
+
     function makeDBConnection($database)
     {
         //MySQL Connection
@@ -19,8 +41,9 @@ class MySQLLib
         return $conn;
     }
 
-    function makeDBSelection($select_statement,$dbconn)
+    function makeDBSelection($select_statement,$dbname)
     {
+	$dbconn = MySQLLib::makeDBConnection($dbname);
         ($result = mysqli_query($dbconn, $select_statement)) or die (mysqli_error($dbconn));
         return $result;
     }
