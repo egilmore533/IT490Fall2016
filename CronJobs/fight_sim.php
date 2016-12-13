@@ -17,10 +17,12 @@ while($r=mysqli_fetch_array($result))
 	if($r['trainer1'] == $winner)
 	{
 		$winnerID = $r['trainer1id'];
+		$oddspayout = $r['odds'];
 	}
 	if($r['trainer2'] == $winner)
         {
                 $winnerID = $r['trainer2id'];
+                $oddspayout = $r['odds2'];
         }
 
 
@@ -45,11 +47,11 @@ while($r=mysqli_fetch_array($result))
 			var_dump($r3);
 			if( ($r['trainer1']==$winner && $r2['trainer1_bet'] > 0) || ($r['trainer2']==$winner && $r2['trainer2_bet'] > 0) )
 			{
-				$s='update Accounts.info set funds='.($payout + $payout + $r3['funds']).' where username="'.$r2['username'].'"';
+				$s='update Accounts.info set funds='.($payout + $payout + $r3['funds']).', wincount=wincount+1 where username="'.$r2['username'].'"';
 			}
 			else
 			{
-				$s="update Accounts.info set funds='".$r3['funds']."' where username='".$r2['username']."'";
+				$s="update Accounts.info set funds='".$r3['funds']."', losecount=losecount+1 where username='".$r2['username']."'";
 			}
 			echo $s."\n";
 			if(mysqli_query($conn,$s))
@@ -58,7 +60,7 @@ while($r=mysqli_fetch_array($result))
 			}
 			else { echo "payout failed to ".$r2['username']; }
 		}
-		$payout_total += ((int)$r2['trainer1_bet'] + (int)$r2['trainer2_bet']);//this where oddspayout is going
+		$payout_total += $oddspayout * ((int)$r2['trainer1_bet'] + (int)$r2['trainer2_bet']);//this where oddspayout is going
 		if( ($r['trainer1']==$winner && $r2['trainer1_bet'] > 0) || ($r['trainer2']==$winner && $r2['trainer2_bet'] > 0) )
 		{
 			$s = 'update betHistory.history set winnings='.($payout + $payout).' where fightid='.$r['fightid'].' and username="'.$r2['username'].'"';
