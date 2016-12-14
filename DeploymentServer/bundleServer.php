@@ -68,7 +68,7 @@ function insertBundle($versionName)
 	
 
 	$ipaddress = ipcall('eric_dev');
-	$ipaddress = ipcall('stephen_dev');
+	//$ipaddress = ipcall('stephen_dev');
 
 	
 	//Create Connection
@@ -165,8 +165,8 @@ function deploy($versionName, $hostname, $config, $name)
 	while($r=mysqli_fetch_array($result))
 	{
 		
-		if($versionName == $r['versionName']){
-			$localLocation = "/var/packages/" . $r['versionName'].".tar.gz";
+		if($versionName == $r['full_package_name']){
+			$localLocation = "/var/packages/" . $name . "/" . $r['versionNum'] . "/" . $r['full_package_name'].".tar.gz";
 			$version_num = $r['versionNum'];
 			$version_name = $r['versionName'];
 			
