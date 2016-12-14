@@ -13,6 +13,12 @@
     <div id="clcontainer" style="display: none;">
         <iframe id="clframe" src="CreateLeague.php" width=100% height=500></iframe>
     </div>
+    <div id="jlcontainer" style="display: none;">
+        This league has a fee. Make sure you have enough money to enter.
+        <input type="button" id="jlbutton" onclick="" value= "Join League"/>
+        <div id="jltest">
+        </div>
+    </div>
     <div id="container">
         <div id="header"> <h1>PokéFight Leagues</h1> </div>
         <div id="contents">
@@ -50,6 +56,22 @@
     function handleLeagueResponse()
     { 
         document.getElementById("league").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
+    }
+    
+    function sendJLRequest(leagueid)
+    {
+        var name = document.getElementById("name").value;
+        var fee = document.getElementById("fee").value;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = handleJLResponse;
+        request.open("POST","rpc/rpc.php",true);
+        request.setRequestHeader("Content-type","application/json");
+        var data = JSON.stringify({request:"jl",leagueid:leagueid});
+        request.send(data);
+    }
+    function handleJLResponse()
+    {
+        window.top.location.href = "myaccount.php";
     }
 </script>
 

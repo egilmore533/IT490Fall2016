@@ -1,7 +1,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="fhstyle.css"/>
-    <script src="utils/webutils.js"></script>
+    <script src="webutils.js"></script>
 </head>
 
 <!--- accountbar info --->

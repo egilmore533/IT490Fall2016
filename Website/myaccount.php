@@ -3,7 +3,7 @@
 <head>
     <title>PokeFights</title>
 </head>
-<body id="output" onload="bhRequest()">
+<body id="output" onload="bhRequest(); lhRequest();">
 
     <?php
         include "/var/lib/pokelibs/webutils/layout.php"
@@ -32,8 +32,10 @@
         <input id="withdrawfunds" type="button" onclick="sendBalRequest('show2')" value="Withdraw"/>
         <input type="number" id="howmuch" style="display: none;"/>
         <input type="button" id="confirmbutton" onclick="sendBalRequest('addFunds')" value= "Confirm" style ="display: none;"/>
-        
-        <p id="bh"></p>
+        <div id="table">
+            <p id="bh"></p>
+            <p id="lh"></p>
+        </div>
 
         <?php
             include "/var/lib/pokelibs/webutils/footer.php"
@@ -43,6 +45,7 @@
 
 <script language="javascript">
     var request;
+    var request2;
     var reqType;
     
     function sendBalRequest(reqType)
@@ -89,6 +92,19 @@
     function handleBHResponse()
     { 
         document.getElementById("bh").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
+    }
+    function lhRequest()
+    {
+        request2 = new XMLHttpRequest();
+        request2.onreadystatechange = handleLHResponse;
+        request2.open("POST","rpc/rpc.php",true);
+        request2.setRequestHeader("Content-type","application/json");
+        var data = JSON.stringify({request:"lh"});
+        request2.send(data);
+    }
+    function handleLHResponse()
+    { 
+        document.getElementById("lh").innerHTML = request2.responseText.substring(3, request2.responseText.length - 1);
     }
 </script>
 </html>

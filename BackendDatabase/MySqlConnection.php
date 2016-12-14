@@ -285,31 +285,25 @@ function betHistory($username)
     $result2 = MySQLLib::makeDBSelection($s2,$conn2);
 
     $tablestring = "";
-    //$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
     $tablestring .= "<table><tr><th>FightID<th>Trainer 1 Bet<th>Trainer 2 Bet<th>Winnings";
-    //output data of each row
-
-    if($result2->num_rows > 0)
-    {
-        while($row = $result2->fetch_assoc())
-        {
-            //echo "\nbet history found\n";
-            $tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
-            
-            //echo "bet history gathered and sent" . "\n";
-        }
-    }
-    else
-    {
-        echo "error no username";
-        $conn2->close();
-        $conn->close();
-        return array("success" => '0', 'message'=>"$username may not have a bet history yet.");
-    }
     
     while($row2 = $result->fetch_assoc())
     {
         $funds = $row2['funds'];
+    }
+    
+    if($result2->num_rows > 0)
+    {
+        while($row = $result2->fetch_assoc())
+        {
+            $tablestring .= "<tr><td>".$row["fightid"]."<td>"."$".$row["trainer1_bet"]."<td>"."$".$row["trainer2_bet"]."<td>"."$".$row["winnings"]."";
+        }
+    }
+    else
+    {   
+        $conn2->close();
+        $conn->close();
+        return array("success" => '0', 'message'=>"$username may not have a bet history yet.", 'funds'=>$funds);
     }
     
     $conn->close();
@@ -407,46 +401,33 @@ function trainers($trainer)
     $conn = MySQLLib::makeDBConnection($database);
     $result = MySQLLib::makeDBSelection($s,$conn);
     
-	
-    if($trainer=="")
+    $pokesearchresult = array();
+    $pokesearch = "SELECT * FROM pokemon where name LIKE \"%$trainer%\"";
+    $result = MySQLLib::makeDBSelection($pokesearch,$conn);
+    while($row = $result->fetch_assoc())
     {
-   	$s = "SELECT * FROM info";
-        ($result = mysqli_query($conn, $s)) or die (mysqli_error());
-                        
-        echo $trainer;
-        echo "Connected Successfully";
+        $pokesearchresult[] = $row["pokemonid"];
     }
-    else
+    $list_pokesearch = implode(', ', $pokesearchresult);
+    var_dump($list_pokesearch);
+    
+    if($list_pokesearch == "")
     {
-        $pokesearchresult = array();
-        $pokesearch = "SELECT * FROM pokemon where name LIKE \"%$trainer%\"";
-        $result = MySQLLib::makeDBSelection($pokesearch,$conn);
-        while($row = $result->fetch_assoc())
-        {
-            $pokesearchresult[] = $row["pokemonid"];
-        }
-        $list_pokesearch = implode(', ', $pokesearchresult);
-        var_dump($list_pokesearch);
-        
-        if($list_pokesearch == "")
-        {
-            $list_pokesearch = "-1,-2";
-        }
-        //search for certain keywords in the trainer db
-      	$s = "SELECT * FROM info where info.name LIKE \"%$trainer%\" or 
-                                        info.pokemon1id IN ($list_pokesearch) or 
-                                        info.pokemon2id IN ($list_pokesearch) or 
-                                        info.pokemon3id IN ($list_pokesearch) or 
-                                        info.pokemon4id IN ($list_pokesearch) or 
-                                        info.pokemon5id IN ($list_pokesearch) or 
-                                        info.pokemon6id IN ($list_pokesearch)";
-                                        
-      	$result = MySQLLib::makeDBSelection($s,$conn);
-                	
-       	echo "Searching for ".$trainer."\n";
-      	echo "Searched Successfully\n";            	
-
+        $list_pokesearch = "-1,-2";
     }
+    //search for certain keywords in the trainer db
+    $s = "SELECT * FROM info where info.name LIKE \"%$trainer%\" or 
+                                    info.pokemon1id IN ($list_pokesearch) or 
+                                    info.pokemon2id IN ($list_pokesearch) or 
+                                    info.pokemon3id IN ($list_pokesearch) or 
+                                    info.pokemon4id IN ($list_pokesearch) or 
+                                    info.pokemon5id IN ($list_pokesearch) or 
+                                    info.pokemon6id IN ($list_pokesearch)";
+                                    
+    $result = MySQLLib::makeDBSelection($s,$conn);
+                    
+    echo "Searching for ".$trainer."\n";
+    echo "Searched Successfully\n";            	
 	
 	
     $tablestring = "";
@@ -577,7 +558,15 @@ function leagues()
 
         while($row = $result->fetch_assoc())
         {
-            $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>".$row["entryFee"]."<td>".$row["freeSlots"]."";
+            if($row["freeSlots"] > 0)
+            {
+                $linktojoin = "<a href='javascript:void(0)' title='Join League' onclick='joinLeagueOverlay.show(".$row["leagueid"].")'>";
+                $tablestring .= "<tr><td>".$linktojoin.$row["name"]."<td>".$row["owner"]."<td>".$row["entryFee"]."<td>".$row["freeSlots"];
+            }
+            else
+            {
+                $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>".$row["entryFee"]."<td>"."Full";
+            }
         }
         
         echo "tablestring sent\n";
@@ -615,10 +604,11 @@ function createLeague($leaguename, $entryfee, $username)
         {
             $leagueid = $row["leagueid"];
             $salary = $row["salaryCap"];
+            $points = 0;
             $trainer = 0;
             $null = "-";
             $addLHistory = "INSERT INTO history (leagueid, name, owner, pool, winner1st, winner2nd) VALUES ('$leagueid','$leaguename','$username','$defaultPool','$null', '$null')";
-            $createCommishTeam = "INSERT INTO teams (leagueid, username, trainer1id, trainer2id, trainer3id, trainer4id, trainer5id, trainer6id, personalSalary) VALUES ('$leagueid','$username','$trainer','$trainer','$trainer','$trainer','$trainer','$trainer','$salary')";
+            $createCommishTeam = "INSERT INTO teams (leagueid, username, trainer1id, trainer2id, trainer3id, trainer4id, trainer5id, trainer6id, personalSalary, points) VALUES ('$leagueid','$username','$trainer','$trainer','$trainer','$trainer','$trainer','$trainer','$salary','$points')";
             
             MySQLLib::makeDBSelection($addLHistory,$conn);
             $result2 = MySQLLib::makeDBSelection($createCommishTeam,$conn);
@@ -631,7 +621,62 @@ function createLeague($leaguename, $entryfee, $username)
         return array("success" => '0', 'message'=>"Unable to create league.");
     }
 }
+function joinLeague($leagueid, $username)
+{
+    $database = "League";
+    $conn = MySQLLib::makeDBConnection($database);
+    
+    $userCheck = "SELECT * FROM teams where leagueid='$leagueid'";
+    $result = MySQLLib::makeDBSelection($userCheck,$conn);
+    while($row = $result->fetch_assoc())
+    {
+        if($row["username"] == $username)
+        {
+            echo "Already Joined League\n";
+            return array("success" => '0', 'message'=>"Unable to join league. Already Joined.");
+        }
+    }
+    
+    $s = "SELECT * FROM info where leagueid='$leagueid'";
+    $result = MySQLLib::makeDBSelection($s,$conn);
+    while($row = $result->fetch_assoc())
+    {        
+        if($row["freeSlots"] > 0)
+        {
+            $canWD = withdraw($username, $row["entryFee"]);
+            
+            if($canWD["success"] === TRUE)
+            {   
+                $s2 = "UPDATE info SET freeSlots = (freeSlots - 1) where leagueid='$leagueid'";
+            
+                MySQLLib::makeDBSelection($s2,$conn);
+                
+                $leagueid = $row["leagueid"];
+                $salary = $row["salaryCap"];
+                $points = 0;
+                $trainer = 0;
+                $null = "-";
+                $createCommishTeam = "INSERT INTO teams (leagueid, username, trainer1id, trainer2id, trainer3id, trainer4id, trainer5id, trainer6id, personalSalary, points) VALUES ('$leagueid','$username','$trainer','$trainer','$trainer','$trainer','$trainer','$trainer','$salary','$points')";
 
+                MySQLLib::makeDBSelection($createCommishTeam,$conn);
+                
+                
+            }
+            else
+            {
+                echo "No funds to join league.";
+                return array("success" => '0', 'message'=>"Unable to join league.");
+            }
+        }
+        else
+        {
+            echo "League is full.";
+            return array("success" => '0', 'message'=>"League is full.");
+        }
+        
+    }
+    
+}
 function leagueHistory($username)
 {
 
@@ -639,12 +684,21 @@ function leagueHistory($username)
 
     $teamsearch = "SELECT * FROM teams where username=\"$username\"";
     
+    $teamsearchresult = array();
+    
     $conn = MySQLLib::makeDBConnection($database);
     $result = MySQLLib::makeDBSelection($teamsearch,$conn);
-    
-    while($row = $result->fetch_assoc())
+    if($result->num_rows > 0)
     {
-        $teamsearchresult[] = $row["leagueid"];
+        while($row = $result->fetch_assoc())
+        {
+            $teamsearchresult[] = $row["leagueid"];
+        }
+    }
+    else
+    {
+        $conn->close();
+        return array("success" => '0', 'message'=>"$username may not have a league history yet.");
     }
     
     $list_teamsearch = implode(', ', $teamsearchresult);
@@ -659,24 +713,23 @@ function leagueHistory($username)
     //$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
     $tablestring .= "<table><tr><th>League Name<th>Owner<th>Pool<th>Winnings";
     //output data of each row
-
     if($result->num_rows > 0)
     {
         while($row = $result->fetch_assoc())
         {
             if($username == $row["winner1st"])
             {
-                $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>"."$".$row["pool"]."<td>".$row["winner1st"]."";
+                $tablestring .= "<tr><td><a href=LeagueHome.php?lid=".$row["leagueid"].">".$row["name"]."<td>".$row["owner"]."<td>"."$".$row["pool"]."<td>".$row["winner1st"]."";
             }
             else
             {
-                $tablestring .= "<tr><td>".$row["name"]."<td>".$row["owner"]."<td>"."$".$row["pool"]."<td>"."$".$row["winner2nd"]."";
+                $tablestring .= "<tr><td><a href=LeagueHome.php?lid=".$row["leagueid"].">".$row["name"]."<td>".$row["owner"]."<td>"."$".$row["pool"]."<td>"."$".$row["winner2nd"]."";
             }
+            
         }
     }
     else
     {
-        echo "error no username";
         $conn2->close();
         $conn->close();
         return array("success" => '0', 'message'=>"$username may not have a league history yet.");
@@ -686,6 +739,66 @@ function leagueHistory($username)
     return array("success" => true, 'message'=>$tablestring);
 
 }
+function leagueHome($username, $lid)
+{
+    $database = "League";
+    $database2 = "Trainer";
+    
+    $leaguesearch = "SELECT * FROM history where leagueid=\"$lid\"";
+    $teamsearch = "SELECT * FROM teams where leagueid=\"$lid\"";
+    
+    $conn = MySQLLib::makeDBConnection($database);
+    $conn2 = MySQLLib::makeDBConnection($database2);
+    
+    $result = MySQLLib::makeDBSelection($leaguesearch,$conn);
+    $result2 = MySQLLib::makeDBSelection($teamsearch,$conn);
+
+    if($result->num_rows > 0)
+    {
+        while($row = $result->fetch_assoc())
+        {
+            $lname = $row["name"];
+        }
+    }
+    else
+    {
+        $conn->close();
+        return array("success" => '0', 'message'=>"$username may not be in league");
+    }
+    
+    $tablestring = "";
+
+    $tablestring .= "<table><tr><th>Team Owner<th>Remaining Salary<th>Points<th>Trainer1<th>Trainer2<th>Trainer3<th>Trainer4<th>Trainer5<th>Trainer6";
+    
+    if($result2->num_rows > 0)
+    {
+        while($row2 = $result2->fetch_assoc())
+        {
+            $tablestring .= "<tr><td>".$row2["username"]."<td>"."$".$row2["personalSalary"]."<td>".$row2["points"]." pts"."";
+            
+            for($pokemonNum = 1; $pokemonNum <= 6; $pokemonNum++)
+            {
+                $id = $row["trainer$pokemonNum"."id"];
+                $trainersearch = "select * from info where trainerid=\"$id\"";
+                $result3 = MySQLLib::makeDBSelection($trainersearch,$conn2);
+                $row3=$result3->fetch_assoc();
+                $tablestring.="<td>".$row3["name"];
+            }
+        }
+    }
+    else
+    {
+        $conn->close();
+        $conn2->close();
+        return array("success" => '0', 'message'=>"Teams not available.");
+    }
+    
+    $conn->close();
+    $conn2->close();
+
+    return array("success" => true, 'message'=>$tablestring, 'leaguename'=>$lname);
+}
+
 function requestProcessor($request)
 {
     echo "received request".PHP_EOL;
@@ -720,8 +833,12 @@ function requestProcessor($request)
             return leagues();
         case "cl":
             return createLeague($request["leaguename"], $request["entryfee"], $request["username"]);
+        case "jl":
+            return joinLeague($request["leagueid"], $request["username"]);
         case "lh":
             return leagueHistory($request['user']);
+        case "leaguehome":
+            return leagueHome($request['user'], $request['leagueid']);
         default:
             return "ERROR: unsupported message type.";
     }
