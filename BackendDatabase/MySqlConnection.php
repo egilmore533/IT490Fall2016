@@ -4,6 +4,7 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 require_once('MySQLLib.php.inc');
+require_once('requestClean.php.inc');
 
 function doLogin($username,$password)
 {
@@ -802,7 +803,9 @@ function leagueHome($username, $lid)
 function requestProcessor($request)
 {
     echo "received request".PHP_EOL;
-    
+
+    $request=ArrayClean::multidimensionalArrayClean($array,MySQLLib::makeConnection());
+
     if(!isset($request['type']))
     {
         return "ERROR: request type not set";
