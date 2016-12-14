@@ -54,7 +54,8 @@
     }
     function handleLoginResponse()
     {
-        window.top.location.href = "http://www.pokefights.com/";
+        //window.top.location.href = "http://www.pokefights.com/";
+        window.top.location.reload(false); 
     }
     function handleRegResponse()
     {
