@@ -9,7 +9,7 @@ require_once('MySQLLib.php.inc');
 function ipcall($machineName)
 {
     $ini_array=parse_ini_file('hosts_addresses.ini');
-
+    
     $ip = $ini_array[$machineName];
     
     return $ip;
@@ -40,7 +40,10 @@ function insertBundle($versionName)
     $checkDB = 1;
 	$conn = MySQLLib::makeDBConnection('Files');
 	
-	$ipaddress = ipcall('stephen_dev');
+
+	$ipaddress = ipcall('eric_dev');
+	//$ipaddress = ipcall('stephen_dev');
+
 	
 	$s = "SELECT * FROM files where versionName='$versionName'";
 	($result = mysqli_query($conn, $s)) or die (mysqli_error());
@@ -73,6 +76,45 @@ function insertBundle($versionName)
 		var_dump($versionName);
 		var_dump($verNum);
 	}
+<<<<<<< HEAD
+	//MySQL Connection
+	
+	
+		($result = mysqli_query($conn, $s)) or die (mysqli_error());
+                $verNum = 1;
+		while($r=mysqli_fetch_array($result))
+                {
+		    if($verNum == (float)$r['versionNum'])
+                    {
+		        $verNum+=1;
+		    }  
+			
+                }
+		$reg = "INSERT INTO files (versionNum, versionName, full_package_name) VALUES('$verNum','$versionName', '$versionName$verNum')";
+		$deploylocation = "/var/packages/$versionName/$verNum";	
+		if($conn->query($reg) === TRUE)
+                {
+			
+			echo "New Package created \n";
+			shell_exec("mkdir -p /var/packages/$versionName/$verNum");
+			shell_exec("sshpass -p 'password' scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation );
+			$test_string = "sshpass -p password scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation;
+			var_dump($test_string);
+			shell_exec($test_string);
+			var_dump($versionName);
+			var_dump($ipaddress);
+			var_dump($deploylocation);
+			var_dump($verNum);
+			var_dump($ipaddress);	
+		}
+		else {
+			
+			echo "Error: " . $reg . "<br>" . $conn->error;
+			var_dump($versionName);
+			var_dump($verNum);
+		}
+=======
+>>>>>>> 5be4b9a00c7ac7cdb836bb3281f3b9845b7a1a10
 		
 	
 	$conn->close();
@@ -101,8 +143,8 @@ function deploy($versionName, $hostname, $config, $name)
 	while($r=mysqli_fetch_array($result))
 	{
 		
-		if($versionName == $r['versionName']){
-			$localLocation = "/var/packages/" . $r['versionName'].".tar.gz";
+		if($versionName == $r['full_package_name']){
+			$localLocation = "/var/packages/" . $name . "/" . $r['versionNum'] . "/" . $r['full_package_name'].".tar.gz";
 			$version_num = $r['versionNum'];
 			$version_name = $r['versionName'];
 			
