@@ -19,8 +19,6 @@ function install($n, $v, $c)
             shell_exec("scp /var/packages/$n/$v/$file $source_dir$file");
             var_dump($file);
         }
-        
-        
 
         return array ("success" => '1', 'message'=>"Package installed.");
     }

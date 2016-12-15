@@ -25,7 +25,7 @@ function sendRequest($request)
                 $_SESSION['user'] = $username;
                 $_SESSION['balance'] = $response["balance"];
                 $_SESSION['wins'] = $response['wins'];
-                
+                header("refresh:1;url=localhost");
                 $response["message"] = "Login Successful! ".$response["message"];
     
             }
@@ -134,6 +134,7 @@ function sendRequest($request)
             else
             {
                 $response["message"] = "Failed to show bet history. ".$response["message"];
+                $_SESSION['balance'] = $response["funds"];
             }
             break;
         case "tdb":
@@ -197,11 +198,61 @@ function sendRequest($request)
             $response = $client->send_request($requestArr);
             if ($response["success"]==true)
             {
+                $response["message"] = "League Created!";
+            }
+            else
+            {
+                $response["message"] = "Failed to Create League";
+            }
+            break;
+        case "jl":
+            $requestArr = array();
+            SessionManager::sessionStart('PokemonBets');
+            $requestArr["type"] = "jl";
+            $requestArr["leagueid"] = $request['lid'];
+            $requestArr["username"] = $_SESSION['user'];
+            
+            $response = $client->send_request($requestArr);
+            if ($response["success"]==true)
+            {
                 $response["message"] = "League Joined!";
             }
             else
             {
                 $response["message"] = "Failed to Join League";
+            }
+            break;
+        case "lh":
+            SessionManager::sessionStart('PokemonBets');
+            $requestArr = array();
+            $requestArr["type"] = "lh";
+            $requestArr["user"] = $_SESSION['user'];
+            
+            $response = $client->send_request($requestArr);
+            if ($response["success"]==true)
+            {
+            }
+            else
+            {
+                $response["message"] = "Failed to show league history. ".$response["message"];
+            }
+            break;
+        case "leaguehome":
+            SessionManager::sessionStart('PokemonBets');
+            $requestArr = array();
+            $requestArr["type"] = "leaguehome";
+            $requestArr["user"] = $_SESSION['user'];
+            $requestArr["leagueid"] = $request['leagueid'];
+            
+            $response = $client->send_request($requestArr);
+            if ($response["success"]==true)
+            {
+                $_SESSION['leaguename'] = $response["leaguename"];
+                $response["message"] = $response["message"];
+            }
+            else
+            {
+                $response["message"] = "Failed to show league home data. ".$response["message"];
             }
             break;
         

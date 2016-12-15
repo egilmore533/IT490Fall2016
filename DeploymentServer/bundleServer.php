@@ -3,6 +3,8 @@
 require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
+require_once('requestClean.php.inc');
+require_once('MySQLLib.php.inc');
 
 function ipcall($machineName)
 {
@@ -15,75 +17,66 @@ function ipcall($machineName)
 
 function bundle($versionName)
 {
+	$conn = MySQLLib::makeDBConnection('Files');	
 	
-	//MySQL Connection
-	$servername = "localhost";
-	$DBuser = "it490";
-	$DBpass = "whoGivesaFuck!490";
-	$database = "Files";
-	
-	//Create Connection
-	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
-	
-	//Check Connection
-	if($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
-	}
-	else
-	{
-		$s = "SELECT * FROM files where versionName='$versionName'";
-		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully \n";
-	}
-	//MySQL Connection
-	
+	$s = "SELECT * FROM files where versionName='$versionName'";
+	($result = mysqli_query($conn, $s)) or die (mysqli_error());
 	// 	lookup versionName and versionNum in database
-	
-
-                $verNum = 1;
-		while($r=mysqli_fetch_array($result))
-                {
-                    if($verNum == $r['versionNum'])
-                            $verNum+=1; 
-                }
-		
-
-	
+        $verNum = 1;
+	while($r=mysqli_fetch_array($result))
+        {
+   	     if($verNum == $r['versionNum'])
+             $verNum+=1; 
+        }	
 	
 	$conn->close();
 	
-		return array("success" => true, 'version_number'=>"$verNum");
+	return array("success" => true, 'version_number'=>"$verNum");
 
 }
 
 function insertBundle($versionName)
 {
     $checkDB = 1;
-	
-	//MySQL Connection
-	$servername = "localhost";
-	$DBuser = "it490";
-	$DBpass = "whoGivesaFuck!490";
-	$database = "Files";
+	$conn = MySQLLib::makeDBConnection('Files');
 	
 
 	$ipaddress = ipcall('eric_dev');
 	//$ipaddress = ipcall('stephen_dev');
 
 	
-	//Create Connection
-	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
+	$s = "SELECT * FROM files where versionName='$versionName'";
+	($result = mysqli_query($conn, $s)) or die (mysqli_error());
 	
-	//Check Connection
-	if($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
+	($result = mysqli_query($conn, $s)) or die (mysqli_error());
+        $verNum = 1;
+	while($r=mysqli_fetch_array($result))
+        {
+	    if($verNum == (float)$r['versionNum'])
+            {
+	        $verNum+=1;
+	    }  		
+        }
+	$reg = "INSERT INTO files (versionNum, versionName, full_package_name) VALUES('$verNum','$versionName', '$versionName$verNum')";
+	$deploylocation = "/var/packages/$versionName/$verNum";	
+	if($conn->query($reg) === TRUE)
+        {		
+		echo "New Package created \n";
+		shell_exec("mkdir -p /var/packages/$versionName/$verNum");
+		$test_string = "sshpass -p password scp it490@" . $ipaddress . ":" . $deploylocation . "/$versionName$verNum.tar.gz " . $deploylocation;
+		var_dump($test_string);
+		shell_exec($test_string);
+		var_dump($versionName);
+		var_dump($deploylocation);
+		var_dump($verNum);
+		var_dump($ipaddress);	
 	}
-	else
-	{
-		$s = "SELECT * FROM files where versionName='$versionName'";
-		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully \n";
+	else {		
+		echo "Error: " . $reg . "<br>" . $conn->error;
+		var_dump($versionName);
+		var_dump($verNum);
 	}
+<<<<<<< HEAD
 	//MySQL Connection
 	
 	
@@ -120,6 +113,8 @@ function insertBundle($versionName)
 			var_dump($versionName);
 			var_dump($verNum);
 		}
+=======
+>>>>>>> 5be4b9a00c7ac7cdb836bb3281f3b9845b7a1a10
 		
 	
 	$conn->close();
@@ -132,32 +127,15 @@ function insertBundle($versionName)
 
 function deploy($versionName, $hostname, $config, $name)
 {
-
-        //MySQL Connection
-	$servername = "localhost";
-	$DBuser = "it490";
-	$DBpass = "whoGivesaFuck!490";
-	$database = "Files";
-	
+	$conn = MySQLLib::makeDBConnection('Files');
+		
 	$bundlelocation = "/var/packages/$versionName.tar.gz";
 	$QALocation = "/var/packages";
 	
 	$ipaddress = ipcall($hostname);
 	
-	//Create Connection
-	$conn = new mysqli($servername, $DBuser, $DBpass, $database);
-	
-	//Check Connection
-	if($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
-	}
-	else
-	{
-		$s = "SELECT * FROM files";
-		($result = mysqli_query($conn, $s)) or die (mysqli_error());
-		echo "Connected Successfully \n";
-	}
-	//MySQL Connection
+	$s = "SELECT * FROM files";
+	($result = mysqli_query($conn, $s)) or die (mysqli_error());
 	
 	var_dump($versionName);
 	
@@ -193,6 +171,8 @@ function deploy($versionName, $hostname, $config, $name)
 function requestProcessor($request)
 {
 	echo "received request".PHP_EOL;
+	
+	$request = ArrayClean::multidimensionalArrayClean($request, MySQLLib::makeConnection());
 	
 	if(!isset($request['type']))
 	  {
