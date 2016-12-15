@@ -20,35 +20,35 @@ function requestProcessor($request)
     switch ($request['type'])
     {
         case "login":
-            return BackendRequestLib::doLogin($request['username'],$request['password']);
+            return BackendRequest::doLogin($request['username'],$request['password']);
         case "register":
-            return BackendRequestLib::register($request['username'],$request['password']);
+            return BackendRequest::register($request['username'],$request['password']);
         case "addfunds":
-            return BackendRequestLib::addfunds($request['username'], $request['funds']);
+            return BackendRequest::addfunds($request['username'], $request['funds']);
         case "validate_session":
-            return BackendRequestLib::doValidate($request['sessionId']);
+            return BackendRequest::doValidate($request['sessionId']);
         case "fh":
-            return BackendRequestLib::fightHistory();
+            return BackendRequest::fightHistory();
         case "bh":
-            return BackendRequestLib::betHistory($request['user']);
+            return BackendRequest::betHistory($request['user']);
         case "sched":
-            return BackendRequestLib::schedule();
+            return BackendRequest::schedule();
         case "tdb":
-            return BackendRequestLib::trainers($request['trainer']);
+            return BackendRequest::trainers($request['trainer']);
         case "wdfunds":
-            return BackendRequestLib::withdraw($request['username'], $request['funds']);
+            return BackendRequest::withdraw($request['username'], $request['funds']);
         case "placebet":
-            return BackendRequestLib::placebet($request['username'], $request['fid'], $request['tid'], $request['funds']);
+            return BackendRequest::placebet($request['username'], $request['fid'], $request['tid'], $request['funds']);
         case "league":
-            return BackendRequestLib::leagues();
+            return BackendRequest::leagues();
         case "cl":
-            return BackendRequestLib::createLeague($request["leaguename"], $request["entryfee"], $request["username"]);
+            return BackendRequest::createLeague($request["leaguename"], $request["entryfee"], $request["username"]);
         case "jl":
-            return BackendRequestLib::joinLeague($request["leagueid"], $request["username"]);
+            return BackendRequest::joinLeague($request["leagueid"], $request["username"]);
         case "lh":
-            return BackendRequestLib::leagueHistory($request['user']);
+            return BackendRequest::leagueHistory($request['user']);
         case "leaguehome":
-            return BackendRequestLib::leagueHome($request['user'], $request['leagueid']);
+            return BackendRequest::leagueHome($request['user'], $request['leagueid']);
         default:
             return "ERROR: unsupported message type.";
     }
