@@ -259,7 +259,7 @@ class BackendRequest
                 $newname3 = implode("&nbsp;", $pieces3);
                 $linktojoin3 = "<a href='javascript:void(0)' onclick=tdbRequest(&quot;".$newname3."&quot;)>";
                 
-                $tablestring .= "<tr><td>".$linktojoin1.$row["trainer1"]."<td>".$linktojoin2.$row["trainer2"]."<td>".$row["payout"]."<td>".$linktojoin3.$row["winner"]."<td>".$row["odds"]."";
+                $tablestring .= "<tr><td>".$linktojoin1.$row["trainer1"]."<td>".$linktojoin2.$row["trainer2"]."<td>".$row["payout"]."<td>".$linktojoin3.$row["winner"]."";
             }
             echo "tablestring sent\n";
             return array("success" => true, 'message'=>$tablestring);	
