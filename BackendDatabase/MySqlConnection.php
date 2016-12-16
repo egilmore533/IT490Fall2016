@@ -11,7 +11,7 @@ function requestProcessor($request)
 {
     echo "received request".PHP_EOL;
 
-    $request=ArrayClean::multidimensionalArrayClean($array,MySQLLib::makeConnection());
+    $request=ArrayClean::multidimensionalArrayClean($request,MySQLLib::makeConnection());
 
     if(!isset($request['type']))
     {
@@ -49,6 +49,8 @@ function requestProcessor($request)
             return BackendRequest::leagueHistory($request['user']);
         case "leaguehome":
             return BackendRequest::leagueHome($request['user'], $request['leagueid']);
+        case "ct":
+            return BackendRequest::createTeam($request['username'], $request['number'], $request['trainerid']);
         default:
             return "ERROR: unsupported message type.";
     }

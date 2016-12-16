@@ -45,6 +45,8 @@ class MySQLLib
     {
 	$dbconn = MySQLLib::makeDBConnection($dbname);
         ($result = mysqli_query($dbconn, $select_statement)) or die (mysqli_error($dbconn));
+        
+        $dbconn->close();
         return $result;
     }
 }
