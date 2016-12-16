@@ -1,36 +1,36 @@
 {
-"name": "Team Rocket Grunt",
+"name": "Picnicker Claire",
 "pokemon1": 
- { "name": "Machop",
-   "level": "17",
-   "move1": "Karate Chop", 
-   "move2": "Focus Energy", 
-   "move3": "Leer", 
-   "move4": "Low Kick" 
+ { "name": "Meowth",
+   "level": "35",
+   "move1": "Screech", 
+   "move2": "Faint Attack", 
+   "move3": "Pay Day", 
+   "move4": "Bite" 
 },
 "pokemon2": 
- { "name": "Drowzee",
-   "level": "17",
-   "move1": "Headbutt", 
-   "move2": "Confusion", 
-   "move3": "Disable", 
-   "move4": "Hypnosis" 
+ { "name": "Meowth",
+   "level": "35",
+   "move1": "Screech", 
+   "move2": "Faint Attack", 
+   "move3": "Pay Day", 
+   "move4": "Bite" 
 },
 "pokemon3": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Pikachu",
+   "level": "35",
+   "move1": "Agility", 
+   "move2": "Thunderbolt", 
+   "move3": "Slam", 
+   "move4": "Double Team" 
 },
 "pokemon4": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Clefairy",
+   "level": "35",
+   "move1": "Cosmic Power", 
+   "move2": "Metronome", 
+   "move3": "Defense Curl", 
+   "move4": "Minimize" 
 },
 "pokemon5": 
  { "name": "",

@@ -1,20 +1,20 @@
 {
-"name": "Youngster Tyler",
+"name": "Biker Nikolas",
 "pokemon1": 
- { "name": "Nidoran-M (M)",
-   "level": "21",
-   "move1": "Horn Attack", 
-   "move2": "Poison Sting", 
-   "move3": "Double Kick", 
-   "move4": "Focus Energy" 
+ { "name": "Voltorb",
+   "level": "29",
+   "move1": "Selfdestruct", 
+   "move2": "Spark", 
+   "move3": "SonicBoom", 
+   "move4": "Screech" 
 },
 "pokemon2": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Voltorb",
+   "level": "29",
+   "move1": "Selfdestruct", 
+   "move2": "Spark", 
+   "move3": "SonicBoom", 
+   "move4": "Screech" 
 },
 "pokemon3": 
  { "name": "",

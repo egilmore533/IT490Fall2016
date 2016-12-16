@@ -54,7 +54,7 @@ while($r=mysqli_fetch_array($result))
 		}
 		
 		$s = 'select * from Accounts.info where username="'.$r2['username'].'"';
-		$result3 = MySQLLib::makeSelection($s3,$conn);
+		$result3 = MySQLLib::makeSelection($s,$conn);
 		while($r3=mysqli_fetch_array($result3))
 		{
 			echo $winner."\n";
