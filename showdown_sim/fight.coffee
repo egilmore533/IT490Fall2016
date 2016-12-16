@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 
-pokemon= require '/home/egilmore/git/pokemon-battle/index'
+pokemon= require '/home/stephen/git/pokemon-battle-mod/index'
 fs = require 'fs'
 
 trainer1 = JSON.parse fs.readFileSync('./trainer1.json').toString()

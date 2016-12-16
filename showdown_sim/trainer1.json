@@ -1,36 +1,36 @@
 {
-"name": "Juggler Kirk",
+"name": "Team Rocket Grunt",
 "pokemon1": 
- { "name": "Drowzee",
-   "level": "31",
-   "move1": "Psychic", 
-   "move2": "Meditate", 
-   "move3": "Poison Gas", 
-   "move4": "Headbutt" 
+ { "name": "Weezing",
+   "level": "28",
+   "move1": "SmokeScreen", 
+   "move2": "Sludge", 
+   "move3": "Selfdestruct", 
+   "move4": "Smog" 
 },
 "pokemon2": 
- { "name": "Drowzee",
-   "level": "31",
-   "move1": "Psychic", 
-   "move2": "Meditate", 
-   "move3": "Poison Gas", 
-   "move4": "Headbutt" 
+ { "name": "Koffing",
+   "level": "28",
+   "move1": "SmokeScreen", 
+   "move2": "Sludge", 
+   "move3": "Selfdestruct", 
+   "move4": "Smog" 
 },
 "pokemon3": 
- { "name": "Drowzee",
-   "level": "31",
-   "move1": "Psychic", 
-   "move2": "Meditate", 
-   "move3": "Poison Gas", 
-   "move4": "Headbutt" 
+ { "name": "Golbat",
+   "level": "28",
+   "move1": "Confuse Ray", 
+   "move2": "Wing Attack", 
+   "move3": "Bite", 
+   "move4": "Astonish" 
 },
 "pokemon4": 
- { "name": "Kadabra",
-   "level": "31",
-   "move1": "Future Sight", 
-   "move2": "Recover", 
-   "move3": "Reflect", 
-   "move4": "Psybeam" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon5": 
  { "name": "",

@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-$host = '128.235.25.1';
+$host = '10.200.44.148';
 $ports = array(7000);
 $backup = false;
 

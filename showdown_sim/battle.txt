@@ -1,373 +1,175 @@
-[ [ '96', '31' ], [ '96', '31' ], [ '96', '31' ], [ '64', '31' ] ]
-[ [ '109', '26' ],
-  [ '109', '26' ],
-  [ '88', '26' ],
-  [ '109', '26' ] ]
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 234 HP (11%)
+[ [ '110', '28' ], [ '109', '28' ], [ '42', '28' ] ]
+[ [ '118', '29' ], [ '90', '29' ], [ '119', '29' ] ]
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 69 HP (2%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's a critical hit!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 145 HP (4%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Goldeen was hit for 159 HP (6%)
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's a critical hit!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 304 HP (14%)
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 75 HP (2%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 101 HP (3%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Goldeen was hit for 182 HP (7%)
+Swimmer David's lvl 29 Goldeen was poisoned!
 
+Swimmer David's lvl 29 Goldeen was hurt 344 HP (13%) by poison!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 212 HP (10%)
-Biker Lukas's lvl 26 Koffing's Special Defense fell!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 92 HP (2%)
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Swimmer David's lvl 29 Goldeen's attack missed!
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Goldeen was hit for 179 HP (7%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 274 HP (12%)
+Swimmer David's lvl 29 Goldeen was hurt 344 HP (13%) by poison!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 104 HP (3%)
 
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 74 HP (2%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 270 HP (12%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Goldeen was hit for 158 HP (6%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 96 HP (2%)
+Swimmer David's lvl 29 Goldeen was hurt 344 HP (13%) by poison!
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 285 HP (13%)
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 73 HP (2%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 96 HP (2%)
-Juggler Kirk's lvl 31 Drowzee's Special Defense fell!
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Goldeen was hit for 169 HP (6%)
 
+Swimmer David's lvl 29 Goldeen was hurt 344 HP (13%) by poison!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's a critical hit!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 428 HP (19%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 127 HP (3%)
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 72 HP (2%)
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Goldeen was hit for 165 HP (6%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 214 HP (10%)
-Biker Lukas's lvl 26 Koffing fainted!
-Biker Lukas took out Koffing.
+Swimmer David's lvl 29 Goldeen was hurt 344 HP (13%) by poison!
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 224 HP (10%)
+Swimmer David's lvl 29 Goldeen used Aqua Tail!
+Swimmer David's lvl 29 Goldeen's attack missed!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 126 HP (3%)
+Team Rocket Grunt's lvl 28 Weezing used Shadow Ball!
+Swimmer David's lvl 29 Goldeen was hit for 19 HP (1%)
+Swimmer David's lvl 29 Goldeen fainted!
+Swimmer David took out Seaking.
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 235 HP (11%)
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 97 HP (3%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 137 HP (4%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 109 HP (2%)
+Swimmer David's lvl 29 Seaking was poisoned!
 
+Swimmer David's lvl 29 Seaking was hurt 598 HP (13%) by poison!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 223 HP (10%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 142 HP (4%)
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 97 HP (3%)
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 118 HP (2%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 227 HP (10%)
+Swimmer David's lvl 29 Seaking was hurt 598 HP (13%) by poison!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 127 HP (3%)
 
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 89 HP (2%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 217 HP (10%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 115 HP (2%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 138 HP (4%)
-Juggler Kirk's lvl 31 Drowzee's Special Defense fell!
+Swimmer David's lvl 29 Seaking was hurt 598 HP (13%) by poison!
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 227 HP (10%)
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 90 HP (2%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's a critical hit!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 249 HP (6%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 118 HP (2%)
 
+Swimmer David's lvl 29 Seaking was hurt 598 HP (13%) by poison!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 205 HP (9%)
-Biker Lukas's lvl 26 Koffing's Special Defense fell!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 158 HP (4%)
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Swimmer David's lvl 29 Seaking's attack missed!
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 117 HP (2%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 300 HP (14%)
+Swimmer David's lvl 29 Seaking was hurt 598 HP (13%) by poison!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 155 HP (4%)
 
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Team Rocket Grunt's lvl 28 Weezing was hit for 91 HP (2%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 303 HP (14%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 115 HP (2%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 164 HP (4%)
+Swimmer David's lvl 29 Seaking was hurt 598 HP (13%) by poison!
 
 
-Juggler Kirk's lvl 31 Drowzee used Shadow Ball!
-Biker Lukas's lvl 26 Koffing was hit for 60 HP (3%)
-Biker Lukas's lvl 26 Koffing fainted!
-Biker Lukas took out Koffing.
+Swimmer David's lvl 29 Seaking used Aqua Tail!
+Swimmer David's lvl 29 Seaking's attack missed!
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Seaking was hit for 114 HP (2%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 207 HP (9%)
+Swimmer David's lvl 29 Seaking was hurt 387 HP (8%) by poison!
+Swimmer David's lvl 29 Seaking fainted!
+Swimmer David took out Shellder.
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 158 HP (4%)
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Shellder was hit for 260 HP (14%)
+Swimmer David's lvl 29 Shellder was poisoned!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 235 HP (11%)
+Swimmer David's lvl 29 Shellder used Razor Shell!
+Team Rocket Grunt's lvl 28 Weezing was hit for 54 HP (1%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 170 HP (4%)
+Swimmer David's lvl 29 Shellder was hurt 235 HP (12%) by poison!
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 232 HP (10%)
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Shellder was hit for 285 HP (15%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 174 HP (5%)
+Swimmer David's lvl 29 Shellder used Razor Shell!
+Team Rocket Grunt's lvl 28 Weezing was hit for 58 HP (2%)
+Team Rocket Grunt's lvl 28 Weezing's Defense fell!
 
+Swimmer David's lvl 29 Shellder was hurt 235 HP (12%) by poison!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 204 HP (9%)
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 159 HP (4%)
-Juggler Kirk's lvl 31 Drowzee's Special Defense fell!
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Shellder was hit for 273 HP (15%)
 
+Swimmer David's lvl 29 Shellder used Razor Shell!
+Team Rocket Grunt's lvl 28 Weezing was hit for 85 HP (2%)
+Team Rocket Grunt's lvl 28 Weezing's Defense fell!
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 225 HP (10%)
+Swimmer David's lvl 29 Shellder was hurt 235 HP (12%) by poison!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 186 HP (5%)
 
+Team Rocket Grunt's lvl 28 Weezing used Sludge Bomb!
+Swimmer David's lvl 29 Shellder was hit for 281 HP (15%)
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 203 HP (9%)
+Swimmer David's lvl 29 Shellder used Razor Shell!
+Team Rocket Grunt's lvl 28 Weezing was hit for 95 HP (3%)
+Team Rocket Grunt's lvl 28 Weezing's Defense fell!
 
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 207 HP (5%)
+Swimmer David's lvl 29 Shellder was hurt 77 HP (4%) by poison!
+Swimmer David's lvl 29 Shellder fainted!
 
 
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 219 HP (10%)
-Biker Lukas's lvl 26 Koffing's Special Defense fell!
-
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 199 HP (5%)
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's a critical hit!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 395 HP (18%)
-
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 181 HP (5%)
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Koffing was hit for 294 HP (13%)
-Biker Lukas's lvl 26 Koffing's Special Defense fell!
-
-Biker Lukas's lvl 26 Koffing used Shadow Ball!
-It's super effective!
-Juggler Kirk's lvl 31 Drowzee was hit for 202 HP (5%)
-
-
-Juggler Kirk's lvl 31 Drowzee used Low Sweep!
-It's not very effective...
-Biker Lukas's lvl 26 Koffing was hit for 7 HP (0%)
-Biker Lukas's lvl 26 Koffing fainted!
-Biker Lukas took out Grimer.
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 194 HP (5%)
-Biker Lukas's lvl 26 Grimer's Special Defense fell!
-
-Biker Lukas's lvl 26 Grimer used Rock Tomb!
-Juggler Kirk's lvl 31 Drowzee was hit for 68 HP (2%)
-Juggler Kirk's lvl 31 Drowzee fainted!
-Juggler Kirk took out Drowzee.
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 274 HP (6%)
-Biker Lukas's lvl 26 Grimer's Special Defense fell!
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 240 HP (6%)
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 296 HP (7%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 227 HP (6%)
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 295 HP (7%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 235 HP (6%)
-Juggler Kirk's lvl 31 Drowzee was poisoned!
-
-Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 322 HP (7%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 248 HP (6%)
-
-Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 310 HP (7%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 243 HP (6%)
-
-Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 319 HP (7%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 214 HP (6%)
-
-Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
-
-
-Juggler Kirk's lvl 31 Drowzee used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 321 HP (7%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Drowzee was hit for 239 HP (6%)
-
-Juggler Kirk's lvl 31 Drowzee was hurt 283 HP (7%) by poison!
-Juggler Kirk's lvl 31 Drowzee fainted!
-Juggler Kirk took out Kadabra.
-
-
-Juggler Kirk's lvl 31 Kadabra used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 662 HP (15%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Biker Lukas's lvl 26 Grimer's attack missed!
-
-
-Juggler Kirk's lvl 31 Kadabra used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 659 HP (15%)
-
-Biker Lukas's lvl 26 Grimer used Gunk Shot!
-Juggler Kirk's lvl 31 Kadabra was hit for 324 HP (12%)
-Juggler Kirk's lvl 31 Kadabra was poisoned!
-
-Juggler Kirk's lvl 31 Kadabra was hurt 328 HP (13%) by poison!
-
-
-Juggler Kirk's lvl 31 Kadabra used Psychic!
-It's super effective!
-Biker Lukas's lvl 26 Grimer was hit for 649 HP (15%)
-Biker Lukas's lvl 26 Grimer fainted!
-
-
-Juggler Kirk defeated Biker Lukas!
-Drowzee: 0 HP (0%) left.
-Drowzee: 3861 HP (100%) left.
-Drowzee: 0 HP (0%) left.
-Kadabra: 1969 HP (75%) left.
+Team Rocket Grunt defeated Swimmer David!
+Weezing: 2662 HP (70%) left.
+Koffing: 2381 HP (100%) left.
+Golbat: 4341 HP (100%) left.

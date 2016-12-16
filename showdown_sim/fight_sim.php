@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 require_once 'path.inc';
-require_once 'MySQLLib.php';
+require_once 'MySQLLib.php.inc';
 require_once 'make_team.php.inc';
 
 $conn = MySQLLib::makeConnection();
