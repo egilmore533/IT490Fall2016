@@ -50,7 +50,10 @@ function requestProcessor($request)
         case "leaguehome":
             return BackendRequest::leagueHome($request['user'], $request['leagueid']);
         case "ct":
-            return BackendRequest::createTeam($request['username'], $request['number'], $request['trainerid']);
+            var_dump($request['leagueid']);
+            return BackendRequest::createTeam($request['username'], $request['number'], $request['leagueid'],$request['trainerid']);
+        
+            
         default:
             return "ERROR: unsupported message type.";
     }

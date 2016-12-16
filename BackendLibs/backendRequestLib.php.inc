@@ -28,9 +28,6 @@ class BackendRequest
             $usernameDB = $r["username"];
             $passwordDB = $r["password"];
             
-            var_dump($username);
-            var_dump($password);
-            
             if($username == $usernameDB && $password == $passwordDB)
             {
                 $sd = sha1(strval(date(DATE_ATOM)));
@@ -451,7 +448,7 @@ class BackendRequest
         
         if($result->num_rows > 0)
         {
-            $tablestring .= "<table><tr><th>TrainerID<th>".$trainers."<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png>";
+            $tablestring .= "<table><tr><th>TrainerID<th>".$trainers."<th><img title=Slot1 src=images&#47;pokeball.png><th><img title=Slot2 src=images&#47;pokeball.png><th><img title=Slot3 src=images&#47;pokeball.png><th><img title=Slot4 src=images&#47;pokeball.png><th><img title=Slot5 src=images&#47;pokeball.png><th><img title=Slot6 src=images&#47;pokeball.png><th>Salary Cost";
             while($row = $result->fetch_assoc())
             {
                 $name = $row["name"];
@@ -459,6 +456,7 @@ class BackendRequest
                 $newname = implode("&nbsp;", $pieces);
                 $linktojoin = "<a href='javascript:void(0)' onclick=tdbRequest(&quot;".$newname."&quot;)>";
                 $tablestring.="<tr><td>".$row["trainerid"]."<td><b>".$linktojoin.$row["name"];
+                
                 for($pokemonNum = 1; $pokemonNum < 7; $pokemonNum++)
                 {
                     $id = $row["pokemon$pokemonNum"."id"];
@@ -467,7 +465,8 @@ class BackendRequest
                     $row2=$result2->fetch_assoc();
                     $tablestring.="<td>".$pokepic.self::isNidoFamily($row2["name"]).$pokepic2.$pokepic3.$row2["name"].">";
                 }
-
+                
+                $tablestring.="<td>".$row["salary"];
             }
             echo "tablestring sent\n";
             return array("success"=>true, 'message'=>$tablestring);
@@ -515,8 +514,6 @@ class BackendRequest
             
         while($row = $result->fetch_assoc())
         {
-            var_dump($row['fightid']);
-            var_dump($fightid);
             if($row['fightid'] == $fightid)
             {
                 if($row['trainer1id'] == $trainerid)
@@ -764,13 +761,17 @@ class BackendRequest
                 for($pokemonNum = 1; $pokemonNum <= 6; $pokemonNum++)
                 {
                 
-                    $linktoadd = "<a href='javascript:void(0)' title='Join League' onclick='createTeamOverlay.show(".$pokemonNum.")'>";
+                    $linktoadd = "<a href='javascript:void(0)' title='Add Player' onclick='createTeamOverlay.show(".$pokemonNum.",".$lid.")'>";
+                    //var_dump($pokemonNum);
+                    //var_dump($lid);
 
                     $id = $row2["trainer$pokemonNum"."id"];
-                    var_dump($id);
+                    //var_dump($id);
                     $trainersearch = "select * from info where trainerid=\"$id\"";
                     $result3 = MySQLLib::makeDBSelection($trainersearch,$database2);
                     $row3=$result3->fetch_assoc();
+                    
+                    //var_dump($row3);
                     
                     $name = $row3["name"];
                     $pieces = explode(" ", $name);
@@ -795,41 +796,79 @@ class BackendRequest
 
         return array("success" => true, 'message'=>$tablestring, 'leaguename'=>$lname);
     }
-    function createTeam($username,$number,$trainerid)
+    function createTeam($username,$number,$leagueid, $trainerid)
     {
         $database = "League";
-
-        $addPlayer = "UPDATE teams SET trainer".$number."id=\"$trainerid\" WHERE username=\"$username\"";
-        //$canAdd = self::withdraw($username, $entryfee);
+        $database2 = "Trainer";
+        $addPlayer = "UPDATE teams SET trainer".$number."id=\"$trainerid\" WHERE username=\"$username\" and leagueid=\"$leagueid\"";
+        $checkTrainer = "SELECT * from info where trainerid=\"$trainerid\"";
         
-        //if($canWD["success"] === TRUE)
-        //{
+        $result = MySQLLib::makeDBSelection($checkTrainer,$database2);
+        $row = $result->fetch_assoc();
+        $salaryHit = $row["salary"];
+        
+        
+        $canAdd = self::balanceSalary($username, $leagueid, $salaryHit);
+        
+        if($canAdd["success"] === TRUE)
+        {
             $result = MySQLLib::makeDBSelection($addPlayer,$database);
             
-            /*$s = "SELECT * FROM info where name='$leaguename'";
-            
-            $result = MySQLLib::makeDBSelection($s,$database);
-            
-            while($row = $result->fetch_assoc())
+        }
+        else
+        {
+            echo "No funds to create league.";
+            return array("success" => '0', 'message'=>"Unable to create league.");
+        }
+    }
+    
+    function balanceSalary($username, $leagueid, $wd)
+    {
+        $database = "League";
+        $s = "SELECT * FROM teams where username=\"$username\" and leagueid=\"$leagueid\"";
+
+        $result = MySQLLib::makeDBSelection($s,$database);
+
+        //var_dump($username);
+        $f = 0;
+        if($wd >= 0)
+        {
+            if($result->num_rows > 0)
             {
-                $leagueid = $row["leagueid"];
-                $salary = $row["salaryCap"];
-                $points = 0;
-                $trainer = 0;
-                $null = "-";
-                $addLHistory = "INSERT INTO history (leagueid, name, owner, pool, winner1st, winner2nd) VALUES ('$leagueid','$leaguename','$username','$defaultPool','$null', '$null')";
-                $createCommishTeam = "INSERT INTO teams (leagueid, username, trainer1id, trainer2id, trainer3id, trainer4id, trainer5id, trainer6id, personalSalary, points) VALUES ('$leagueid','$username','$trainer','$trainer','$trainer','$trainer','$trainer','$trainer','$salary','$points')";
-                
-                MySQLLib::makeDBSelection($addLHistory,$database);
-                $result2 = MySQLLib::makeDBSelection($createCommishTeam,$database);
-            }*/
-            
-        //}
-        //else
-        //{
-        //    echo "No funds to create league.";
-        //    return array("success" => '0', 'message'=>"Unable to create league.");
-        //}
+                while($a = $result->fetch_assoc())
+                {
+                    $f = $a['personalSalary'];
+                    $f = $f-$wd;
+                    
+                    if($f < 0)
+                    {
+                        return array ("success" => '0', 'message' => "Can't withdraw over your balance.");
+                    }
+
+                    $reg = "UPDATE teams SET personalSalary='$f' WHERE username=\"$username\" and leagueid=\"$leagueid\"";
+                        
+                    if(MySQLLib::makeDBSelection($reg,$database) === TRUE)
+                    {
+                        echo "\nFunds withdrawn from database\n";
+                    }
+                    else 
+                    {
+                        echo "Error: " . $reg . "<br>";
+                    }
+                    
+                    return array("success" => true, 'message'=>$f);
+                }
+            }
+            else
+            {
+                return array("success" => '0', 'message'=>"Error with adding funds");
+            }
+        }
+        else
+        {
+            return array("success" => '0', 'message' => "Can't withdraw negative or zero funds");
+        }
+
     }
 }
 

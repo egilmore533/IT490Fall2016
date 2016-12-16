@@ -6,6 +6,7 @@ body {
     width:100%;
     padding: 50px 0px 0px 0px;
     background-repeat: no-repeat;
+    overflow-y: visible;
 
 }
 
@@ -152,7 +153,7 @@ td.text-right {
     
 }
 
-#logincontainer, #clcontainer, #jlcontainer {
+#logincontainer, #clcontainer, #jlcontainer, #ctcontainer{
     background-color: #D8DBE2;
     font-family: Verdana, sans-serif;
     position: fixed;
@@ -222,6 +223,7 @@ td.text-right {
     width: 50%;
     margin-left: 25%;
     margin-right: auto;
+    overflow-y: visible;
 
 }
 

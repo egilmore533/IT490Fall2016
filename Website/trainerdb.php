@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>    
     <title>Pokemon Trainer DB</title>
+    <script src="webutils.js" language="javascript"></script>
 </head>
-<body id="body" onload="tdbRequest()"> 
+<body id="body" onload="tdbRequest('none')"> 
 
     <?php
         include "/var/lib/pokelibs/webutils/layout.php"
@@ -18,7 +19,7 @@
             <h3>Search</h3>
             
             <input id="searchbar" type="text" name="tid"/><br><br>
-            <input type="submit" value="Search" onclick="tdbRequest()"/>
+            <input type="submit" value="Search" onclick="tdbRequest('none')"/>
             <p><font size="1pt">
             Search by: <br>trainer type <br>trainer name <br>pokemon</p>
 
@@ -33,24 +34,5 @@
     ?>
 </div>
 </body>
-
-<script language="javascript">
-
-    function tdbRequest()
-    {
-        var trainer = document.getElementById("searchbar").value;
-        request = new XMLHttpRequest();
-        request.onreadystatechange = handleFHResponse;
-        request.open("POST","rpc/rpc.php",true);
-        request.setRequestHeader("Content-type","application/json");
-        var data = JSON.stringify({request:"tdb",trainer:trainer});
-        request.send(data);        
-        
-    }
-    function handleFHResponse()
-    { 
-        document.getElementById("tdb").innerHTML = request.responseText.substring(3, request.responseText.length - 1);      
-    }
-</script>
 
 </html>

@@ -16,8 +16,6 @@
     <div id="jlcontainer" style="display: none;">
         This league has a fee. Make sure you have enough money to enter.
         <input type="button" id="jlbutton" onclick="" value= "Join League"/>
-        <div id="jltest">
-        </div>
     </div>
     <div id="container">
         <div id="header"> <h1>PokéFight Leagues</h1> </div>

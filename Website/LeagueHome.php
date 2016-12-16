@@ -3,7 +3,7 @@
 <head>
     <title>PokeFights</title>
 </head>
-<body id="output" onload="leagueRequest(
+<body id="body" onload="leagueRequest(
                                         <?php 
                                             if(!isset($_GET['lid']))
                                             {
@@ -23,6 +23,11 @@
     ?>
     
     <!--- page info --->
+    <div id="ctcontainer" style="display: none;">
+        Please input the ID of the Trainer you want to add
+        <input type="number" id="trnid" name="trnid"/> 
+        <input type="button" id="ctbutton" onclick="" value= "Add Trainer"/>
+    </div>
     <div id="container">
         <?php
             require_once("rpc/path.inc");
@@ -37,8 +42,12 @@
         ?> 
         <div id="header"> <h1><?php echo $_SESSION['leaguename']; ?></h1> </div>
         <div id="contents">
+            Hello <?php echo $_SESSION['user']; ?>!
+            
             <div id="table">
             <p id="teams"></p>
+            <p id="tdb"></p>
+            <div id="test"></div>
             </div>
         </div>
 
@@ -51,6 +60,8 @@
 <script language="javascript">
     var request;
     var leagueid;
+    var number;
+    
     function leagueRequest(leagueid)
     {
         request = new XMLHttpRequest();
@@ -64,5 +75,6 @@
     { 
         document.getElementById("teams").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
     }
+    
 </script>
 </html>

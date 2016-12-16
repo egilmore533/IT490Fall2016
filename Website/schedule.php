@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Poke Fight Schedule</title>
+    <script src="webutils.js" language="javascript"></script>
 </head>
 <body id="body" onload="schedRequest()"> 
 
     <?php
         include "/var/lib/pokelibs/webutils/layout.php"
     ?>
-    
+    <div id=confirmpanel style="display: none;">
+        <input type="number" id="hm" style="display: none;">
+        <input type="button" id="confirm" onclick="" value= "Confirm" style ="display: none;"/>
+    </div>
     <!---page info --->
     <div id="fightcontainer">
     <div id="header"> <h1>Upcoming PokéFights</h1> </div>
@@ -23,10 +27,7 @@
                     if (isset($_SESSION['user'])) { ?>
                     <h3 id="betbal"> Balance $<?php echo $_SESSION['balance']; ?>
                     </h3>
-                    <div id=confirmpanel style="display: none;">
-                        <input type="number" id="hm" style="display: none;">
-                        <input type="button" id="confirm" onclick="" value= "Confirm" style ="display: none;"/>
-                    </div>
+                    
                     <?php } 
                     else { ?>
                     <a href="javascript:void(0)" title="Sign In" onclick="loginOverlay.show();">Sign In to view Balance and Place Bets</a>
@@ -42,52 +43,6 @@
 </div>
 </body>
 <script language="javascript">
-    
-    function schedRequest()
-    {
-        
-        request = new XMLHttpRequest();
-        request.onreadystatechange = handleFHResponse;
-        request.open("POST","rpc/rpc.php",true);
-        request.setRequestHeader("Content-type","application/json");
-        var data = JSON.stringify({request:"sched"});
-        request.send(data);
-    }
-    function handleFHResponse()
-    { 
-        document.getElementById("sched").innerHTML = request.responseText.substring(3, request.responseText.length - 1);
-    }
-    function sendBetRequest(event,reqType,fid,tid)
-    {
-        if(reqType == 'show')
-        {
-            var d = document.getElementById("confirmpanel");
-        
-            d.style.position = "absolute";
-            d.style.left = event.clientX+'px';
-            d.style.top = event.clientY+'px';
-            document.getElementById("confirmpanel").style.display = "block";
-            document.getElementById("hm").style.display = "block";
-            document.getElementById("confirm").style.display = "block";
-            document.getElementById("confirm").onclick = function(){sendBetRequest("placebet",fid,tid);};
-        }
-        else{
-            var funds = document.getElementById("hm").value;
-            
-            request = new XMLHttpRequest();
-            request.onreadystatechange = handleBetResponse;
-            request.open("POST","rpc/rpc.php",true);
-            request.setRequestHeader("Content-type","application/json");
-            var data = JSON.stringify({request:"placebet",fid:fid,tid:tid,funds:funds});
-            request.send(data);
-        }
-    }
-    function handleBetResponse()
-    {
-        document.getElementById("betbal").innerHTML = "Balance: $" + request.responseText;
-        document.getElementById("confirmpanel").style.display = "none";
-        document.getElementById("hm").style.display = "none";
-        document.getElementById("confirm").style.display = "none";
-    }
+
 </script>
 </html>
