@@ -14,7 +14,6 @@ while(true)
 
         if (is_resource($connection))
         {
-            echo '<h2>' . $host . ':' . $port . ' ' . '(' . getservbyport($port, 'tcp') . ') is open.</h2>' . "\n";
             
             if($backup == true)
                 shell_exec('killall -9 MySqlConnection.php');
@@ -29,7 +28,6 @@ while(true)
             
             if($backup == false)
             {
-                    echo '<h2>' . $host . ':' . $port . ' is not responding.</h2>' . "\n";
                     echo 'Server is Running' . "\n";
                     
                     $backup = true;

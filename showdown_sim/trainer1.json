@@ -1,28 +1,28 @@
 {
-"name": "Biker Nikolas",
+"name": "Black Belt Takashi",
 "pokemon1": 
- { "name": "Voltorb",
-   "level": "29",
-   "move1": "Selfdestruct", 
-   "move2": "Spark", 
-   "move3": "SonicBoom", 
-   "move4": "Screech" 
+ { "name": "Machoke",
+   "level": "38",
+   "move1": "Vital Throw", 
+   "move2": "Revenge", 
+   "move3": "Foresight", 
+   "move4": "Seismic Toss" 
 },
 "pokemon2": 
- { "name": "Voltorb",
-   "level": "29",
-   "move1": "Selfdestruct", 
-   "move2": "Spark", 
-   "move3": "SonicBoom", 
-   "move4": "Screech" 
+ { "name": "Machop",
+   "level": "38",
+   "move1": "Submission", 
+   "move2": "Vital Throw", 
+   "move3": "Revenge", 
+   "move4": "Foresight" 
 },
 "pokemon3": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Machop",
+   "level": "38",
+   "move1": "Submission", 
+   "move2": "Vital Throw", 
+   "move3": "Revenge", 
+   "move4": "Foresight" 
 },
 "pokemon4": 
  { "name": "",

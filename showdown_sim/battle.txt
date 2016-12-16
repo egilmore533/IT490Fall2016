@@ -1,73 +1,56 @@
-Picnicker Claire's lvl 35 Meowth used Slash!
-Biker Nikolas's lvl 29 Voltorb was hit for 88 HP (24%)
+Biker Hideo's lvl 33 Weezing used Sludge Bomb!
+Black Belt Takashi's lvl 38 Machoke was hit for 150 HP (20%)
 
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Meowth was hit for 140 HP (33%)
-
-
-Picnicker Claire's lvl 35 Meowth used Slash!
-Biker Nikolas's lvl 29 Voltorb was hit for 81 HP (22%)
-
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Meowth was hit for 142 HP (34%)
+Black Belt Takashi's lvl 38 Machoke used Earthquake!
+It's super effective!
+Biker Hideo's lvl 33 Weezing was hit for 153 HP (27%)
 
 
-Picnicker Claire's lvl 35 Meowth used Slash!
-Biker Nikolas's lvl 29 Voltorb was hit for 86 HP (23%)
+Biker Hideo's lvl 33 Weezing used Sludge Bomb!
+Black Belt Takashi's lvl 38 Machoke was hit for 147 HP (20%)
+Black Belt Takashi's lvl 38 Machoke was poisoned!
 
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
+Black Belt Takashi's lvl 38 Machoke used Earthquake!
+It's super effective!
+Biker Hideo's lvl 33 Weezing was hit for 142 HP (25%)
+
+Black Belt Takashi's lvl 38 Machoke was hurt 94 HP (13%) by poison!
+
+
+Biker Hideo's lvl 33 Weezing used Sludge Bomb!
+Black Belt Takashi's lvl 38 Machoke was hit for 140 HP (19%)
+
+Black Belt Takashi's lvl 38 Machoke used Earthquake!
+It's super effective!
+Biker Hideo's lvl 33 Weezing was hit for 139 HP (24%)
+
+Black Belt Takashi's lvl 38 Machoke was hurt 94 HP (13%) by poison!
+
+
+Biker Hideo's lvl 33 Weezing used Sludge Bomb!
 It's a critical hit!
-Picnicker Claire's lvl 35 Meowth was hit for 139 HP (33%)
-Picnicker Claire's lvl 35 Meowth fainted!
-Picnicker Claire took out Meowth.
+Black Belt Takashi's lvl 38 Machoke was hit for 124 HP (17%)
+Black Belt Takashi's lvl 38 Machoke fainted!
+Black Belt Takashi took out Machop.
 
 
-Picnicker Claire's lvl 35 Meowth used Slash!
-Biker Nikolas's lvl 29 Voltorb was hit for 78 HP (21%)
+Biker Hideo's lvl 33 Weezing used Sludge Bomb!
+Black Belt Takashi's lvl 38 Machop was hit for 225 HP (33%)
 
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Meowth was hit for 150 HP (36%)
-
-
-Picnicker Claire's lvl 35 Meowth used Dark Pulse!
-Biker Nikolas's lvl 29 Voltorb was hit for 40 HP (11%)
-Biker Nikolas's lvl 29 Voltorb fainted!
-Biker Nikolas took out Voltorb.
+Black Belt Takashi's lvl 38 Machop used Earthquake!
+It's super effective!
+Biker Hideo's lvl 33 Weezing was hit for 113 HP (20%)
 
 
-Picnicker Claire's lvl 35 Meowth used Slash!
-Biker Nikolas's lvl 29 Voltorb was hit for 79 HP (21%)
+Biker Hideo's lvl 33 Weezing used Sludge Bomb!
+Black Belt Takashi's lvl 38 Machop was hit for 200 HP (30%)
 
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Meowth was hit for 138 HP (33%)
-
-
-Picnicker Claire's lvl 35 Meowth used Slash!
-Biker Nikolas's lvl 29 Voltorb was hit for 76 HP (20%)
-
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Meowth was hit for 133 HP (32%)
-Picnicker Claire's lvl 35 Meowth fainted!
-Picnicker Claire took out Clefairy.
+Black Belt Takashi's lvl 38 Machop used Thunder Punch!
+Biker Hideo's lvl 33 Weezing was hit for 23 HP (4%)
+Biker Hideo's lvl 33 Weezing fainted!
 
 
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Clefairy was hit for 100 HP (16%)
-
-Picnicker Claire's lvl 35 Clefairy used Moonblast!
-Biker Nikolas's lvl 29 Voltorb was hit for 135 HP (36%)
-
-
-Biker Nikolas's lvl 29 Voltorb used Thunderbolt!
-Picnicker Claire's lvl 35 Clefairy was hit for 101 HP (16%)
-
-Picnicker Claire's lvl 35 Clefairy used Moonblast!
-Biker Nikolas's lvl 29 Voltorb was hit for 83 HP (22%)
-Biker Nikolas's lvl 29 Voltorb fainted!
-
-
-Picnicker Claire defeated Biker Nikolas!
-Meowth: 0 HP (0%) left.
-Meowth: 0 HP (0%) left.
-Pikachu: 386 HP (100%) left.
-Clefairy: 430 HP (68%) left.
+Black Belt Takashi defeated Biker Hideo!
+Machoke: 0 HP (0%) left.
+Machop: 248 HP (37%) left.
+Machop: 673 HP (100%) left.

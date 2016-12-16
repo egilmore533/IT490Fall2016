@@ -15,7 +15,6 @@ while(true)
 
         if (is_resource($connection))
         {
-            echo '<h2>' . $host . ':' . $port . ' ' . '(' . getservbyport($port, 'tcp') . ') is open.</h2>' . "\n";
             $backup = false;
             
             fclose($connection);

@@ -1,36 +1,36 @@
 {
-"name": "Picnicker Claire",
+"name": "Biker Hideo",
 "pokemon1": 
- { "name": "Meowth",
-   "level": "35",
-   "move1": "Screech", 
-   "move2": "Faint Attack", 
-   "move3": "Pay Day", 
-   "move4": "Bite" 
+ { "name": "Weezing",
+   "level": "33",
+   "move1": "Haze", 
+   "move2": "SmokeScreen", 
+   "move3": "Sludge", 
+   "move4": "Selfdestruct" 
 },
 "pokemon2": 
- { "name": "Meowth",
-   "level": "35",
-   "move1": "Screech", 
-   "move2": "Faint Attack", 
-   "move3": "Pay Day", 
-   "move4": "Bite" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon3": 
- { "name": "Pikachu",
-   "level": "35",
-   "move1": "Agility", 
-   "move2": "Thunderbolt", 
-   "move3": "Slam", 
-   "move4": "Double Team" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon4": 
- { "name": "Clefairy",
-   "level": "35",
-   "move1": "Cosmic Power", 
-   "move2": "Metronome", 
-   "move3": "Defense Curl", 
-   "move4": "Minimize" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon5": 
  { "name": "",
