@@ -330,7 +330,7 @@ class BackendRequest
         if($result->num_rows > 0)
         {
             //$tablestring .= "<style>table, th, td{border: 1px solid black; float:center;}</style>";
-            $tablestring .= "<table id=poketable><tr><th>".$pokepic.'Trainer1'.$pokepic2.$pokepic3."Trainer".$space."1><th>".$pokepic.'Trainer2'.$pokepic2.$pokepic3."Trainer".$space."2><th>Odds<th>Date";
+            $tablestring .= "<table id=poketable><tr><th>".$pokepic.'Trainer1'.$pokepic2.$pokepic3."Trainer".$space."1><th>".$pokepic.'Trainer2'.$pokepic2.$pokepic3."Trainer".$space."2><th>Trainer1 Odds payout<th>Trainer2 Odds payout<th>Date";
 
                 //output data of each row
             while($row = $result->fetch_assoc())
@@ -378,7 +378,7 @@ class BackendRequest
                 $newname2 = implode("&nbsp;", $pieces2);
                 $linktojoin2 = "<a href='javascript:void(0)' onclick=tdbRequest(&quot;".$newname2."&quot;)>";
                 
-                $tablestring .= "<tr><td><bb title=$pokestring1>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["time"]."";
+                $tablestring .= "<tr><td><bb title=$pokestring1>".$row["trainer1"].$betbutton."<td><cc title=$pokestring2>".$row["trainer2"].$betbutton2."<td>".$row["odds"]."<td>".$row["odds2"]."<td>".$row["time"]."";
 
                 $pokestring1 = "";
                 $pokestring2 = "";
