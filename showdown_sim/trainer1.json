@@ -1,36 +1,36 @@
 {
-"name": "Black Belt Koichi",
+"name": "Juggler Kirk",
 "pokemon1": 
- { "name": "Hitmonlee",
-   "level": "37",
-   "move1": "Foresight", 
-   "move2": "Mind Reader", 
-   "move3": "Hi Jump Kick", 
-   "move4": "Focus Energy" 
+ { "name": "Drowzee",
+   "level": "31",
+   "move1": "Psychic", 
+   "move2": "Meditate", 
+   "move3": "Poison Gas", 
+   "move4": "Headbutt" 
 },
 "pokemon2": 
- { "name": "Hitmonchan",
-   "level": "37",
-   "move1": "Sky Uppercut", 
-   "move2": "Fire Punch", 
-   "move3": "Ice Punch", 
-   "move4": "ThunderPunch" 
+ { "name": "Drowzee",
+   "level": "31",
+   "move1": "Psychic", 
+   "move2": "Meditate", 
+   "move3": "Poison Gas", 
+   "move4": "Headbutt" 
 },
 "pokemon3": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Drowzee",
+   "level": "31",
+   "move1": "Psychic", 
+   "move2": "Meditate", 
+   "move3": "Poison Gas", 
+   "move4": "Headbutt" 
 },
 "pokemon4": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Kadabra",
+   "level": "31",
+   "move1": "Future Sight", 
+   "move2": "Recover", 
+   "move3": "Reflect", 
+   "move4": "Psybeam" 
 },
 "pokemon5": 
  { "name": "",

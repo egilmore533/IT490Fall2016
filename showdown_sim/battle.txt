@@ -1,40 +1,373 @@
-[ '106', '107' ]
-[ '119', '118' ]
-Black Belt Koichi's Hitmonlee used High Jump Kick!
-Black Belt Koichi's Hitmonlee's attack missed!
-Black Belt Koichi's Hitmonlee kept going and crashed for 120 HP (50%)!
-
-Sis and Bro Lia and Luc's Seaking used Aqua Tail!
-Black Belt Koichi's Hitmonlee was hit for 121 HP (50%)
-Black Belt Koichi's Hitmonlee fainted!
-Black Belt Koichi took out Hitmonchan.
-
-
-Black Belt Koichi's Hitmonchan used Thunder Punch!
+[ [ '96', '31' ], [ '96', '31' ], [ '96', '31' ], [ '64', '31' ] ]
+[ [ '109', '26' ],
+  [ '109', '26' ],
+  [ '88', '26' ],
+  [ '109', '26' ] ]
+Juggler Kirk's lvl 31 Drowzee used Psychic!
 It's super effective!
-Sis and Bro Lia and Luc's Seaking was hit for 189 HP (63%)
+Biker Lukas's lvl 26 Koffing was hit for 234 HP (11%)
 
-Sis and Bro Lia and Luc's Seaking used Aqua Tail!
-Black Belt Koichi's Hitmonchan was hit for 128 HP (53%)
-
-
-Black Belt Koichi's Hitmonchan used Thunder Punch!
-It's super effective!
-Sis and Bro Lia and Luc's Seaking was hit for 112 HP (37%)
-Sis and Bro Lia and Luc's Seaking fainted!
-Sis and Bro Lia and Luc took out Goldeen.
-
-
-Black Belt Koichi's Hitmonchan used Thunder Punch!
-It's super effective!
-Sis and Bro Lia and Luc's Goldeen was hit for 208 HP (90%)
-
-Sis and Bro Lia and Luc's Goldeen used Aqua Tail!
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
 It's a critical hit!
-Black Belt Koichi's Hitmonchan was hit for 113 HP (47%)
-Black Belt Koichi's Hitmonchan fainted!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 145 HP (4%)
 
 
-Sis and Bro Lia and Luc defeated Black Belt Koichi!
-Seaking: 0 HP (0%) left.
-Goldeen: 23 HP (10%) left.
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's a critical hit!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 304 HP (14%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 101 HP (3%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 212 HP (10%)
+Biker Lukas's lvl 26 Koffing's Special Defense fell!
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 92 HP (2%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 274 HP (12%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 104 HP (3%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 270 HP (12%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 96 HP (2%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 285 HP (13%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 96 HP (2%)
+Juggler Kirk's lvl 31 Drowzee's Special Defense fell!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's a critical hit!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 428 HP (19%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 127 HP (3%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 214 HP (10%)
+Biker Lukas's lvl 26 Koffing fainted!
+Biker Lukas took out Koffing.
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 224 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 126 HP (3%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 235 HP (11%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 137 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 223 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 142 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 227 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 127 HP (3%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 217 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 138 HP (4%)
+Juggler Kirk's lvl 31 Drowzee's Special Defense fell!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 227 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's a critical hit!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 249 HP (6%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 205 HP (9%)
+Biker Lukas's lvl 26 Koffing's Special Defense fell!
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 158 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 300 HP (14%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 155 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 303 HP (14%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 164 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Shadow Ball!
+Biker Lukas's lvl 26 Koffing was hit for 60 HP (3%)
+Biker Lukas's lvl 26 Koffing fainted!
+Biker Lukas took out Koffing.
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 207 HP (9%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 158 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 235 HP (11%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 170 HP (4%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 232 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 174 HP (5%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 204 HP (9%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 159 HP (4%)
+Juggler Kirk's lvl 31 Drowzee's Special Defense fell!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 225 HP (10%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 186 HP (5%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 203 HP (9%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 207 HP (5%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 219 HP (10%)
+Biker Lukas's lvl 26 Koffing's Special Defense fell!
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 199 HP (5%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's a critical hit!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 395 HP (18%)
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 181 HP (5%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Koffing was hit for 294 HP (13%)
+Biker Lukas's lvl 26 Koffing's Special Defense fell!
+
+Biker Lukas's lvl 26 Koffing used Shadow Ball!
+It's super effective!
+Juggler Kirk's lvl 31 Drowzee was hit for 202 HP (5%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Low Sweep!
+It's not very effective...
+Biker Lukas's lvl 26 Koffing was hit for 7 HP (0%)
+Biker Lukas's lvl 26 Koffing fainted!
+Biker Lukas took out Grimer.
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 194 HP (5%)
+Biker Lukas's lvl 26 Grimer's Special Defense fell!
+
+Biker Lukas's lvl 26 Grimer used Rock Tomb!
+Juggler Kirk's lvl 31 Drowzee was hit for 68 HP (2%)
+Juggler Kirk's lvl 31 Drowzee fainted!
+Juggler Kirk took out Drowzee.
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 274 HP (6%)
+Biker Lukas's lvl 26 Grimer's Special Defense fell!
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 240 HP (6%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 296 HP (7%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 227 HP (6%)
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 295 HP (7%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 235 HP (6%)
+Juggler Kirk's lvl 31 Drowzee was poisoned!
+
+Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 322 HP (7%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 248 HP (6%)
+
+Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 310 HP (7%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 243 HP (6%)
+
+Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 319 HP (7%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 214 HP (6%)
+
+Juggler Kirk's lvl 31 Drowzee was hurt 483 HP (13%) by poison!
+
+
+Juggler Kirk's lvl 31 Drowzee used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 321 HP (7%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Drowzee was hit for 239 HP (6%)
+
+Juggler Kirk's lvl 31 Drowzee was hurt 283 HP (7%) by poison!
+Juggler Kirk's lvl 31 Drowzee fainted!
+Juggler Kirk took out Kadabra.
+
+
+Juggler Kirk's lvl 31 Kadabra used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 662 HP (15%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Biker Lukas's lvl 26 Grimer's attack missed!
+
+
+Juggler Kirk's lvl 31 Kadabra used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 659 HP (15%)
+
+Biker Lukas's lvl 26 Grimer used Gunk Shot!
+Juggler Kirk's lvl 31 Kadabra was hit for 324 HP (12%)
+Juggler Kirk's lvl 31 Kadabra was poisoned!
+
+Juggler Kirk's lvl 31 Kadabra was hurt 328 HP (13%) by poison!
+
+
+Juggler Kirk's lvl 31 Kadabra used Psychic!
+It's super effective!
+Biker Lukas's lvl 26 Grimer was hit for 649 HP (15%)
+Biker Lukas's lvl 26 Grimer fainted!
+
+
+Juggler Kirk defeated Biker Lukas!
+Drowzee: 0 HP (0%) left.
+Drowzee: 3861 HP (100%) left.
+Drowzee: 0 HP (0%) left.
+Kadabra: 1969 HP (75%) left.

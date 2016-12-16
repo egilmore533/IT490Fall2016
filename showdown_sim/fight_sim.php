@@ -17,7 +17,7 @@ while($r=mysqli_fetch_array($result))
 	
 	TrainerFiles::makeTrainerFile($r['trainer1id'],1);
 	TrainerFiles::makeTrainerFile($r['trainer2id'],2);
-	shell_exec('./test.coffee > battle.txt');
+	shell_exec('./fight.coffee > battle.txt');
 
 	$fight_data = file_get_contents('./battle.txt');
 	$winner_regex = '/(.+) defeated/';

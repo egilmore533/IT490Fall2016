@@ -1,36 +1,36 @@
 {
-"name": "Sis and Bro Lia and Luc",
+"name": "Biker Lukas",
 "pokemon1": 
- { "name": "Seaking",
-   "level": "30",
-   "move1": "Fury Attack", 
-   "move2": "Flail", 
-   "move3": "Horn Attack", 
-   "move4": "Supersonic" 
+ { "name": "Koffing",
+   "level": "26",
+   "move1": "SmokeScreen", 
+   "move2": "Sludge", 
+   "move3": "Selfdestruct", 
+   "move4": "Smog" 
 },
 "pokemon2": 
- { "name": "Goldeen",
-   "level": "30",
-   "move1": "Fury Attack", 
-   "move2": "Flail", 
-   "move3": "Horn Attack", 
-   "move4": "Supersonic" 
+ { "name": "Koffing",
+   "level": "26",
+   "move1": "SmokeScreen", 
+   "move2": "Sludge", 
+   "move3": "Selfdestruct", 
+   "move4": "Smog" 
 },
 "pokemon3": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Grimer",
+   "level": "26",
+   "move1": "Screech", 
+   "move2": "Minimize", 
+   "move3": "Sludge", 
+   "move4": "Disable" 
 },
 "pokemon4": 
- { "name": "",
-   "level": "",
-   "move1": "", 
-   "move2": "", 
-   "move3": "", 
-   "move4": "" 
+ { "name": "Koffing",
+   "level": "26",
+   "move1": "SmokeScreen", 
+   "move2": "Sludge", 
+   "move3": "Selfdestruct", 
+   "move4": "Smog" 
 },
 "pokemon5": 
  { "name": "",
