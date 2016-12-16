@@ -122,7 +122,7 @@ while($r=mysqli_fetch_array($result))
 	$points = $row_points['salary'];
 
 	//league updates
-	$s = "update League.teams set points=$points+1 where (trainer1id=$winnerID)";
+	$s = "update League.teams set points=points+$points where (trainer1id=$winnerID)";
 	for($count = 2; $count < 7; $count++)
 	{
 		$s.=" or (trainer".$count."id=$winnerID)";
