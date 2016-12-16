@@ -1,28 +1,28 @@
 {
-"name": "Swimmer David",
+"name": "Team Rocket Grunt",
 "pokemon1": 
- { "name": "Goldeen",
-   "level": "29",
-   "move1": "Fury Attack", 
-   "move2": "Flail", 
-   "move3": "Horn Attack", 
-   "move4": "Supersonic" 
+ { "name": "Machop",
+   "level": "17",
+   "move1": "Karate Chop", 
+   "move2": "Focus Energy", 
+   "move3": "Leer", 
+   "move4": "Low Kick" 
 },
 "pokemon2": 
- { "name": "Shellder",
-   "level": "29",
-   "move1": "Protect", 
-   "move2": "Aurora Beam", 
-   "move3": "Supersonic", 
-   "move4": "Icicle Spear" 
+ { "name": "Drowzee",
+   "level": "17",
+   "move1": "Headbutt", 
+   "move2": "Confusion", 
+   "move3": "Disable", 
+   "move4": "Hypnosis" 
 },
 "pokemon3": 
- { "name": "Seaking",
-   "level": "29",
-   "move1": "Fury Attack", 
-   "move2": "Flail", 
-   "move3": "Horn Attack", 
-   "move4": "Supersonic" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon4": 
  { "name": "",

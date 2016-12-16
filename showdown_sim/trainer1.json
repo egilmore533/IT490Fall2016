@@ -1,28 +1,28 @@
 {
-"name": "Team Rocket Grunt",
+"name": "Youngster Tyler",
 "pokemon1": 
- { "name": "Weezing",
-   "level": "28",
-   "move1": "SmokeScreen", 
-   "move2": "Sludge", 
-   "move3": "Selfdestruct", 
-   "move4": "Smog" 
+ { "name": "Nidoran-M (M)",
+   "level": "21",
+   "move1": "Horn Attack", 
+   "move2": "Poison Sting", 
+   "move3": "Double Kick", 
+   "move4": "Focus Energy" 
 },
 "pokemon2": 
- { "name": "Koffing",
-   "level": "28",
-   "move1": "SmokeScreen", 
-   "move2": "Sludge", 
-   "move3": "Selfdestruct", 
-   "move4": "Smog" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon3": 
- { "name": "Golbat",
-   "level": "28",
-   "move1": "Confuse Ray", 
-   "move2": "Wing Attack", 
-   "move3": "Bite", 
-   "move4": "Astonish" 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
 },
 "pokemon4": 
  { "name": "",

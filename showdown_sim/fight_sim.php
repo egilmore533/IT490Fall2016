@@ -27,24 +27,20 @@ while($r=mysqli_fetch_array($result))
 	preg_match($loser_regex,$fight_data,$loser_data);
 
 	$winner = $winner_data[1];
+	$loser = $loser_data[1];
 
-	//$fight_array = array($r['trainer1'],$r['trainer2']);
-	var_dump($fight_array);
-	//$winner = randomly_choose_winner($fight_array);
 	if($r['trainer1'] == $winner)
 	{
 		$winnerID = $r['trainer1id'];
+		$loserID = $r['trainer2id'];
 		$oddspayout = $r['odds'];
 	}
 	if($r['trainer2'] == $winner)
         {
                 $winnerID = $r['trainer2id'];
+		$loserID = $r['trainer1id'];
                 $oddspayout = $r['odds2'];
         }
-
-	var_dump($winner);
-	var_dump($r['trainer1']);
-	var_dump($r['trainer2']);
 
 	$s = 'select * from betHistory.history where fightid='.$r['fightid'];
 	$payout_total = 0;
@@ -118,9 +114,14 @@ while($r=mysqli_fetch_array($result))
 		echo "Schedule Row Failed to Update\n";
 	}
 
+	$s = "select * from Trainer.info where trainerid=$loserID";
+	$resultPoints = MySQLLib::makeSelection($s,$conn);
+	$row_points=mysqli_fetch_array($resultPoints);
+
+	$points = $row_points['salary'];
 
 	//league updates
-	$s = "update League.teams set points=points+1 where (trainer1id=$winnerID)";
+	$s = "update League.teams set points=$points+1 where (trainer1id=$winnerID)";
 	for($count = 2; $count < 7; $count++)
 	{
 		$s.=" or (trainer".$count."id=$winnerID)";
@@ -135,12 +136,6 @@ while($r=mysqli_fetch_array($result))
 }
 
 echo "\nWinner: $winner\n\n\n";
-
-
-function get_winner()
-{
-
-}
 
 function randomly_choose_winner($trainers)
 {

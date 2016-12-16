@@ -6,9 +6,6 @@ fs = require 'fs'
 trainer1 = JSON.parse fs.readFileSync('./trainer1.json').toString()
 trainer2 = JSON.parse fs.readFileSync('./trainer2.json').toString()
 
-if trainer1["pokemon6"]["name"] 
-	console.log trainer1["pokemon1"]
-
 team1 = []
 if trainer1["pokemon1"]["name"]
 	poke= []
@@ -41,8 +38,6 @@ if trainer1["pokemon6"]["name"]
 	poke.push trainer1["pokemon6"]["level"]
 	team1.push poke
 
-console.log team1
-
 team2 = []
 if trainer2["pokemon1"]["name"]
 	poke= []
@@ -74,7 +69,6 @@ if trainer2["pokemon6"]["name"]
 	poke.push pokemon.lookup trainer2["pokemon6"]["name"]
 	poke.push trainer2["pokemon6"]["level"]
 	team2.push poke
-console.log team2
 
 console.log pokemon.battle {trainer: trainer1["name"],  pokemon: team1},
                            {trainer: trainer2["name"],  pokemon: team2}
