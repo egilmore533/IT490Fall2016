@@ -176,11 +176,14 @@ function oddsCalculation($trainer1, $trainer2)
 	
 	$odds1 = 1.0;
 	$odds2 = 1.0;
+        $randOdds1 = 1.0;
+	$randOdds2 = 1.0;
+	
+	$randOdds1 = rand($salary1, $salary2);
+	$randOdds2 = rand($salary1, $salary2);
 	
 	$odds1 += (intval(oddsCalc($arrayUnique, $arrayUnique2)) + intval($pokeNum)) / (intval(oddsCalc($arrayUnique2, $arrayUnique)) + intval($pokeNum2));
         $odds2 += (intval(oddsCalc($arrayUnique2, $arrayUnique)) + intval($pokeNum2)) / (intval(oddsCalc($arrayUnique, $arrayUnique2)) + intval($pokeNum));
-	
-	echo "Odds payout for " . $trainer1 . " are " . $odds1 . " and the odds payout for " . $trainer2 . " are " . $odds2 . "\n";
 	
 	if($odds1 == $odds2)
 	{
@@ -210,6 +213,14 @@ function oddsCalculation($trainer1, $trainer2)
                 $odds1 = 1 + ($salary2/$salary1);
             }
 	}
+	
+        $odds1 += (10/$randOdds1);
+        $odds2 += (10/$randOdds2);
+	
+        $odds1 = round($odds1, 1, PHP_ROUND_HALF_UP);
+        $odds2 = round($odds2, 1, PHP_ROUND_HALF_UP);
+	
+	echo "Odds payout for " . $trainer1 . " are " . $odds1 . " and the odds payout for " . $trainer2 . " are " . $odds2 . "\n";
 	
 	$oddspayout[0] = $odds1;
 	$oddspayout[1] = $odds2;
