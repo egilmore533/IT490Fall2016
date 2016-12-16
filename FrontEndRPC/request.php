@@ -255,6 +255,26 @@ function sendRequest($request)
                 $response["message"] = "Failed to show league home data. ".$response["message"];
             }
             break;
+        case "ct":
+            $requestArr = array();
+            SessionManager::sessionStart('PokemonBets');
+            $requestArr["type"] = "ct";
+            $requestArr["username"] = $_SESSION['user'];
+            $requestArr["number"] = $request['number'];
+            $requestArr["leagueid"] = $request['lid'];
+            var_dump($request['lid']);
+            $requestArr["trainerid"] = $request['trainerid'];
+         
+            $response = $client->send_request($requestArr);
+            if ($response["success"]==true)
+            {
+                $response["message"] = $request['lid'];
+            }
+            else
+            {
+                $response["message"] = "Failed to Create Team";
+            }
+            break;
         
     }
         echo json_encode($response['message']);
