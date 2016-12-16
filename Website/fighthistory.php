@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Poke Fight History</title>
+    <script src="webutils.js" language="javascript"></script>
 </head>
 <body id="body" onload="fhRequest()">  
 
@@ -17,6 +18,7 @@
 
             <div id="table">
             <p id="fh"></p>
+            <p id="tdb"></p>
             </div>
         </div>
 
