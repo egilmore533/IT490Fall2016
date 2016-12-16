@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
-include 'path.inc';
-include 'MySQLLib.php';
+require_once 'path.inc';
+require_once 'MySQLLib.php';
+require_once 'make_team.php.inc';
 
 $conn = MySQLLib::makeConnection();
 
@@ -11,9 +12,25 @@ $s = 'select * from Schedule.schedule';
 $result = MySQLLib::makeSelection($s,$conn);
 while($r=mysqli_fetch_array($result))
 {
-	$fight_array = array($r['trainer1'],$r['trainer2']);
+
+	$fight_array = array($r['trainer1id'],$r['trainer2id']);
+	
+	TrainerFiles::makeTrainerFile($r['trainer1id'],1);
+	TrainerFiles::makeTrainerFile($r['trainer2id'],2);
+	shell_exec('./test.coffee > battle.txt');
+
+	$fight_data = file_get_contents('./battle.txt');
+	$winner_regex = '/(.+) defeated/';
+	$loser_regex = '/defeated (.+)!/';
+
+	preg_match($winner_regex,$fight_data,$winner_data);
+	preg_match($loser_regex,$fight_data,$loser_data);
+
+	$winner = $winner_data[1];
+
+	//$fight_array = array($r['trainer1'],$r['trainer2']);
 	var_dump($fight_array);
-	$winner = randomly_choose_winner($fight_array);
+	//$winner = randomly_choose_winner($fight_array);
 	if($r['trainer1'] == $winner)
 	{
 		$winnerID = $r['trainer1id'];
@@ -25,7 +42,9 @@ while($r=mysqli_fetch_array($result))
                 $oddspayout = $r['odds2'];
         }
 
-
+	var_dump($winner);
+	var_dump($r['trainer1']);
+	var_dump($r['trainer2']);
 
 	$s = 'select * from betHistory.history where fightid='.$r['fightid'];
 	$payout_total = 0;
@@ -117,6 +136,11 @@ while($r=mysqli_fetch_array($result))
 
 echo "\nWinner: $winner\n\n\n";
 
+
+function get_winner()
+{
+
+}
 
 function randomly_choose_winner($trainers)
 {

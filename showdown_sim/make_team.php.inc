@@ -2,7 +2,8 @@
 
 <?php
 
-include "/var/lib/rpc/MySQLLib.php";
+class TrainerFiles
+{
 
 function makeFile($filename, $textArray)
 {
@@ -64,9 +65,9 @@ function makeTrainerFile($trainerid,$trainer_num)
 		}
 		$textArray[$linenum++] = "}\n";	
 	}
-	makeFile($filename,$textArray);
+	TrainerFiles::makeFile($filename,$textArray);
 }
 
-makeTrainerFile(366,1);
+}//end of class
 
 ?>

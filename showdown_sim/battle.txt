@@ -1,0 +1,40 @@
+[ '106', '107' ]
+[ '119', '118' ]
+Black Belt Koichi's Hitmonlee used High Jump Kick!
+Black Belt Koichi's Hitmonlee's attack missed!
+Black Belt Koichi's Hitmonlee kept going and crashed for 120 HP (50%)!
+
+Sis and Bro Lia and Luc's Seaking used Aqua Tail!
+Black Belt Koichi's Hitmonlee was hit for 121 HP (50%)
+Black Belt Koichi's Hitmonlee fainted!
+Black Belt Koichi took out Hitmonchan.
+
+
+Black Belt Koichi's Hitmonchan used Thunder Punch!
+It's super effective!
+Sis and Bro Lia and Luc's Seaking was hit for 189 HP (63%)
+
+Sis and Bro Lia and Luc's Seaking used Aqua Tail!
+Black Belt Koichi's Hitmonchan was hit for 128 HP (53%)
+
+
+Black Belt Koichi's Hitmonchan used Thunder Punch!
+It's super effective!
+Sis and Bro Lia and Luc's Seaking was hit for 112 HP (37%)
+Sis and Bro Lia and Luc's Seaking fainted!
+Sis and Bro Lia and Luc took out Goldeen.
+
+
+Black Belt Koichi's Hitmonchan used Thunder Punch!
+It's super effective!
+Sis and Bro Lia and Luc's Goldeen was hit for 208 HP (90%)
+
+Sis and Bro Lia and Luc's Goldeen used Aqua Tail!
+It's a critical hit!
+Black Belt Koichi's Hitmonchan was hit for 113 HP (47%)
+Black Belt Koichi's Hitmonchan fainted!
+
+
+Sis and Bro Lia and Luc defeated Black Belt Koichi!
+Seaking: 0 HP (0%) left.
+Goldeen: 23 HP (10%) left.

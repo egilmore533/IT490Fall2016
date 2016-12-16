@@ -1,0 +1,51 @@
+{
+"name": "Black Belt Koichi",
+"pokemon1": 
+ { "name": "Hitmonlee",
+   "level": "37",
+   "move1": "Foresight", 
+   "move2": "Mind Reader", 
+   "move3": "Hi Jump Kick", 
+   "move4": "Focus Energy" 
+},
+"pokemon2": 
+ { "name": "Hitmonchan",
+   "level": "37",
+   "move1": "Sky Uppercut", 
+   "move2": "Fire Punch", 
+   "move3": "Ice Punch", 
+   "move4": "ThunderPunch" 
+},
+"pokemon3": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+},
+"pokemon4": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+},
+"pokemon5": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+},
+"pokemon6": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+}
+}

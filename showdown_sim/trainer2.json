@@ -1,0 +1,51 @@
+{
+"name": "Sis and Bro Lia and Luc",
+"pokemon1": 
+ { "name": "Seaking",
+   "level": "30",
+   "move1": "Fury Attack", 
+   "move2": "Flail", 
+   "move3": "Horn Attack", 
+   "move4": "Supersonic" 
+},
+"pokemon2": 
+ { "name": "Goldeen",
+   "level": "30",
+   "move1": "Fury Attack", 
+   "move2": "Flail", 
+   "move3": "Horn Attack", 
+   "move4": "Supersonic" 
+},
+"pokemon3": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+},
+"pokemon4": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+},
+"pokemon5": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+},
+"pokemon6": 
+ { "name": "",
+   "level": "",
+   "move1": "", 
+   "move2": "", 
+   "move3": "", 
+   "move4": "" 
+}
+}
