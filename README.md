@@ -23,5 +23,5 @@ Package Managment/Software deployment system implemented.
 
 * trainer salary calculation for their use in the leagues
 
-![Login page](/Screenshots/10.png?raw=true "Pokéfights Login")
+![Login page](/Screenshots/10.jpg?raw=true "Pokéfights Login")
 
