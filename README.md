@@ -9,16 +9,16 @@ Advanced Message Queuing Protocol architecture implemented using RabbitMQ.
 Package Managment/Software deployment system implemented.
 
 
-### Includes:
+### Website Features:
 
-users and their winnings
+* users and their winnings
 
-leagues for collecting trainers onto a single team and competing against other league members
+* leagues for collecting trainers onto a single team and competing against other league members
 
-a scheduling system for upcoming fights
+* scheduling system for upcoming fights
 
-a text based simulation for the fight
+* text based simulation for the fight
 
-simple bet payout calculation based on their pokemon levels and types
+* simple bet payout calculation based on their pokemon levels and types
 
-trainer salary calculation for their use in the leagues
+* trainer salary calculation for their use in the leagues
