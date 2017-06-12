@@ -15,7 +15,9 @@ Package Managment/Software deployment system implemented.
 * users account page and their winnings 
 ![Account Page](/Screenshots/9.jpg?raw=true "Pokéfights account details")
 * leagues for collecting trainers onto a single team and competing against other league members
-![League Page](/Screenshots/11.jpg?raw=true "Pokéfights League details")
+![Leagues Page](/Screenshots/5.jpg?raw=true "Pokéfights League list")
+![League Details Page](/Screenshots/11.jpg?raw=true "Pokéfights League details")
+![League Creation Page](/Screenshots/7.jpg?raw=true "Pokéfights League creation page")
 * scheduling system for upcoming fights
 ![Fight Schedule Page](/Screenshots/3.jpg?raw=true "Pokéfights Schedule")
 * simple bet payout calculation based on their pokemon levels and types
