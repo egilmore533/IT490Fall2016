@@ -8,7 +8,7 @@ Advanced Message Queuing Protocol architecture implemented using RabbitMQ.
 
 Package Managment/Software deployment system implemented.
 
-###Includes:
+### Includes:
 
 users and their winnings
 
