@@ -11,7 +11,7 @@ Package Managment/Software deployment system implemented.
 
 ### Website Features:
 
-* users and their winnings
+* users and their winnings 
 
 * leagues for collecting trainers onto a single team and competing against other league members
 
@@ -22,3 +22,6 @@ Package Managment/Software deployment system implemented.
 * simple bet payout calculation based on their pokemon levels and types
 
 * trainer salary calculation for their use in the leagues
+
+![Login page](/Screenshots/10.png?raw=true "Pokéfights Login")
+
