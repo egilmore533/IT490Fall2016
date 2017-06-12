@@ -1,4 +1,4 @@
-# IT490Fall2016
+# Pokéfights
 
 Fun Pokémon Betting Website
 
@@ -8,7 +8,8 @@ Advanced Message Queuing Protocol architecture implemented using RabbitMQ.
 
 Package Managment/Software deployment system implemented.
 
-Includes:
+###Includes:
+
 users and their winnings
 
 leagues for collecting trainers onto a single team and competing against other league members
