@@ -1,12 +1,13 @@
 # Pokéfights
 
-Fun Pokémon Betting Website
+### Fun Pokémon Betting Website
 
 Back end development in PHP for a fun gambling website for Pokémon fight simulations. 
 
 Advanced Message Queuing Protocol architecture implemented using RabbitMQ.
 
 Package Managment/Software deployment system implemented.
+
 
 ### Includes:
 
