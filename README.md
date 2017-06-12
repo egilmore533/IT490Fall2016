@@ -20,7 +20,5 @@ Package Managment/Software deployment system implemented.
 ![League Creation Page](/Screenshots/7.jpg?raw=true "Pokéfights League creation page")
 * scheduling system for upcoming fights
 ![Fight Schedule Page](/Screenshots/3.jpg?raw=true "Pokéfights Schedule")
-* simple bet payout calculation based on their pokemon levels and types
-* trainer salary calculation for their use in the leagues
 * Trainer Database
 ![Trainer Database Page](/Screenshots/4.jpg?raw=true "Pokéfights Trainer database")
