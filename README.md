@@ -9,7 +9,7 @@ Advanced Message Queuing Protocol architecture implemented using RabbitMQ.
 Package Managment/Software deployment system implemented.
 
 Includes:
-users and their winnings.
+users and their winnings\n
 leagues for collecting trainers onto a single team and competing against other league members
 a scheduling system for upcoming fights
 a text based simulation for the fight
