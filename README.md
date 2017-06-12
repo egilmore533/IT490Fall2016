@@ -10,18 +10,15 @@ Package Managment/Software deployment system implemented.
 
 
 ### Website Features:
-
-* users and their winnings 
-
+* Home page with stream of text based fight simulation
+![Text Simulation](/Screenshots/12.jpg?raw=true "Pokéfights simulation and navigation menu")
+* users account page and their winnings 
+![Account Page](/Screenshots/9.jpg?raw=true "Pokéfights account details")
 * leagues for collecting trainers onto a single team and competing against other league members
-
+![League Page](/Screenshots/11.jpg?raw=true "Pokéfights League details")
 * scheduling system for upcoming fights
-
-* text based simulation for the fight
-
+![Fight Schedule Page](/Screenshots/3.jpg?raw=true "Pokéfights Schedule")
 * simple bet payout calculation based on their pokemon levels and types
-
 * trainer salary calculation for their use in the leagues
-
-![Login page](/Screenshots/10.jpg?raw=true "Pokéfights Login")
-
+* Trainer Database
+![Trainer Database Page](/Screenshots/4.jpg?raw=true "Pokéfights Trainer database")
